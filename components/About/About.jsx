@@ -9,7 +9,7 @@ export default function AboutSection(){
                     <div className={styles.aboutDescMain}>
                         <h3>Brzo lako i jednostavno</h3>
                         <div><p>Dobrodošli u HakatonArenu, gde inovacija susreće strast, a ideje postaju stvarnost! Ako želite osvojiti nove medalje, proširiti svoje horizonte i stvarati nezaboravna iskustva na zanimljiv način, rezervisanje termina kod nas je prvi korak ka ostvarenju vaših ciljeva!</p></div>
-                        <Link href="/o-skoli"><div className={`${styles.primaryButton} primaryButton`}>Prijavi se</div></Link>
+                        <Link href="/prijavi-se"><div className={`${styles.primaryButton} primaryButton`}>Prijavi se</div></Link>
                     </div>
                 </div>
                 <img className={styles.aboutImg} src="./images/hero2.jpg" alt="" />
