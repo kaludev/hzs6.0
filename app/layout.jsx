@@ -2,6 +2,7 @@ import './globals.css';
 
 import Nav from '@components/Nav/Nav';
 import Provider from '@components/Provider';
+import Footer from '@components/Footer/Footer';
 
 export const metadata = {
     title: 'Higher Lower game',
@@ -15,6 +16,7 @@ const RootLayout = ({ children }) => {
                     <main className='app'>
                         <Nav />
                         {children}
+                        <Footer />
                     </main>
                 </Provider>
             </body>
