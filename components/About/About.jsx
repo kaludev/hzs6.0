@@ -12,17 +12,17 @@ export default function AboutSection(){
                         <Link href="/o-skoli"><div className={`${styles.primaryButton} primaryButton`}>Prijavi se</div></Link>
                     </div>
                 </div>
-                <img className={styles.aboutImg} src="./images/hero.jpg" alt="" />
+                <img className={styles.aboutImg} src="./images/hero2.jpg" alt="" />
             </div>
             <div className={styles.aboutSec}>
                 <div className={styles.aboutDesc}>
                     <div className={styles.aboutDescMain}>
                         <h3>Šta sve nudimo?</h3>
-                        <div><p>У нашој средњој електротехничкој школи верујемо да je практично учење најбољи начин да се ученици припреме за успешну каријеру у области електротехнологије.</p></div>
+                        <div><p>Naša misija je podržati entuzijaste i stručnjake iz različitih oblasti. Rezervisanje termina kod nas nije samo korak ka vašem uspehu, već i pristupačan način da uđete u svet inovacija i takmičenja. HakatonArena se ponosi sigurnim okruženjem gde se cene ideje i gde svaki učesnik ima priliku da se istakne. Vaše rezervisano mesto je vaša karta ka sigurnom i podsticajnom okruženju gde možete razviti svoje veštine i ostvariti svoje ambicije.</p></div>
                         <Link href="/smerovi"><div className={`${styles.primaryButton} primaryButton`}>Rezerviši termin</div></Link>
                     </div>
                 </div>
-                <img className={styles.aboutImg} src="./images/hero2.jpg" alt="" />
+                <img className={styles.aboutImg} src="./images/hero4.jpg" alt="" />
             </div>
         </section>
     )
