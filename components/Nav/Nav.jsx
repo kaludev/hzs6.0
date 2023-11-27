@@ -29,12 +29,12 @@ const Nav = () => {
           className="object-contain"
         ></Image>
       </Link>
-      <h2 className={"mt-5 " + NavStyles.mainHeading}>Dobrodosli u Hakaton Arenu</h2>
+      <h2 className={"mt-5 sm:flex hidden " + NavStyles.mainHeading}>Dobrodosli u Hakaton Arenu</h2>
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-5 justify-items-end my-3 h-15">
 
-            <Link href="/create-prompt" className="rounded-lg h-12.5 secondaryButton">
+            <Link href="/create-prompt" className="rounded-lg pt-2.5 h-12.5 secondaryButton">
 
               {" "}
               Create Post
@@ -60,7 +60,7 @@ const Nav = () => {
               type="button"
               key={provider.name}
               onClick={() => signIn(provider.id)}
-              className="primaryButton my-3 mr-5"
+              className="primaryButton rounded-lg my-3 mr-5"
             >Sign in</button>
           ))
         )}
@@ -76,7 +76,7 @@ const Nav = () => {
                 src={session?.user.image}
                 width={37}
                 height={37}
-                className="flex justify-self-end mr-2 rounded-full"
+                className="flex justify-self-end mr-2 mt-3 rounded-full"
                 alt="profile"
                 onClick={() => setToggleDropdown((prev) => !prev)}
               ></Image>
