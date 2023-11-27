@@ -18,18 +18,28 @@ const Nav = () => {
     setUpProviders();
   }, []);
   return (
-    <nav className=" flex-between w-full mb-16 pt-3">
+    <nav className="flex justify-between w-full ">
       {/* Desktop Navigation */}
+      <Link href="/" className="flex gap-2 flex-center">
+        <Image
+          src="/images/logoGreen.png"
+          alt="Promptopia Logo"
+          width={100}
+          height={30}
+          className="object-contain"
+        ></Image>
+      </Link>
+      <h2 className={"mt-5 " + NavStyles.mainHeading}>Dobrodosli u Hakaton Arenu</h2>
       <div className="sm:flex hidden">
         {session?.user ? (
-          <div className="">
+          <div className="flex gap-5 justify-items-end my-3 h-15">
 
-            <Link href="/create-prompt" className={NavStyles.LinkToOther}>
+            <Link href="/create-prompt" className="rounded-lg h-12.5 secondaryButton">
 
               {" "}
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button type="button" onClick={signOut} className="primaryButton h-12.5 rounded-lg">
               {" "}
               Sign Out
             </button>
@@ -38,7 +48,7 @@ const Nav = () => {
                 src={session?.user.image}
                 width={37}
                 height={37}
-                className="rounded-full"
+                className="rounded-full mr-5 mt-2.5"
                 alt="profile"
               ></Image>
             </Link>
@@ -50,7 +60,7 @@ const Nav = () => {
               type="button"
               key={provider.name}
               onClick={() => signIn(provider.id)}
-              className="primaryButton"
+              className="primaryButton my-3 mr-5"
             >Sign in</button>
           ))
         )}
@@ -61,23 +71,26 @@ const Nav = () => {
       <div className="sm:hidden flex relative">
         {session?.user ? (
           <div className="flex flex-col flex-end">
-            <Image
-              src={session?.user.image}
-              width={37}
-              height={37}
-              className="rounded-full"
-              alt="profile"
-              onClick={() => setToggleDropdown((prev) => !prev)}
-            ></Image>
+            <div className="flex flex-row justify-end">
+              <Image
+                src={session?.user.image}
+                width={37}
+                height={37}
+                className="flex justify-self-end mr-2 rounded-full"
+                alt="profile"
+                onClick={() => setToggleDropdown((prev) => !prev)}
+              ></Image>
+            </div>
+            
             {toggleDropdown && (
                 <div className={NavStyles.dropdown+ " flex flex-col"}>
                     <Link href='/profile'
-                    className="my-5 w-4/5"
+                    className="ml-7 my-5 w-4/5"
                     onClick={() => setToggleDropdown(false)}>
                         My Profile
                     </Link>
                     <Link href='/create-prompt'
-                    className="mx-auto my-5 w-4/5 dropdown_link"
+                    className="ml-7 my-5 w-4/5 "
                     onClick={() => setToggleDropdown(false)}>
                         Create Prompt
                     </Link>
@@ -86,7 +99,7 @@ const Nav = () => {
                         setToggleDropdown(false);
                         signOut();
                     }}
-                    className="my-5 w-4/5 primaryButton"
+                    className="ml-7 my-5 w-1/2 primaryButton"
                     >
                         Sign Out
                     </button>
