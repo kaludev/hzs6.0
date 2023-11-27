@@ -1,11 +1,5 @@
 
-.LinkToOther {
-    padding: 15px 10px;
-    border: solid 2px black;
-}
-.signInButton{
-    padding: 15px 10px;
-    background-color: black;
-    border-radius: 5px;
-    color: white;
+.dropdown{
+    height: 100vh;
+    width: 100vw;
 }
