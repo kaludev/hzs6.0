@@ -22,7 +22,7 @@ const Nav = () => {
       
 
       {/* Desktop Navigation */}
-      {/*<div className="">
+      <div className="sm:hidden flex">
         {session?.user ? (
           <div className="">
 
@@ -52,16 +52,15 @@ const Nav = () => {
               type="button"
               key={provider.name}
               onClick={() => signIn(provider.id)}
-              className={NavStyles.signInButton}
+              className="primaryButton"
             >Sign in</button>
           ))
         )}
       </div>
-          */}
       {/*Mobile Navigation */}
 
 
-      <div className="sm:hidden flex relative">
+      <div className="sm:flex hidden relative">
         {session?.user ? (
           <div className="flex">
             <Image
@@ -73,7 +72,7 @@ const Nav = () => {
               onClick={() => setToggleDropdown((prev) => !prev)}
             ></Image>
             {toggleDropdown && (
-                <div className="dropdown">
+                <div className={NavStyles.dropdown}>
                     <Link href='/profile'
                     className="dropdown_link"
                     onClick={() => setToggleDropdown(false)}>
@@ -89,7 +88,7 @@ const Nav = () => {
                         setToggleDropdown(false);
                         signOut();
                     }}
-                    className="mt-5 w-full black_btn"
+                    className="primaryButton"
                     >
                         Sign Out
                     </button>
@@ -104,7 +103,7 @@ const Nav = () => {
                     type="button"
                     key={provider.name}
                     onClick={() => signIn(provider.id)}
-                    className={NavStyles.signInButton}
+                    className="primaryButton"
                     >
                         Sign in
                     </button>
