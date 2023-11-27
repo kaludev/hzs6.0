@@ -1,11 +1,11 @@
 import './globals.css';
 
-import Nav from '@components/Nav';
+import Nav from '@components/Nav/Nav';
 import Provider from '@components/Provider';
 
 export const metadata = {
-    title: 'Promptopia',
-    description: 'Discover and share AI Prompts'
+    title: 'Higher Lower game',
+    description: 'Play our higher lower game'
 };
 const RootLayout = ({ children }) => {
   return (
