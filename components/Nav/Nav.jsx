@@ -19,8 +19,6 @@ const Nav = () => {
   }, []);
   return (
     <nav className=" flex-between w-full mb-16 pt-3">
-      
-
       {/* Desktop Navigation */}
       {/*<div className="">
         {session?.user ? (

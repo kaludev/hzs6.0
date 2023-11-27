@@ -12,21 +12,21 @@ export default function Footer({dark}) {
                 </div>
                 <div className={styles.footerCol}>
                     <h3>Stranice</h3>
-                    <div className={styles.footerLink}><Link href="/dokumenta/javne-nabavke">Početna</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/opsti-akti">O nama</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/dokumenta-skole">Zaigraj se</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/prosvetni-glasnici">Saznaj više</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/prosvetni-glasnici">Dokumentacija</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/prosvetni-glasnici">Test funkcionalnosti</Link></div>
+                    <div className={styles.footerLink}><Link href="/">Početna</Link></div>
+                    <div className={styles.footerLink}><Link href="/o-nama">O nama</Link></div>
+                    <div className={styles.footerLink}><Link href="/zaigraj-se">Zaigraj se</Link></div>
+                    <div className={styles.footerLink}><Link href="/saznaj-vise">Saznaj više</Link></div>
+                    <div className={styles.footerLink}><Link href="/dokumentacija">Dokumentacija</Link></div>
+                    <div className={styles.footerLink}><Link href="/test-funkcionalnosti">Test funkcionalnosti</Link></div>
                 </div>
                 <div className={styles.footerCol}>
                     <h3>Resursi</h3>
                     <div className={styles.footerLink}><Link href="/smerovi">Lista svih API-ja</Link></div>
-                    <div className={styles.footerLink}><a href="http://www.estsnikolatesla.edu.rs/moodle1/" target="_blank" rel="noreferrer">Izvori podataka</a></div>
+                    <div className={styles.footerLink}><a href="https://www.google.com" target="_blank" rel="noreferrer">Izvori podataka</a></div>
                     <h3>Nalog</h3>
-                    <div className={styles.footerLink}><Link href="/dokumenta/sistematizacija">Upravljajte nalogom</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/finansijska-dokumenta">Kreiraj nalog</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumenta/obrasci-priprema">Odjavi se</Link></div>
+                    <div className={styles.footerLink}><Link href="/profile">Upravljajte nalogom</Link></div>
+                    <div className={styles.footerLink}><Link href="/uloguj-se">Kreiraj nalog</Link></div>
+                    <div className={styles.footerLink}><Link href="/odjavi-se">Odjavi se</Link></div>
                 </div>
                 <div className={styles.footerCol}>
                     <h3>Kontakt</h3>
