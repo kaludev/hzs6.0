@@ -36,6 +36,7 @@ a {
   color: var(--main-background);
   border: 2px solid transparent;
   border-radius: 0px;
+  font-size: 16px;
 }
 
 .primaryButton:hover {
@@ -49,6 +50,7 @@ a {
   color: var(--main-background);
   border: solid 2px var(--main-color);
   border-radius: 0px;
+  font-size: 16px;
 }
 
 .secondaryButton:hover {

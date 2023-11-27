@@ -1,7 +1,7 @@
 import styles from "./Hero.module.css"
 import Link from "next/link";
 
-export default function HeroSection({novosti}) {
+export default function HeroSection() {
     return (
         <header className={styles.header}>
             <section className={styles.hero}>
