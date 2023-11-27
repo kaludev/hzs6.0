@@ -20,7 +20,7 @@ const Nav = () => {
   return (
     <nav className=" flex-between w-full mb-16 pt-3">
       {/* Desktop Navigation */}
-      <div className="sm:hidden flex">
+      <div className="sm:flex hidden">
         {session?.user ? (
           <div className="">
 
@@ -58,9 +58,9 @@ const Nav = () => {
       {/*Mobile Navigation */}
 
 
-      <div className="sm:flex hidden relative">
+      <div className="sm:hidden flex relative">
         {session?.user ? (
-          <div className="flex">
+          <div className="flex flex-col flex-end">
             <Image
               src={session?.user.image}
               width={37}
@@ -70,14 +70,14 @@ const Nav = () => {
               onClick={() => setToggleDropdown((prev) => !prev)}
             ></Image>
             {toggleDropdown && (
-                <div className={NavStyles.dropdown}>
+                <div className={NavStyles.dropdown+ " flex flex-col"}>
                     <Link href='/profile'
-                    className="dropdown_link"
+                    className="my-5 w-4/5"
                     onClick={() => setToggleDropdown(false)}>
                         My Profile
                     </Link>
                     <Link href='/create-prompt'
-                    className="dropdown_link"
+                    className="mx-auto my-5 w-4/5 dropdown_link"
                     onClick={() => setToggleDropdown(false)}>
                         Create Prompt
                     </Link>
@@ -86,7 +86,7 @@ const Nav = () => {
                         setToggleDropdown(false);
                         signOut();
                     }}
-                    className="primaryButton"
+                    className="my-5 w-4/5 primaryButton"
                     >
                         Sign Out
                     </button>
