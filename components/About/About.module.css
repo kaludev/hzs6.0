@@ -1,26 +1,31 @@
-.about{
+.about {
     width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
 }
-.aboutFirst, .aboutSec{
+
+.aboutFirst,
+.aboutSec {
     width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: row;
 }
-.aboutSec{
+
+.aboutSec {
     flex-direction: row-reverse;
 }
-.aboutDesc{
+
+.aboutDesc {
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.aboutDescMain{
+
+.aboutDescMain {
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -28,7 +33,12 @@
     align-items: left;
 }
 
-.primaryButton{
+.aboutDescMain h3 {
+    font-size: 24px;
+    padding: 10px 0;
+}
+
+.primaryButton {
     margin-top: 40px;
     padding: 10px 30px 10px 30px;
     max-width: fit-content;
@@ -36,11 +46,11 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.primaryButton:hover{
-    color:  var(--main-color);
+.primaryButton:hover {
+    color: var(--main-color);
 }
 
-.secondaryButton{
+.secondaryButton {
     margin-top: 40px;
     padding: 10px 30px 10px 30px;
     max-width: fit-content;
@@ -48,27 +58,32 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.secondaryButton:hover{
-    color:  var(--main-color);
+.secondaryButton:hover {
+    color: var(--main-color);
 }
 
-.aboutImg{
+.aboutImg {
     width: 50%;
 }
 
 /* Extra large devices (large laptops and desktops, 1200px) */
 @media only screen and (max-width: 1200px) {
-    .aboutFirst, .aboutSec{
+
+    .aboutFirst,
+    .aboutSec {
         flex-direction: column;
     }
-    .aboutDesc{
+
+    .aboutDesc {
         width: 100%;
         margin: 30px 0;
     }
-    .aboutDescMain{
+
+    .aboutDescMain {
         width: 80%;
     }
-    .aboutImg{
+
+    .aboutImg {
         width: 100%;
     }
 }
@@ -81,5 +96,3 @@
 
 /* Small devices (portrait tablets and large phones, 600px) */
 @media only screen and (max-width: 600px) {}
-
-
