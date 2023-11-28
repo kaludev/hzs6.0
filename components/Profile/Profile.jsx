@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./Profile.module.css"
 import { FaCog } from "react-icons/fa";
 
-export default function ProfileSection({name, username, photo,form,showForm,settings,showSettings,handleSignOut,isOrganizer}){
+export default function ProfileSection({name, username, photo,isOrganizer,form,showForm,settings,showSettings,handleSignOut}){
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
