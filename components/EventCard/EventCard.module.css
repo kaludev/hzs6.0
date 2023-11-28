@@ -1,3 +1,7 @@
+.cardsMainSection{
+    width: 100%;
+    background-color: var(--main-background);
+}
 .cardsSection{
     width: 100%;
     max-width: 1200px;
@@ -16,6 +20,7 @@
     border-radius: 5px;
     margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
 }
 .eventPhoto{
     width: 100%;

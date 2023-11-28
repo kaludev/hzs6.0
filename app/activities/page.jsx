@@ -5,12 +5,14 @@ import styles from '@components/EventCard/EventCard.module.css'
 const EventsPage = () => {
 
     return (
-        <section className={styles.cardsSection}>
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
+        <section className={styles.cardsMainSection}>
+            <section className={styles.cardsSection}>
+                <EventCard />
+                <EventCard />
+                <EventCard />
+                <EventCard />
+                <EventCard />
+            </section>
         </section>
     )
 }
