@@ -1,6 +1,8 @@
 "use client"
+
 import { useSession } from "next-auth/react"
 import { useState } from "react";
+import ProfileSection from "@components/Profile/Profile";
 import Form from "@components/OrganizerRequestForm/Form";
 import "@styles/margin.css"
 const Profile = () => {
@@ -24,8 +26,10 @@ const Profile = () => {
         </div>
     ):(
         <div>
-            <div>Profile</div>
-
+            <ProfileSection 
+            name={session?.user.name}
+            username={session?.user.username}
+            photo ={session?.user.image}/>
             {
                 !showForm && <button 
                 type="button"

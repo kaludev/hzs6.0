@@ -40,7 +40,7 @@ export default function Footer({dark}) {
             <div className={styles.footerCopyright}>
                 <p className={styles.footerCopyrightP}>© {new Date().getFullYear()}. Sva prava zadržana Tim "Class" Kraljevo.</p>
                 <div className={styles.footerPowered}>
-                    <p> Veb aplikaciju uradili đaci ESTŠ "Nikola Tesla" </p>
+                    <p>Veb aplikaciju izradili učenici ESTŠ "Nikola Tesla" </p>
                 </div>
             </div>
         </footer>

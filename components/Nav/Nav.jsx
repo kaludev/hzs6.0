@@ -3,8 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css"
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FaBars } from "react-icons/fa";
 
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
@@ -92,7 +91,7 @@ const Nav = () => {
         </ul>
       </nav>
       <div className={`${styles.menuBtn}`} onClick={(e) => {e.stopPropagation(); setMenuVisible(true)}}>
-      {/* <FontAwesomeIcon icon={faBars} /> */}
+        <FaBars />
       </div>
     </div>
     // <nav className="flex justify-between w-full ">
