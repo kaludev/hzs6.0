@@ -5,8 +5,8 @@ import Provider from '@components/Provider';
 import Footer from '@components/Footer/Footer';
 
 export const metadata = {
-    title: 'Higher Lower game',
-    description: 'Play our higher lower game'
+    title: 'Hakaton Arena',
+    description: 'Rezerviši svoju arenu odmah!'
 };
 const RootLayout = ({ children }) => {
   return (
