@@ -9,11 +9,12 @@ const Profile = () => {
     const [showForm, setShowForm] = useState(false);
     const [request, setRequest] = useState({
         name: "",
-        EventTypes:"",
+        eventTypes:"",
         reason: ""
     })
-    const handleFormOpen = () =>{
-        setShowForm((value) => !value)
+    const [submitting, setSubmitting] = useState(false)
+    const handleSubmit = async () =>{
+        console.log(request)
     }
     return (
 
@@ -33,7 +34,10 @@ const Profile = () => {
             }
             <Form 
             show={showForm}
-
+            request={request}
+            setRequest={setRequest}
+            submitting={submitting}
+            handleSubmit={handleSubmit}
             />
         </div>
     ) )    
