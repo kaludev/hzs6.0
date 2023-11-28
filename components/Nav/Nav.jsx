@@ -62,7 +62,7 @@ const Nav = () => {
                 {" "}
                 Dodaj Događaj
               </Link>}
-              <button type="button" onClick={signOut} className={`${styles.secondaryButton} secondaryButton`}>
+              <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
               </button>

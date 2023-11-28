@@ -1,8 +1,7 @@
 import React from 'react'
 
-const Form = ({show, request, setRequest, submitting, handleSubmit}) => {
+const Form = ({request, setRequest, submitting, handleSubmit}) => {
   return (
-    show&&
     <div>
         <div className="nameInput">
             <p>Name:</p>
