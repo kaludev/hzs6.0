@@ -1,6 +1,10 @@
 import mongoose, { Schema,model ,models } from "mongoose";
 
 const organizerSchema = new Schema({
+    user_id: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     name: {
         type : String,
         unique : [true, 'Name should be unique'],
