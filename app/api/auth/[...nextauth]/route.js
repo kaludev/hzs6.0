@@ -4,6 +4,7 @@ import User from "@models/user";
 
 import { connectToDB } from "@utils/database";
 import Organizer from "@models/organizer";
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -35,8 +36,19 @@ const handler = NextAuth({
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
+      let isOrganizer = await Organizer.findOne({
+        user_id: sessionUser._id
+      });
+      console.log(isOrganizer)
+      if (isOrganizer != undefined) {
+        isOrganizer = true;
+      }else{
+        isOrganizer = false;
+      }
       session.user.id = sessionUser._id.toString();
       session.user.image = sessionUser.image.toString();
+      session.user.isOrganizer = isOrganizer;
+      console.log(session.user);
       return session;
     },
     async signIn({ profile }) {

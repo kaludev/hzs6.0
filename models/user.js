@@ -13,6 +13,10 @@ const userSchema = new Schema({
     },
     image: {
         type: String
+    },
+    isSuperAdmin:{
+        type: Boolean,
+        default: false
     }
 })
 

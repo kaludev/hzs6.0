@@ -57,10 +57,10 @@ const Nav = () => {
           <li>
           {session?.user ? (
             <div className={styles.navProfile}>
-              <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
+              {session?.user.isOrganizer && <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Dodaj Događaj
-              </Link>
+              </Link>}
               <button type="button" onClick={signOut} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
