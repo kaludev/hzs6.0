@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import NavStyles from "./Nav.module.css"
+import "@styles/tailwind.css"
 
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
@@ -99,7 +100,7 @@ const Nav = () => {
                         setToggleDropdown(false);
                         signOut();
                     }}
-                    className="ml-7 my-5 w-1/2 primaryButton"
+                    className="ml-7 my-5 w-1/2 rounded-lg primaryButton"
                     >
                         Sign Out
                     </button>
