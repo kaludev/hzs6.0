@@ -1,0 +1,90 @@
+.cardsSection{
+    width: 100%;
+    max-width: 900px;
+    margin: 85px auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.cardEvent{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.eventPhoto{
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    object-fit: contain;
+}
+.eventMain{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.eventName{
+    width: 100%;
+    font-size: 22px;
+    font-weight: 600;
+}
+.eventDesc{
+    width: 100%;
+    font-size: 16px;
+    color: #000000c4;
+}
+.eventData{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.eventPlaceData{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    color: #000000c4;
+    font-size: 14px;
+}
+.eventColored{
+    color: green; /* izmeniti bojuu */
+    font-weight: bold;
+}
+.eventParticipants{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+.eventButtons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.primaryButton{
+    margin-right: 20px;
+}
+.eventLikes{
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    background-color: pink;
+}
+.secondaryButton{
+    color: red;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.eventLikesNum{
+    font-size: 16px;
+}
