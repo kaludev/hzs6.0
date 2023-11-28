@@ -11,6 +11,14 @@ const eventSchema = new Schema({
         required : [true, 'Name is required'],
         match: [/^[a-zA-Z0-9]{1,30}$/, "Name can contain up to 30 alphanumeric letters!"]
     },
+    description: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
     starts_at: {
         type: Date,
         required: true
