@@ -7,6 +7,10 @@ const EventsPage = () => {
     return (
         <section className={styles.cardsSection}>
             <EventCard />
+            <EventCard />
+            <EventCard />
+            <EventCard />
+            <EventCard />
         </section>
     )
 }

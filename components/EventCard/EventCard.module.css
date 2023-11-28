@@ -1,6 +1,6 @@
 .cardsSection{
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 85px auto 0 auto;
     display: flex;
     flex-direction: row;
@@ -8,18 +8,20 @@
 }
 .cardEvent{
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
+    height: fit-content;
+    min-height: 450px;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    margin: 10px;
+    margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .eventPhoto{
     width: 100%;
-    height: auto;
-    max-height: 100px;
-    object-fit: contain;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
 }
 .eventMain{
     width: 90%;
@@ -29,28 +31,32 @@
 }
 .eventName{
     width: 100%;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px 0;
 }
 .eventDesc{
     width: 100%;
     font-size: 16px;
     color: #000000c4;
+    line-height: 19px;
 }
 .eventData{
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding: 10px 0;
 }
 .eventPlaceData{
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     color: #000000c4;
     font-size: 14px;
 }
 .eventColored{
-    color: green; /* izmeniti bojuu */
+    width: 30%;
+    color: var(--main-color);
     font-weight: bold;
 }
 .eventParticipants{
@@ -61,24 +67,40 @@
     margin: auto;
     font-size: 24px;
     font-weight: bold;
-    color: green;
+    color: var(--main-color);
 }
 .eventButtons{
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .primaryButton{
-    margin-right: 20px;
+    padding: 5px 15px;
+    margin: 10px 20px 10px 5px;
+}
+.primaryButton:hover{
+    color: var(--main-color);
+}
+.secondaryButton{
+    height: 20px;
+    padding: 0 5px;
+    margin: 0;
+}
+.secondaryButton:hover{
+    background-color: transparent;
+    color: var(--main-color);
+    border: none;
 }
 .eventLikes{
     display: flex;
     flex-direction: row;
     border-radius: 5px;
-    background-color: pink;
+    align-items: center;
+    margin: 0 20px;
 }
 .secondaryButton{
-    color: red;
+    color: var(--main-color);
     font-size: 16px;
     background-color: transparent;
     border: none;
@@ -87,4 +109,10 @@
 }
 .eventLikesNum{
     font-size: 16px;
+}
+/* Medium devices (landscape tablets, 800 and down) */
+@media only screen and (max-width: 800px) {
+    .cardsSection{
+        justify-content: center;
+    }
 }
