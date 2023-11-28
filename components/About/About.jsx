@@ -22,7 +22,7 @@ export default function AboutSection(){
                         <Link href="/smerovi"><div className={`${styles.primaryButton} primaryButton`}>Rezerviši termin</div></Link>
                     </div>
                 </div>
-                <img className={styles.aboutImg} src="./images/hero7.jpg" alt="" />
+                <img className={styles.aboutImg} src="./images/hero.jpg" alt="" />
             </div>
         </section>
     )

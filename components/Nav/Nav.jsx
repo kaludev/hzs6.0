@@ -56,10 +56,7 @@ const Nav = () => {
               <a className={styles.navLink} href="">Aktivnosti</a>
           </li>
           <li>
-              <a className={styles.navLink} href="">Dešavanja</a>
-          </li>
-          <li>
-              <a className={styles.navLink} href="">Tabela</a>
+              <a className={styles.navLink} href="">Raspored</a>
           </li>
           <li>
           {session?.user ? (

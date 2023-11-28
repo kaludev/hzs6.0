@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ProfileSection from "@components/Profile/Profile";
 import OrganizationForm from "@components/OrganizationForm/OrganizationForm";
 import "@styles/margin.css"
-import Settings from "@components/Settings/Settings";
+import SettingsForm from "@components/SettingsForm/SettingsForm";
 import { useRouter } from "next/navigation";
 const Profile = () => {
     const {data: session} = useSession();
@@ -33,9 +33,6 @@ const Profile = () => {
             body: JSON.stringify(request)
         })
     }
-    const handleEditProfile = async () =>{
-        console.log(profile)
-    }
     return (
             <div>
                 <ProfileSection 
@@ -57,10 +54,9 @@ const Profile = () => {
                     />
                 }
                 {settings && 
-                    <Settings
+                    <SettingsForm
                         profile={profile}
                         setProfile={setProfile}
-                        handleSubmit={handleEditProfile}
                     />
                     }
             </div>
