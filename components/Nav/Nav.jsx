@@ -6,10 +6,25 @@ import styles from "./Nav.module.css"
 
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+
 const Nav = () => {
+
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
-  const [toggleDropdown, setToggleDropdown] = useState(false)
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [scrolled, setScrolled] = useState();
+  const SCROLL_TRIGGER_PX = 0;
+
+  useEffect(() => {
+    function check() {
+        setScrolled(window.scrollY > SCROLL_TRIGGER_PX);
+    }
+    window.addEventListener("scroll", check)
+    return () => {
+        window.removeEventListener("scroll", check);
+    }
+}, [])
+
   useEffect(() => {
     const setUpProviders = async () => {
       const res = await getProviders();
@@ -17,15 +32,16 @@ const Nav = () => {
     };
     setUpProviders();
   }, []);
+
   return (
-    <div className={styles.navbar}>
-  <div className={styles.logo}>
-          <Link href="/">
-            <img src="/images/logoNavGreen.png" alt="Promptopia Logo" />
-          </Link>
-  </div>
-  <nav className={styles.nav}>
-      <ul>
+    <div className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
+      <div className={styles.logo}>
+              <Link href="/">
+                <img src={scrolled ? "/images/logoNavGreen.png" : "/images/logoNavWhite.png"} alt="Logo" />
+              </Link>
+      </div>
+      <nav className={styles.nav}>
+        <ul>
           <li>
               <a className={styles.navLink} href="">O Nama</a>
           </li>
@@ -40,43 +56,43 @@ const Nav = () => {
           </li>
           <li>
           {session?.user ? (
-  <div className={styles.navProfile}>
-    <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
-      {" "}
-      Dodaj Događaj
-    </Link>
-    <button type="button" onClick={signOut} className={`${styles.secondaryButton} secondaryButton`}>
-      {" "}
-      Odjavi se
-    </button>
-    <Link href="/profile">
-      <Image
-        src={session?.user.image}
-        width={37}
-        height={37}
-        className={styles.profilePic}
-        alt="profile"
-      ></Image>
-    </Link>
-  </div>
-) : (
-  providers &&
-  Object.values(providers).map((provider) => (
-    <button
-      type="button"
-      key={provider.name}
-      onClick={() => signIn(provider.id)}
-      className={`${styles.secondaryButton} secondaryButton`}
-    >Prijavi se</button>
-  ))
-)}
+            <div className={styles.navProfile}>
+              <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
+                {" "}
+                Dodaj Događaj
+              </Link>
+              <button type="button" onClick={signOut} className={`${styles.secondaryButton} secondaryButton`}>
+                {" "}
+                Odjavi se
+              </button>
+              <Link href="/profile">
+                <Image
+                  src={session?.user.image}
+                  width={37}
+                  height={37}
+                  className={styles.profilePic}
+                  alt="profile"
+                ></Image>
+              </Link>
+            </div>
+            ) : (
+              providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className={`${styles.secondaryButton} secondaryButton`}
+                >Prijavi se</button>
+              ))
+            )}
           </li>
-      </ul>
-  </nav>
-  <div className={styles.menuBtn}>
-        H
-  </div>
-</div>
+        </ul>
+      </nav>
+      <div className={styles.menuBtn}>
+            H
+      </div>
+    </div>
     // <nav className="flex justify-between w-full ">
     //   {/* Desktop Navigation */}
     //   <Link href="/" className="flex gap-2 flex-center">
