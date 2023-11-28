@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 import styles from "./Profile.module.css"
 import { FaCog } from "react-icons/fa";
 
@@ -9,7 +9,8 @@ export default function ProfileSection({name, username, photo,form,showForm,sett
             <h2>O nalogu</h2>
             <hr className={styles.divider} />
             <div className={styles.profileHeader}>
-                <img className={styles.userPhoto} src={photo} alt="Profilna slika" />
+                <Image className={styles.userPhoto} src={photo} alt="Profile" width={80}
+                  height={80}/>
                 <div className={styles.userInfo}>
                     <div className={styles.userFirstName}>{name}</div>
                     <div className={styles.username}>@{username}</div>

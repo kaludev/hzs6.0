@@ -13,7 +13,7 @@ const Nav = () => {
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [scrolled, setScrolled] = useState();
+  const [scrolled, setScrolled] = useState(false);
   const SCROLL_TRIGGER_PX = 0;
 
   useEffect(() => {
@@ -24,12 +24,13 @@ const Nav = () => {
     if(window.location.pathname != "/"){
       setScrolled(true);
     }else{
+      setScrolled(false);
       window.addEventListener("scroll", check)
     }
     return () => {
         window.removeEventListener("scroll", check);
     }
-}, [window.location.pathname])
+},[])
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -42,9 +43,9 @@ const Nav = () => {
   return (
     <div className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>
-              <Link href="/">
+              <a href="/">
                 <img src={scrolled ? "/images/logoNavGreen.png" : "/images/logoNavWhite.png"} alt="Logo" />
-              </Link>
+              </a>
       </div>
       <nav className={styles.nav}>
         <ul>
