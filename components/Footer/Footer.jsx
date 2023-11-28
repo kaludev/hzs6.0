@@ -33,6 +33,7 @@ export default function Footer({dark}) {
                     <div className={styles.footerLink}><Link href="mailto:luka.markovic2017@gmail.com">luka.markovic2017@gmail.com</Link></div>
                     <div className={styles.footerLink}><Link href="mailto:nikolamilanovic2305@gmail.com">nikolamilanovic2305@gmail.com</Link></div>
                     <div className={styles.footerLink}><Link href="mailto:dimitrijeradojkovic8@gmail.com">dimitrijeradojkovic8@gmail.com</Link></div>
+                    <div className={styles.footerLink}><Link href="mailto:tvasiljevic785@gmail.com">tvasiljevic785@gmail.com</Link></div>
                 </div>
             </div>
             <hr className={styles.footerDevider} />
