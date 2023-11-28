@@ -24,6 +24,18 @@ body {
   overflow-x: hidden;
 }
 
+<<<<<<< HEAD:styles/globals.css
+=======
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: normal !important;
+  font-weight: 700 !important;
+}
+>>>>>>> dd5d877fdc6f8a2e7a03a65b097a2022dfa163a3:app/globals.css
 
 a {
   color: inherit;
@@ -58,4 +70,15 @@ a {
 
 .rounded-full {
   border-radius: 50%;
+}
+.slick-list{
+  width: 100%;
+}
+
+.slick-track{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
