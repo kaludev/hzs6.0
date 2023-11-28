@@ -19,13 +19,22 @@ const Profile = () => {
     })
     const [profile,setProfile] = useState({
         name: "",
-        
+        username: ""
     })
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter();
 
     const handleSubmit = async () =>{
-        console.log(request)
+        const res = await fetch('/api/users/requestOrganizer',{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(request)
+        })
+    }
+    const handleEditProfile = async () =>{
+        console.log(profile)
     }
     return (
             <div>
@@ -49,7 +58,11 @@ const Profile = () => {
                     />
                 }
                 {settings && 
-                    <Settings/>
+                    <Settings
+                        profile={profile}
+                        setProfile={setProfile}
+                        handleSubmit={handleEditProfile}
+                    />
                     }
             </div>
             
