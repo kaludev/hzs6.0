@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import "@styles/tailwind.css"
 import styles from "./Nav.module.css"
 
 import { useState, useEffect } from "react";
