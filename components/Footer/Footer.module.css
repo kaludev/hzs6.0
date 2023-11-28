@@ -33,7 +33,7 @@
 }
 
 .footerLogo {
-    width: 80%
+    width: 80%;
 }
 
 .footerLink {
@@ -88,6 +88,10 @@
 
     .footerDevider {
         width: 100%;
+    }
+    .footerLogo {
+        width: 80%;
+        margin: auto;
     }
 }
 

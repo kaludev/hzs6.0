@@ -41,6 +41,7 @@ a {
   text-decoration: none;
 }
 
+/* Dugmici */
 .primaryButton {
   background-color: var(--main-color);
   color: var(--main-background);
@@ -67,9 +68,7 @@ a {
   color: #fff;
 }
 
-.rounded-full {
-  border-radius: 50%;
-}
+/* Slider */
 .slick-list{
   width: 100%;
 }
