@@ -7,10 +7,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding: 20px 0;
+    padding: 30px 0;
     font-weight: 500;
     z-index: 99;
     transition: all linear 0.2s;
+}
+
+.navbar.scrolled {
+    background-color: #fff;
+    padding: 8px 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .logo {
@@ -72,11 +78,19 @@
 .primaryButton, .secondaryButton {
     padding: 7px 20px;
     margin: 5px;
+    font-size: 14px;
 }
 
-.navbar.scrolled {
-    background-color: #fff;
-    padding: 0;
+.primaryButton{
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 7px 25px;
+    color: #fff;
+}
+
+.primaryButton:hover{
+    color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
 }
 
 .navbar.scrolled .navLink {
@@ -91,7 +105,7 @@
     cursor: pointer;
 }
 
-.menuBtnScrolled {
+.menuBtn.scrolled {
     color: #000;
 }
 

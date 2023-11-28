@@ -83,7 +83,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className={`${styles.secondaryButton} secondaryButton`}
+                  className={`${styles.primaryButton} primaryButton`}
                 >Prijavi se</button>
               ))
             )}
