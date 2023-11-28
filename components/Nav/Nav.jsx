@@ -50,7 +50,7 @@ const Nav = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-              <a className={styles.navLink} href="">O Nama</a>
+              <a className={styles.navLink} href="/about">O Nama</a>
           </li>
           <li>
               <a className={styles.navLink} href="">Aktivnosti</a>

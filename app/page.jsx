@@ -1,3 +1,5 @@
+"use client"
+
 import HeroSection from "@components/Hero/Hero"
 import AboutSection from "@components/About/About"
 import SponsorsSection from "@components/Sponsors/Sponsors"

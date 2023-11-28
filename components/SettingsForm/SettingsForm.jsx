@@ -115,8 +115,8 @@ const SettingsForm = ({profile, setProfile})  => {
                         <p className={styles.errorMessage}>{formData.ime.errorMsg}</p>
                     </div>
                     <div className={`${styles.inputBox} ${formData.email.error ?  styles.error : ""} ${formData.email.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel} disabled="disabled">Email</label>
-                        <input value={formData.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <label className={styles.inputLabel}>Email</label>
+                        <input value={formData.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} disabled/>
                         <p className={styles.errorMessage}>{formData.email.errorMsg}</p>
                     </div>
                     <div className={`${styles.inputBox} ${formData.username.error ?  styles.error : ""} ${formData.username.focus ? styles.focus : ""}`}>
