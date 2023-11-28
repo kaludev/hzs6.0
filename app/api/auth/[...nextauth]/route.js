@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
+import Event from "@models/event";
 
 import { connectToDB } from "@utils/database";
 import Organizer from "@models/organizer";
@@ -45,10 +46,12 @@ const handler = NextAuth({
       }else{
         isOrganizer = false;
       }
+      const events = await Event.find({users_signed: sessionUser._id});
       session.user.id = sessionUser._id.toString();
       session.user.image = sessionUser.image.toString();
       session.user.username = sessionUser.username;
       session.user.isOrganizer = isOrganizer;
+      session.user.events = events;
       console.log(session.user);
       return session;
     },
