@@ -38,7 +38,7 @@
     padding: 10px 0;
 }
 
-.primaryButton {
+.primaryButton, .secondaryButton {
     margin-top: 40px;
     padding: 10px 30px 10px 30px;
     max-width: fit-content;
@@ -46,20 +46,9 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.primaryButton:hover {
+.primaryButton:hover, .secondaryButton:hover {
     color: var(--main-color);
-}
-
-.secondaryButton {
-    margin-top: 40px;
-    padding: 10px 30px 10px 30px;
-    max-width: fit-content;
-    color: var(--main-background);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.secondaryButton:hover {
-    color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
 }
 
 .aboutImg {

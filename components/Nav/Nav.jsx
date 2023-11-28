@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css"
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
@@ -82,15 +84,15 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className={`${styles.secondaryButton} secondaryButton`}
+                  className={`${styles.primaryButton} primaryButton`}
                 >Prijavi se</button>
               ))
             )}
           </li>
         </ul>
       </nav>
-      <div className={styles.menuBtn}>
-            H
+      <div className={`${styles.menuBtn}`} onClick={(e) => {e.stopPropagation(); setMenuVisible(true)}}>
+      {/* <FontAwesomeIcon icon={faBars} /> */}
       </div>
     </div>
     // <nav className="flex justify-between w-full ">
