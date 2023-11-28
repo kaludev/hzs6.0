@@ -4,12 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css"
 import { FaBars } from "react-icons/fa";
-
+import { useRouter } from 'next/navigation'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-
+  const router = useRouter();
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -20,11 +20,16 @@ const Nav = () => {
     function check() {
         setScrolled(window.scrollY > SCROLL_TRIGGER_PX);
     }
-    window.addEventListener("scroll", check)
+    console.log(window.location.pathname)
+    if(window.location.pathname != "/"){
+      setScrolled(true);
+    }else{
+      window.addEventListener("scroll", check)
+    }
     return () => {
         window.removeEventListener("scroll", check);
     }
-}, [])
+}, [window.location.pathname])
 
   useEffect(() => {
     const setUpProviders = async () => {
