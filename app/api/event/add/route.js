@@ -1,10 +1,9 @@
 import Event from "@models/event";
 import { connectToDB } from "@utils/database";
+import { NextResponse } from 'next/server';
 
 export const POST = async (req) => {
-        const res = new Response();
         try{
-
                 await connectToDB();
                 const data = await req.json();
                 const resg = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
@@ -14,17 +13,20 @@ export const POST = async (req) => {
                 if (jsong.status === 'OK') {
                         const location = jsong.results[0].geometry.location;
                         data.address = location.lat + "," + location.lng;
+                        console.log(data);
+
+                        const event = new Event(data);
+                        await event.save();
+
+                        return NextResponse.json({ ok: true, data: data }, { status: 200 })
                 } else {
                         console.log('Geocoding failed');
+                        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
                 }
-                console.log(data);
-
-                const event = new Event(data);
-                await event.save();
-
-                res.json({ success: true, data: event })
+                
         }
         catch(err){
                 console.log(err);
+                return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
         }
 }

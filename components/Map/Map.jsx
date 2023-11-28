@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 
 const Map = () => {
     const [yourLocation, setYourLocation] = useState({});
-    const [location, setLocation] = useState({});
     const {data: session} = useSession();
 
     useEffect(() => {
@@ -31,15 +30,16 @@ const Map = () => {
           
           {
             session?.user ? (
+              
               session.user.events.map((e) => (
                   <Marker position={{lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1])}} title={e.name} />
               ))
-                
             ) : 
-              location && (
+              yourLocation && (
                 <Marker position={yourLocation} title={"Your Location"} />
               )
           }
+          <Marker position={yourLocation} title={"Your Location"} />
         </GoogleMap>
       </LoadScript>
       
