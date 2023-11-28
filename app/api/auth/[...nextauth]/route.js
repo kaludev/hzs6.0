@@ -47,6 +47,7 @@ const handler = NextAuth({
       }
       session.user.id = sessionUser._id.toString();
       session.user.image = sessionUser.image.toString();
+      session.user.username = sessionUser.username;
       session.user.isOrganizer = isOrganizer;
       console.log(session.user);
       return session;
