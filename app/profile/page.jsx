@@ -3,7 +3,7 @@
 import { getProviders, signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 import ProfileSection from "@components/Profile/Profile";
-import Form from "@components/OrganizerRequestForm/Form";
+import OrganizationForm from "@components/OrganizationForm/OrganizationForm";
 import "@styles/margin.css"
 import Settings from "@components/Settings/Settings";
 import { useRouter } from "next/navigation";
@@ -24,9 +24,6 @@ const Profile = () => {
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter();
 
-    const handleSubmit = async () =>{
-        console.log(request)
-    }
     return (
             <div>
                 <ProfileSection 
@@ -41,11 +38,10 @@ const Profile = () => {
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
                 />
                 {showForm && 
-                    <Form
+                    <OrganizationForm
                     request={request}
                     setRequest={setRequest}
                     submitting={submitting}
-                    handleSubmit={handleSubmit}
                     />
                 }
                 {settings && 

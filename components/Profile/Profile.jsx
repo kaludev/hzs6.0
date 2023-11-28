@@ -9,7 +9,7 @@ export default function ProfileSection({name, username, photo,form,showForm,sett
             <h2>O nalogu</h2>
             <hr className={styles.divider} />
             <div className={styles.profileHeader}>
-                <img className={styles.userPhoto} src={photo} alt="" />
+                <img className={styles.userPhoto} src={photo} alt="Profilna slika" />
                 <div className={styles.userInfo}>
                     <div className={styles.userFirstName}>{name}</div>
                     <div className={styles.username}>@{username}</div>
