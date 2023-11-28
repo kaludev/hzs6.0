@@ -64,15 +64,15 @@ const Nav = () => {
           <li>
           {session?.user ? (
             <div className={styles.navProfile}>
-              {session?.user.isOrganizer && <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
+              {session?.user.isOrganizer && <a href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Dodaj Događaj
-              </Link>}
+              </a>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
               </button>
-              <Link href="/profile">
+              <a href="/profile">
                 <Image
                   src={session?.user.image}
                   width={37}
@@ -80,7 +80,7 @@ const Nav = () => {
                   className={styles.profilePic}
                   alt="profile"
                 ></Image>
-              </Link>
+              </a>
             </div>
             ) : (
               providers &&
