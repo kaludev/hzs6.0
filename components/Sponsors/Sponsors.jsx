@@ -18,7 +18,6 @@ const settings = {
   infinite: true,
   variableWidth: true,
   autoplay: true,
-  slidesToShow: 5,
   autoplaySpeed: 2000,
   pauseOnHover: false,
   draggable: false
