@@ -74,22 +74,13 @@
     margin: 5px;
 }
 
-.navbarScrolled {
+.navbar.scrolled {
     background-color: #fff;
     padding: 0;
 }
 
-.navbarScrolled nav ul li a {
-    color: #000;
-}
-
-.navbarScrolled .navBtn {
-    color: #fff;
-}
-
-.navbarScrolled .navBtn:hover {
-    color: #f93839;
-    border-color: #f93839;
+.navbar.scrolled .navLink {
+    color: var(--main-color);
 }
 
 .menuBtn {

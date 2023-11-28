@@ -9,8 +9,6 @@
   --secondary-background-: #47cbe5;
 }
 
-
-
 * {
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
@@ -24,8 +22,6 @@ body {
   overflow-x: hidden;
 }
 
-<<<<<<< HEAD:styles/globals.css
-=======
 h1,
 h2,
 h3,
@@ -35,7 +31,6 @@ h6 {
   font-size: normal !important;
   font-weight: 700 !important;
 }
->>>>>>> dd5d877fdc6f8a2e7a03a65b097a2022dfa163a3:app/globals.css
 
 a {
   color: inherit;
