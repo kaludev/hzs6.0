@@ -43,7 +43,12 @@ const eventSchema = new Schema({
         default: [],
         validate: {
             validator: function(users_signed){
-                return users_signed.length < this.capacity;
+                if(users_signed.length < this.capacity){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             },
             message: "Event is full!",
         }
