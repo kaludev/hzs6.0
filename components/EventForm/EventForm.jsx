@@ -1,6 +1,4 @@
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import styles from './OrganizationForm.module.css'
+import styles from './EventForm.module.css'
 
 const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToProfile}) => {
 
@@ -184,25 +182,25 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
                         <input value={request.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{request.ime.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.lokacija.error ?  styles.error : ""} ${request.lokacija.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Lokacija</label>
-                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
+                        <input value={request.lokacija.value} type="text" className={styles.input1} name="lokacija" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.lokacija.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.vremeOd.error ?  styles.error : ""} ${request.vremeOd.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme od</label>
-                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
+                        <input value={request.vremeOd.value} type="text" className={styles.input1} name="vremeOd" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.vremeOd.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.vremeDo.error ?  styles.error : ""} ${request.vremeDo.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme do</label>
-                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
+                        <input value={request.vremeDo.value} type="text" className={styles.input1} name="vremeDo" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.vremeDo.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.max.error ?  styles.error : ""} ${request.max.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Maksimalan broj učesnika</label>
-                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
+                        <input value={request.max.value} type="text" className={styles.input1} name="max" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.max.errorMsg}</p>
                     </div>
                     <div className={styles.eventTypes}>
                         <p className={styles.typeName}>Tip Događaja</p>
@@ -222,6 +220,17 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
                         onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
                     </div>
+                    <div class="select">
+                        <select class="selectText" required>
+                            <option value="" disabled selected></option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <span class="select-highlight"></span>
+                        <span class="select-bar"></span>
+                        <label class="select-label">Select</label>
+				    </div>
                     <div className={`${styles.inputBox} ${request.poruka.error ?  styles.error : ""} ${request.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Opis</label>
                         <textarea value={request.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
