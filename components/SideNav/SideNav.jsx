@@ -62,7 +62,6 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
     };
     setUpProviders();
   }, []);
-  useEffect(() =>{console.log(menuVisible)} , [menuVisible])
 
   useEffect(() => {
     if(windowSize.width > 1024) setMenuVisible(false)
@@ -70,9 +69,9 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
 
   return (
     <>
-      {!menuVisible ? "" : (
-              <div className={styles.sidebar}>
-                <div className={styles.sidebarLinks}>
+      
+              <div className={`${styles.sidebar} ${menuVisible ? styles.sidebarVisible : ""}`}>
+                <div className={`${styles.sidebarLinks}`}>
                     <div className={`${styles.menuIconClose} ${menuVisible ? styles.showX : ""}`} onClick={() => setMenuVisible(false)}>
                       <FaTimes />
                     </div>
@@ -119,7 +118,6 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
             )}
                     </div>
               </div>
-        )}
 
     </>
     
