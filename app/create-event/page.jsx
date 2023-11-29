@@ -16,6 +16,12 @@ const createEvent = () => {
             error: false,
             errorMsg: ""
         },
+    adresa: {
+        value: "",
+        focus: false,
+        error: false,
+        errorMsg: ""
+    },
     lokacija: {
         value: "",
         focus: false,

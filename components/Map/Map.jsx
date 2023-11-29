@@ -1,4 +1,6 @@
 "use client"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {useState, useEffect} from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import { useSession } from 'next-auth/react';
@@ -11,6 +13,7 @@ const Map = ({buttonState, mode}) => {
     const [directions, setDirections] = useState(null);
     const [closestEvent, setClosestEvent] = useState();
     const [ifNextEvents, setIfNextEvents] = useState();
+    const [events, setEvents] = useState([])
     const {data: session} = useSession();
 
     useEffect(() => {
@@ -24,12 +27,27 @@ const Map = ({buttonState, mode}) => {
           });
         }
         
-    }, []);
+    }, [events]);
 
     useEffect(() => {
+      const loadData = async () => {
+        try{
+          const res = await fetch('/api/event/getEvents');
+          const data = await res.json();
+          console.log(data);
+          if(!res.ok) throw new Error(res.text);
+          setEvents(data);
+          
+        }catch(e){
+          toast.error(e.Message);
+        };
+      }
       if(session?.user){
         console.log(session.events);
         findClosestMarker(yourLocation, mode);
+      }else if (mode === 'all'){
+        loadData(session);
+        findClosestMarker(yourLocation, mode)
       }
     }, [session]);
 
@@ -65,7 +83,7 @@ const Map = ({buttonState, mode}) => {
           });
         }
         else if(mode == "all"){
-          session?.events.forEach((e) => {
+          events.forEach((e) => {
             if(new Date(e.starts_at) > Date.now()){
               bool = true;
               const eventLocation = {
@@ -194,10 +212,10 @@ const Map = ({buttonState, mode}) => {
             }
             {
               mode == "all" && (
-              session?.events && (
+              events && (
                 <>
                   {buttonState.showNext && (
-                  session?.events.map((e) => (
+                  events.map((e) => (
                     new Date(e.starts_at) > Date.now() ? (
                       <Marker
                         key={e.id}
@@ -222,7 +240,7 @@ const Map = ({buttonState, mode}) => {
                   }
                   {
                     buttonState.showPast && (
-                      session?.events.map((e) => (
+                      events.map((e) => (
                         new Date(e.ends_at) < Date.now() ? (
                           <Marker
                             key={e.id}
