@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import styles from './EventForm.module.css'
+import './calendar'
 
 const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile}) => {
 
+    const calendarRef = useRef(null);
+    const calendarElement = calendarRef.current;
+
+    useEffect(() => {
+        generateCalendar(); 
+      }, []);
+
+      
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true;
@@ -193,7 +202,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                         <label className={`${styles.selectLabel}`}>Tip takmičenja</label>
 				    </div>
                     <div className={styles.selectDate}>
-                    <div className={styles.calendar}>
+                    <div ref={calendarRef} className={styles.calendar}>
                         <div className={styles.calendarHeader}>
                             <span className={styles.monthPicker} id="monthPicker"></span>
                             <div className={styles.yearPicker}>

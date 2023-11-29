@@ -1,21 +1,12 @@
 let pickDay = new Date()
 let currDate = new Date()
-let sun = document.getElementById('sun')
 let curr_month = {value: currDate.getMonth()}
 let curr_year = {value: currDate.getFullYear()}
 let curr_day = {value: currDate.getDay()} 
-let jupiter = document.getElementById(`jupiter`)
 let calendar = document.querySelector('.calendar')
 let month_list = calendar.querySelector('.monthList')
 let month_picker = calendar.querySelector('#monthPicker')
-const API_KEY = "OFuTHiMgsvzujVRcxT4WM5M281ZwTch54rRdCdtA"
 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-window.addEventListener('scroll', function(){
-let value = window.scrollY
-sun.style.top = 0 + value * 0.6 + 'px'
-jupiter.style.bottom = value * -0.3 + 'px'
-})
 
 isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)
@@ -93,30 +84,3 @@ document.querySelector('#nextYear').onclick = () => {
     ++curr_year.value
     generateCalendar(curr_month.value, curr_year.value)
 }
-
-async function APICall(URL) {
-    try{
-        const res = await fetch(URL)
-        if(!res.ok) throw new Error("Error while gathering data")
-        const data = await res.json()
-        return data
-    }
-    catch(error){
-        console.log(error)
-    }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-    APICall(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&&thumbs=true`)
-    const data = await APICall(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&&thumbs=true`)
-    let title = document.getElementById("title")
-    title.innerHTML = data.title
-})
-
-async function change(slika){
-    const image = document.getElementById(slika)
-    const data = await APICall(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&&thumbs=true&date=${pickDay.getFullYear()}-${pickDay.getMonth()+1}-${pickDay.getDate()}`)
-    const src = data.media_type === "video" ? data.thumbnail_url : data.hdurl || data.url
-    image.src = src
-}
-change("img1")
