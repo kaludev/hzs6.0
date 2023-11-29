@@ -1,116 +1,116 @@
+import { useState } from 'react';
 import styles from './EventForm.module.css'
 
-const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToProfile}) => {
-
+const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile}) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true;
         setSubmitting(true);
-        if (request.ime.value == ``) {
-            const copy = { ...request };
+        if (event.ime.value == ``) {
+            const copy = { ...event };
             copy['ime'].error = true;
             copy['ime'].errorMsg = "Morate uneti ime";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
         else{
-            const copy = { ...request };
+            const copy = { ...event };
             copy['ime'].error = false;
             copy['ime'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
 
-        if (request.email.value == ``) {
-            const copy = { ...request };
+        if (event.email.value == ``) {
+            const copy = { ...event };
             copy['email'].error = true;
             copy['email'].errorMsg = "Morate uneti email";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(request.email.value)) {
-            const copy = { ...request };
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.email.value)) {
+            const copy = { ...event };
             copy['email'].error = true;
             copy['email'].errorMsg = "Unesite ispravnu email adresu";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
         else {
-            const copy = { ...request };
+            const copy = { ...event };
             copy['email'].error = false;
             copy['email'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
 
-        if (request.nazivKluba.value == ``) {
-            const copy = { ...request };
+        if (event.nazivKluba.value == ``) {
+            const copy = { ...event };
             copy['nazivKluba'].error = true;
             copy['nazivKluba'].errorMsg = "Morate uneti naziv Kluba";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
         else{
-            const copy = { ...request };
+            const copy = { ...event };
             copy['nazivKluba'].error = false;
             copy['nazivKluba'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
 
-        if (request.emailKluba.value == ``) {
-            const copy = { ...request };
+        if (event.emailKluba.value == ``) {
+            const copy = { ...event };
             copy['emailKluba'].error = true;
             copy['emailKluba'].errorMsg = "Morate uneti email Kluba";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(request.emailKluba.value)) {
-            const copy = { ...request };
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.emailKluba.value)) {
+            const copy = { ...event };
             copy['emailKluba'].error = true;
             copy['emailKluba'].errorMsg = "Unesite ispravnu email adresu";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
         else {
-            const copy = { ...request };
+            const copy = { ...event };
             copy['emailKluba'].error = false;
             copy['emailKluba'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
 
-        if (request.telefon.value == ``) {
-            const copy = { ...request };
+        if (event.telefon.value == ``) {
+            const copy = { ...event };
             copy['telefon'].error = true;
             copy['telefon'].errorMsg = "Morate uneti telefon";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
-        else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/.test(request.telefon.value)) {
-            const copy = { ...request };
+        else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/.test(event.telefon.value)) {
+            const copy = { ...event };
             copy['telefon'].error = true;
             copy['telefon'].errorMsg = "Unesite ispravan broj telefona";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
         else{
-            const copy = { ...request };
+            const copy = { ...event };
             copy['telefon'].error = false;
             copy['telefon'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
 
-        if (request.poruka.value == "") {
-            const copy = { ...request };
+        if (event.poruka.value == "") {
+            const copy = { ...event };
             copy['poruka'].error = true;
             copy['poruka'].errorMsg = "Morate uneti poruku";
-            setRequest(copy);
+            setEvent(copy);
             valid = false;
         }
 
         else{
-            const copy = { ...request };
+            const copy = { ...event };
             copy['poruka'].error = false;
             copy['poruka'].errorMsg = "";
-            setRequest(copy);
+            setEvent(copy);
         }
         
         if(!valid){
@@ -119,21 +119,21 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
             return;
         } 
         const body = {
-            ime: request.ime.value,
-            email: request.email.value,
-            nazivKluba: request.nazivKluba.value,
-            emailKluba: request.emailKluba.value,
-            telefon: request.telefon.value,
-            poruka: request.poruka.value
+            ime: event.ime.value,
+            email: event.email.value,
+            nazivKluba: event.nazivKluba.value,
+            emailKluba: event.emailKluba.value,
+            telefon: event.telefon.value,
+            poruka: event.poruka.value
         }
 
-        let copy = JSON.parse(JSON.stringify(request)) // deep copy
+        let copy = JSON.parse(JSON.stringify(event)) // deep copy
         copy.ime.value = "";
         copy.email.value = "";
         copy.poruka.value = "";
-        setRequest(copy)
+        setEvent(copy)
         try{
-            const res = await fetch('/api/organizator/request',{
+            const res = await fetch('/api/organizator/event',{
                     method : "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -155,69 +155,69 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
     }
 
     function handleChange(e) {
-        const copy = { ...request };
+        const copy = { ...event };
         copy[e.target.name].value = e.target.value;
-        setRequest(copy);
+        setEvent(copy);
     }
 
     function handleFocus(e) {
-        const copy = { ...request };
+        const copy = { ...event };
         copy[e.target.name].focus = true;
-        setRequest(copy);
+        setEvent(copy);
     }
 
     function handleBlur(e) {
-        const copy = { ...request };
+        const copy = { ...event };
         copy[e.target.name].focus = !!copy[e.target.name].value;
-        setRequest(copy);
+        setEvent(copy);
     }
   return (
     <>
     <section className={styles.contactSec}>
-            <h2>Prijavite se i postanite organizator</h2>
+            <h2>{type} dogadjaj i pozovite ljude da ucestvuju</h2>
             <div className={styles.formContainer}>
                 <form className={`${styles.contactForm} `} name="contactForm" onSubmit={handleSubmit}>
-                    <div className={`${styles.inputBox} ${request.ime.error ? styles.error : ""} ${request.ime.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.ime.error ? styles.error : ""} ${event.ime.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Naziv</label>
-                        <input value={request.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.ime.errorMsg}</p>
+                        <input value={event.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{event.ime.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.lokacija.error ?  styles.error : ""} ${request.lokacija.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.lokacija.error ?  styles.error : ""} ${event.lokacija.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Lokacija</label>
-                        <input value={request.lokacija.value} type="text" className={styles.input1} name="lokacija" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.lokacija.errorMsg}</p>
+                        <input value={event.lokacija.value} type="text" className={styles.input1} name="lokacija" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{event.lokacija.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.vremeOd.error ?  styles.error : ""} ${request.vremeOd.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.vremeOd.error ?  styles.error : ""} ${event.vremeOd.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme od</label>
-                        <input value={request.vremeOd.value} type="text" className={styles.input1} name="vremeOd" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.vremeOd.errorMsg}</p>
+                        <input value={event.vremeOd.value} type="text" className={styles.input1} name="vremeOd" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{event.vremeOd.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.vremeDo.error ?  styles.error : ""} ${request.vremeDo.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.vremeDo.error ?  styles.error : ""} ${event.vremeDo.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme do</label>
-                        <input value={request.vremeDo.value} type="text" className={styles.input1} name="vremeDo" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.vremeDo.errorMsg}</p>
+                        <input value={event.vremeDo.value} type="text" className={styles.input1} name="vremeDo" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{event.vremeDo.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.max.error ?  styles.error : ""} ${request.max.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.max.error ?  styles.error : ""} ${event.max.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Maksimalan broj učesnika</label>
-                        <input value={request.max.value} type="text" className={styles.input1} name="max" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.max.errorMsg}</p>
+                        <input value={event.max.value} type="text" className={styles.input1} name="max" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{event.max.errorMsg}</p>
                     </div>
                     <div className={styles.eventTypes}>
                         <p className={styles.typeName}>Tip Događaja</p>
 
                         <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na otvorenom" checked ={request.eventTypes === "Na otvorenom"}
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        value="Na otvorenom" checked ={event.eventTypes === "Na otvorenom"}
+                        onChange={(e) =>{setEvent({...event,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na otvorenom</span><br />
 
                         <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na zatvorenom" checked ={request.eventTypes === "Na zatvorenom"} 
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        value="Na zatvorenom" checked ={event.eventTypes === "Na zatvorenom"} 
+                        onChange={(e) =>{setEvent({...event,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na zatvorenom</span><br />
 
                         <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na otvorenom i zatvorenom" checked ={request.eventTypes === "Na otvorenom i zatvorenom"}
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        value="Na otvorenom i zatvorenom" checked ={event.eventTypes === "Na otvorenom i zatvorenom"}
+                        onChange={(e) =>{setEvent({...event,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
                     </div>
                     <div class="select">
@@ -231,10 +231,10 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
                         <span class="select-bar"></span>
                         <label class="select-label">Select</label>
 				    </div>
-                    <div className={`${styles.inputBox} ${request.poruka.error ?  styles.error : ""} ${request.poruka.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Opis</label>
-                        <textarea value={request.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
-                        <p className={styles.errorMessage}>{request.poruka.errorMsg}</p>
+                        <textarea value={event.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
+                        <p className={styles.errorMessage}>{event.poruka.errorMsg}</p>
                     </div>
                     <div className="submitButtonBox">
                         <button type="submit"
@@ -248,4 +248,4 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
   )
 }
 
-export default OrganizationForm
+export default EventForm

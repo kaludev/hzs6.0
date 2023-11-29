@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Profile.module.css"
+import Link from "next/link";
 import { FaCog,FaTimes } from "react-icons/fa";
 
 export default function ProfileSection({name, username, photo,isSuperAdmin,requestedOrganizer,
@@ -59,6 +60,17 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                             <button onClick = {showEvents} className={`${styles.secondaryButton} secondaryButton`}>
                                 Dogadjaji
                             </button>
+                        </div>
+                    }
+                    {isOrganizer &&
+                        <div className={styles.descRow}>
+                            <div className={styles.descRowMain}>
+                                <div className={styles.descTitle}>Kreirajte novi dogadjaj</div>
+                                <div className={styles.descP}>Kreirajte novi sportski dogadjaj i pozovite ljude da ucestvuju</div>
+                            </div>
+                            <Link href="/create-event" className={`${styles.secondaryButton} secondaryButton`}>
+                                Kreiraj
+                            </Link>
                         </div>
                     }
                     {
