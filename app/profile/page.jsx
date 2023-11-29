@@ -8,6 +8,7 @@ import SettingsForm from "@components/SettingsForm/SettingsForm";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Requests from "@components/Requests/Requests";
 
 const Profile = () => {
     const {data: session} = useSession();
@@ -153,7 +154,7 @@ const Profile = () => {
                     />
                     }
                 {requests && 
-                <Requests/>
+                <Requests />
                 }
                 {events && 
                 <Events/>
