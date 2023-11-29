@@ -77,10 +77,14 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
         const body = {
             ime: event.ime.value,
             lokacija: event.lokacija.value,
+            vremeOd: event.vremeOd.value,
+            vremeDo: event.vremeDo.value,
             max: event.max.value,
-            emailKluba: event.emailKluba.value,
+            eventType: event.eventType.value,
+            level: event.level.value,
             poruka: event.poruka.value
         }
+        
 
         let copy = JSON.parse(JSON.stringify(event)) // deep copy
         copy.ime.value = "";
