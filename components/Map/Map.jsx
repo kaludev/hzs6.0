@@ -27,8 +27,8 @@ const Map = () => {
     }, [session]);
 
     const containerStyle = {
-      width: '1000px',
-      height: '1000px',
+      width: '100%',
+      height: '100%',
     };
 
     const findClosestMarker = (userLocation) => {
@@ -112,7 +112,6 @@ const Map = () => {
           )}
           {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>
-        <button onClick={handleDirections}>Show Route to Closest Marker</button>
       </LoadScript>
       
     );
