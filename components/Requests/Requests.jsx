@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useState,useEffect } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RequestCard from "@components/RequestCard/RequestCard";
 
 const RequestCardList = ({data,handleConfirm,handleDecline}) =>{
   return (

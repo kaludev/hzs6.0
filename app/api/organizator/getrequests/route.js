@@ -6,12 +6,12 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 export const GET = async (req) => {
     const data = await getServerSession(authOptions);
     console.log(data);
-    if(data.isSuperAdmin) {
+    if(data.user.isSuperAdmin) {
         try{
             await connectToDB();
-            const prompts = await OrganizerRequest.find({})
-    
-            return new Response(JSON.stringify(prompts),{
+            const requests = await OrganizerRequest.find({})
+            console.log(requests);
+            return new Response(JSON.stringify(requests),{
                 status: 200
             })
         }catch(err){
@@ -19,6 +19,8 @@ export const GET = async (req) => {
                 status: 500
             })
         }
+    }else{
+        return new Response("Nemate permisiju",{ok:false,status:500});
     }
     
 }

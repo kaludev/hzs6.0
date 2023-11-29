@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./RequestCard.module.css"
 import Link from "next/link"
 import { FaRegEnvelope } from "react-icons/fa";
