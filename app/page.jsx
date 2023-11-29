@@ -12,7 +12,6 @@ export default function Home() {
       <AboutSection />
       <SponsorsSection />
       <ContactSection />
-      <Map />
     </>
   )
 }
