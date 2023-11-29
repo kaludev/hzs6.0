@@ -64,10 +64,6 @@ const Nav = () => {
           <li>
           {session?.user ? (
             <div className={styles.navProfile}>
-              {session?.user.isOrganizer && <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
-                {" "}
-                Dodaj Događaj
-              </Link>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se

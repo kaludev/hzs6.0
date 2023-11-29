@@ -4,6 +4,7 @@ import { FaCog,FaTimes } from "react-icons/fa";
 
 export default function ProfileSection({name, username, photo,isSuperAdmin,requestedOrganizer,
     isOrganizer,form,showForm,settings,showSettings,events,showEvents,requests,showRequests,handleSignOut,handleDeactivate,deactivating}){
+        console.log(form || requests || events);
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
@@ -15,8 +16,8 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                     <div className={styles.userFirstName}>{name}</div>
                     <div className={styles.username}>@{username}</div>
                 </div>
-                {form ? 
-                    <div onClick={showForm && showForm || showRequests && showRequests || showEvents && showEvents} className={styles.userSettings}>
+                {(form || requests || events) ? 
+                    <div onClick={form?  showForm : requests ? showRequests : showEvents} className={styles.userSettings}>
                         <FaTimes/>
                     </div>
                     :
