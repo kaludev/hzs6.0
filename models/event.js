@@ -56,6 +56,11 @@ const eventSchema = new Schema({
             message: "Event is full!",
         }
     },
+    likes:{
+        type: Number,
+        required: true,
+        default:0
+    },
     image: {
         type: [String]
     }

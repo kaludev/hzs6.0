@@ -119,6 +119,35 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
         setEvent(copy);
     }
 
+    function handleHourChange(e) {
+        if((!isNaN(e.target.value) && !isNaN(parseFloat(e.target.value)) && parseInt(e.target.value)<24)|| e.target.value == "" ){
+            const copy = { ...event };
+            copy[e.target.name].value.setHours(e.target.value);
+            
+            if(copy.vremeDo.value.getTime() > copy.vremeOd.value.getTime()){
+                setEvent(copy);
+            }else{
+                copy.vremeOd.value.setTime(event.vremeDo.value.getTime()-60000);
+                console.log(copy.vremeOd.value)
+                setEvent(copy);
+            }
+        }
+    }
+    function handleMinuteChange(e) {
+        console.log((!isNaN(e.target.value) && !isNaN(parseFloat(e.target.value)) && parseInt(e.target.value)<61)|| e.target.value == "" )
+        if((!isNaN(e.target.value) && !isNaN(parseFloat(e.target.value)) && parseInt(e.target.value)<61)|| e.target.value == "" ){
+            const copy = { ...event };
+            copy[e.target.name].value.setMinutes(e.target.value);
+            if(copy.vremeDo.value.getTime() > copy.vremeOd.value.getTime()){
+                setEvent(copy);
+            }else{
+                copy.vremeOd.value.setTime(event.vremeDo.value.getTime()-60000);
+                console.log(copy.vremeOd.value)
+                setEvent(copy);
+            }
+        }
+    }
+
     function handleFocus(e) {
         const copy = { ...event };
         copy[e.target.name].focus = true;
@@ -146,14 +175,18 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                         <input value={event.lokacija.value} type="text" className={styles.input1} name="lokacija" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{event.lokacija.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${event.vremeOd.error ?  styles.error : ""} ${event.vremeOd.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${styles.hourMinute} ${event.vremeOd.error ?  styles.error : ""} ${event.vremeOd.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme od</label>
-                        <input value={event.vremeOd.value} type="text" className={styles.input1} name="vremeOd" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <input value={event.vremeOd.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeOd" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <span>: </span>
+                        <input value={event.vremeOd.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeOd" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{event.vremeOd.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${event.vremeDo.error ?  styles.error : ""} ${event.vremeDo.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${styles.hourMinute} ${event.vremeDo.error ?  styles.error : ""} ${event.vremeDo.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Vreme do</label>
-                        <input value={event.vremeDo.value} type="text" className={styles.input1} name="vremeDo" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <input value={event.vremeDo.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeDo" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <span>: </span>
+                        <input value={event.vremeDo.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeDo" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{event.vremeDo.errorMsg}</p>
                     </div>
                     <div className={`${styles.inputBox} ${event.max.error ?  styles.error : ""} ${event.max.focus ? styles.focus : ""}`}>
