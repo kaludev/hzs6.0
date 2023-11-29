@@ -130,6 +130,13 @@ const Map = ({buttonState, mode}) => {
       }
     };
 
+    useEffect(() => {
+      return () => {
+        window.google = {};
+        console.log("component will unmount");
+      };
+    }, [])
+
     const returnClosest = () => {
       handleDirections();
       if(directions && closestMarker){
@@ -139,8 +146,8 @@ const Map = ({buttonState, mode}) => {
 
     return (
       
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={yourLocation} zoom={2}>
+      <LoadScript key={new Date().getTime()} googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+        <GoogleMap onl mapContainerStyle={containerStyle} center={yourLocation} zoom={2}>
           
           {
 
