@@ -55,10 +55,13 @@ const Nav = () => {
               <Link className={styles.navLink} href="/about">O Nama</Link>
           </li>
           <li>
-              <Link className={styles.navLink} href="/activities">Aktivnosti</Link>
+              <Link className={styles.navLink} href="/arena">Arena</Link>
           </li>
           <li>
-              <Link className={styles.navLink} href="">Raspored</Link>
+              <Link className={styles.navLink} href="/ranglist">Rang Lista</Link>
+          </li>
+          <li>
+              <Link className={styles.navLink} href="/activities">Moje aktivnosti</Link>
           </li>
           <li>
           {session?.user ? (

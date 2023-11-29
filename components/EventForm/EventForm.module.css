@@ -1,6 +1,6 @@
 .contactSec {
     width: 700px;
-    margin: 100px auto;
+    margin: 120px auto;
     display: flex;
     flex-direction: column;
 }
@@ -178,17 +178,16 @@
 }
 
 .select {
-    font-family:
-        'Roboto', 'Helvetica', 'Arial', sans-serif;
     position: relative;
-    width: 350px;
+    width: 100%;
+    margin: 20px 0;
 }
 
 .selectText {
     position: relative;
     font-family: inherit;
     background-color: transparent;
-    width: 350px;
+    width: 100%;
     padding: 10px 10px 10px 0;
     font-size: 18px;
     border-radius: 0;
@@ -201,7 +200,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
 
-/* Use custom arrow */
 .select .selectText {
     appearance: none;
     -webkit-appearance: none
@@ -211,7 +209,6 @@
     position: absolute;
     top: 18px;
     right: 10px;
-    /* Styling the down arrow */
     width: 0;
     height: 0;
     padding: 0;
@@ -223,11 +220,10 @@
 }
 
 
-/* LABEL ======================================= */
-.select-label {
+.selectLabel {
     color: rgba(0, 0, 0, 0.26);
     font-size: 18px;
-    font-weight: normal;
+    font-weight: 600;
     position: absolute;
     pointer-events: none;
     left: 0;
@@ -235,49 +231,45 @@
     transition: 0.2s ease all;
 }
 
-/* active state */
-.selectText:focus~.select-label,
-.selectText:valid~.select-label {
-    color: #2F80ED;
+.selectText:focus~.selectLabel,
+.selectText:valid~.selectLabel {
+    color: #000000;
     top: -20px;
     transition: 0.2s ease all;
     font-size: 14px;
 }
 
-/* BOTTOM BARS ================================= */
-.select-bar {
+.selectBar {
     position: relative;
     display: block;
-    width: 350px;
+    width: 100%;
 }
 
-.select-bar:before,
-.select-bar:after {
+.selectBar:before,
+.selectBar:after {
     content: '';
     height: 2px;
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: #2F80ED;
+    background: var(--main-color);
     transition: 0.2s ease all;
 }
 
-.select-bar:before {
+.selectBar:before {
     left: 50%;
 }
 
-.select-bar:after {
+.selectBar:after {
     right: 50%;
 }
 
-/* active state */
-.selectText:focus~.select-bar:before,
-.selectText:focus~.select-bar:after {
+.selectText:focus~.selectBar:before,
+.selectText:focus~.selectBar:after {
     width: 50%;
 }
 
-/* HIGHLIGHTER ================================== */
-.select-highlight {
+.selectHighlight {
     position: absolute;
     height: 60%;
     width: 100px;

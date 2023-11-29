@@ -174,7 +174,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
   return (
     <>
     <section className={styles.contactSec}>
-            <h2>{type} dogadjaj i pozovite ljude da ucestvuju</h2>
+            <h2>{type} događaj i omogućite takmičarima da se prijave i učestvuju</h2>
             <div className={styles.formContainer}>
                 <form className={`${styles.contactForm} `} name="contactForm" onSubmit={handleSubmit}>
                     <div className={`${styles.inputBox} ${event.ime.error ? styles.error : ""} ${event.ime.focus ? styles.focus : ""}`}>
@@ -220,16 +220,18 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                         onChange={(e) =>{setEvent({...event,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
                     </div>
-                    <div class="select">
-                        <select class="selectText" required>
+                    <div className={styles.select}>
+                        <select className={styles.selectText} required>
                             <option value="" disabled selected></option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <option value="1">Međunarodno</option>
+                            <option value="2">Državno</option>
+                            <option value="3">Opštinsko</option>
+                            <option value="4">Školsko</option>
+                            <option value="5">Drugo</option>
                         </select>
-                        <span class="select-highlight"></span>
-                        <span class="select-bar"></span>
-                        <label class="select-label">Select</label>
+                        <span className={`${styles.selectHighlight}`}></span>
+                        <span className={`${styles.selectBar} `}></span>
+                        <label className={`${styles.selectLabel}`}>Tip takmičenja</label>
 				    </div>
                     <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Opis</label>

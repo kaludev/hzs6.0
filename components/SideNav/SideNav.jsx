@@ -71,8 +71,8 @@ const Nav = () => {
   return (
     <>
       {(windowSize.width > 1024) ? null : (
-              <div className={styles.sidebar}>
-                <div className={styles.sidebarLinks}>
+              <div className={`${styles.sidebar} ${menuVisible ? styles.sidebarVisivle : ""}`}>
+                <div className={`${styles.sidebarLinks}`}>
                     <div className={`${styles.menuIconClose} ${menuVisible ? styles.showX : ""}`} onClick={() => setMenuVisible(false)}>
                       <FaTimes />
                     </div>
@@ -82,32 +82,41 @@ const Nav = () => {
                             <Link className={styles.sideNavLink} href="/about">O Nama</Link>
                         </li>
                         <li>
-                            <Link className={styles.sideNavLink} href="/activities">Aktivnosti</Link>
+                            <Link className={styles.sideNavLink} href="/arena">Arena</Link>
                         </li>
                         <li>
-                            <Link className={styles.sideNavLink} href="">Raspored</Link>
+                            <Link className={styles.sideNavLink} href="/ranglist">Rang Lista</Link>
+                        </li>
+                        <li>
+                            <Link className={styles.sideNavLink} href="/activities">Moje aktivnosti</Link>
                         </li>
                       </ul>
                     </div>
                 </div>
                 <div className={styles.sidebarUserLinks}>
-                      {session?.user ? (
-                        <div className={styles.sideNavProfile}>
-                          <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.primaryButton} primaryButton`}>
-                            {" "}
-                            Odjavi se</button>
-                        </div>
-                        ) : (
-                          providers &&
-                          Object.values(providers).map((provider) => (
-                            <button
-                              type="button"
-                              key={provider.name}
-                              onClick={() => signIn(provider.id)}
-                              className={`${styles.primaryButton} primaryButton`}
-                            >Prijavi se</button>
-                          ))
-                        )}
+                {session?.user ? (
+                  <div className={styles.sideNavProfile}>
+                    {session?.user.isOrganizer && 
+                    <Link href="/create-event" className={`${styles.primaryButton} primaryButton`}>
+                      {" "}
+                      Dodaj Događaj
+                    </Link>}
+                    <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.primaryButton} primaryButton`}>
+                      {" "}
+                      Odjavi se
+                    </button>
+                  </div>
+                ) : (
+              providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className={`${styles.primaryButton} primaryButton`}
+                >Prijavi se</button>
+              ))
+            )}
                     </div>
               </div>
         )}

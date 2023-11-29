@@ -5,12 +5,15 @@
     width: 100%;
     height: 100svh;
     max-width: 400px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     background-color: #f1f1e3;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 999;
+}
+.sidebar .sidebarVisivle{
+    display: flex;
 }
 .sidebarLinks{
     width: 90%;
@@ -50,16 +53,21 @@
     margin: 10px;
     padding: 10px 0;
 }
-.sidebarUserLinks{
+.sideNavProfile{
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
+    padding: 10px 0 20px 0;
 }
 .primaryButton, .secondaryButton{
     width: 300px;
     height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .primaryButton:hover{
     color: var(--main-color);
