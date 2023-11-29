@@ -12,7 +12,7 @@ export const POST = async (req) => {
                 const jsong = await resg.json();
                 if (jsong.status === 'OK') {
                         const location = jsong.results[0].geometry.location;
-                        data.address = location.lat + "," + location.lng;
+                        data.location = location;
                         console.log(data);
 
                         const event = new Event(data);
