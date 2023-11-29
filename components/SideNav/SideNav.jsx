@@ -9,13 +9,12 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { FaTimes } from "react-icons/fa";
 
-const Nav = () => {
+const SideNav = ({menuVisible,setMenuVisible}) => {
   
   const pathname = usePathname()
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const SCROLL_TRIGGER_PX = 0;
 
@@ -70,7 +69,7 @@ const Nav = () => {
 
   return (
     <>
-      {(windowSize.width > 1024) ? null : (
+      {!menuVisible ? "" : (
               <div className={styles.sidebar}>
                 <div className={styles.sidebarLinks}>
                     <div className={`${styles.menuIconClose} ${menuVisible ? styles.showX : ""}`} onClick={() => setMenuVisible(false)}>
@@ -117,4 +116,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default SideNav;

@@ -8,13 +8,12 @@ import { usePathname} from 'next/navigation'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
-const Nav = () => {
+const Nav = ({setMenuVisible}) => {
   
   const pathname = usePathname()
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const SCROLL_TRIGGER_PX = 0;
 
