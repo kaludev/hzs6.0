@@ -45,9 +45,9 @@ const Nav = () => {
   return (
     <div className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>
-              <a href="/">
+              <Link href="/">
                 <img src={scrolled ? "/images/logoNavGreen.png" : "/images/logoNavWhite.png"} alt="Logo" />
-              </a>
+              </Link>
       </div>
       <nav className={styles.nav}>
         <ul>
@@ -55,7 +55,7 @@ const Nav = () => {
               <Link className={styles.navLink} href="/about">O Nama</Link>
           </li>
           <li>
-              <Link className={styles.navLink} href="">Aktivnosti</Link>
+              <Link className={styles.navLink} href="/activities">Aktivnosti</Link>
           </li>
           <li>
               <Link className={styles.navLink} href="">Raspored</Link>

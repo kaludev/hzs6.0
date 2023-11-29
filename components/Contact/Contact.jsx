@@ -8,10 +8,13 @@ export default function ContactSection() {
 
     return (
         <section className={styles.contactSec}>
-            <div className={styles.formContainer}>
-                <div className={styles.iframeCont}>
-                    <Map/>
-                </div>
+            <div className={styles.iframeMain}>
+                <Map />
+            </div>
+            <div className={styles.iframeButtons}>
+                <button className={`${styles.primaryButton} primaryButton`}>Prikaži najbliže dešavanje</button>
+                <button className={`${styles.primaryButton} primaryButton`}>Prikaži prošla dešavanja</button>
+                <button className={`${styles.primaryButton} primaryButton`}>Prikaži predstojeća dešavanja</button>
             </div>
         </section>
     )

@@ -3,6 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 85px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -102,6 +103,7 @@
     display: none;
     color: var(--main-color);
     font-weight: bold;
+    font-size: 22px;
     padding: 10px;
     cursor: pointer;
 }

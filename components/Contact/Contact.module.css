@@ -1,142 +1,26 @@
 .contactSec{
-    width: 70%;
+    width: 80%;
     margin: 20px auto;
     display: flex;
-    flex-direction: column;
-}
-.formContainer{
-    width: 100%;
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
-.iframeCont{
-    width: 60%;
+.iframeMain{
+    width: 1000px;
+    height: 700px;
 }
 .iframe{
-    width: 100%;
-    height: 100%;
-    min-height: 350px;
-    border: 0;
     /* DARK MODE 
     filter: grayscale(100%) invert(92%) contrast(83%);*/
 }
-.contactForm{
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-}
-.inputBox {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-}
-.inputBox:first-of-type{
-  margin-top: 20px;
-}
-.inputBox.active-grey .input1 {
-    border: 1px solid #dadce0;
-  }
-  .inputBox.active-grey .inputLabel {
-    color: #80868b;
-    top: -8px;
-    background: #fff;
-    font-size: 11px;
-    transition: 250ms;
-  }
-  .inputBox.active-grey .inputLabel svg {
-    position: relative;
-    width: 11px;
-    height: 11px;
-    top: 2px;
-    transition: 250ms;
-  }
-  .inputBox .inputLabel {
-    position: absolute;
-    color: #80868b;
-    font-size: 16px;
-    font-weight: 500;
-    max-width: calc(100% - (2 * 8px));
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    left: 8px;
-    top: 15px;
-    padding: 0 8px;
-    transition: 250ms;
-    user-select: none;
-    pointer-events: none;
-  }
-  .inputBox .inputLabel svg {
-    position: relative;
-    width: 15px;
-    height: 15px;
-    top: 2px;
-    transition: 250ms;
-  }
-  .inputBox .input1 {
-    box-sizing: border-box;
-    min-height: 50px;
-    width: 100%;
-    color: #202124;
-    border: 1px solid #dadce0;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 13px 15px;
-    transition: 250ms;
-    resize: none;
-  }
-  .inputBox .input1:focus {
-    outline: none;
-    border: 2px solid #000000;
-    transition: 250ms;
-  }
-  .error .inputLabel{
-    color: #f44336 ;
-    top: -8px;
-    background: #fff;
-    font-size: 11px;
-    transition: 250ms;
-  }
-  .error .input1 {
-    border: 2px solid #f44336;
-  }
-  .errorMessage{
-    height: 18px;
-    font-size: 0.875rem;
-    color: #f44336 ;
-  }
-  .inputBox.focus .inputLabel,
-  .inputBox.active .inputLabel {
-    color: #000000;
-    top: -9px;
-    background: #fff;
-    font-size: 11px;
-    transition: 250ms;
-  }
-  .inputBox.focus .inputLabel svg,
-  .inputBox.active .inputLabel svg {
-    position: relative;
-    width: 11px;
-    height: 11px;
-    top: 2px;
-    transition: 250ms;
-  }
-  
-.inputBox.active .input1 {
-  border: 2px solid #000000;
-}
-.pull-right {
- float: right;
-}
-  
-.clear {
- clear: both;
+.iframeButtons{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 .primaryButton{
-  width: 160px;
+  width: 90%;
   padding: 10px 15px;
   cursor: pointer;
   font-weight: 500;
@@ -146,6 +30,9 @@
 .primaryButton:hover{
   color: var(--main-color);
   box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
+}
+.primaryButton:not(:first-child){
+  margin-top: 25px;
 }
 /* Extra large devices (large laptops and desktops, 1200px) */
 @media only screen and (max-width: 1200px) {
