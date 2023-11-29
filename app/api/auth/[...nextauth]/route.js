@@ -47,6 +47,7 @@ const authOptions = {
         isOrganizer = false;
       }
       const user_events = await Event.find({users_signed: sessionUser._id});
+      const events = await Event.find({});
       session.user._id = sessionUser._id.toString();
       session.user.image = sessionUser.image.toString();
       session.user.username = sessionUser.username;
@@ -62,6 +63,7 @@ const authOptions = {
         session.user.requestedOrganizer = false;
       }
       session.user.events = user_events;
+      session.events = events;
       return session;
     },
     async signIn({ profile }) {
