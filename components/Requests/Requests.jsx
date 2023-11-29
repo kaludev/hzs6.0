@@ -22,6 +22,13 @@ const Requests = () => {
     const [Posts, setPosts] = useState([]);
     const {data: session} = useSession();
     const handleConfirm= async (id) => {
+        const copy = [];
+        Posts.forEach(post =>{
+            if(post._id !== id){ 
+                copy.push(post);
+            }
+        })
+        setPosts(copy);
         try{
             const res = await fetch(`/api/organizator/confirmreq/${id}`);
             if(!res.ok){
@@ -34,6 +41,13 @@ const Requests = () => {
         }
     };
     const handleDelete= async (id) => {
+        const copy = [];
+        Posts.forEach(post =>{
+            if(post._id !== id){ 
+                copy.push(post);
+            }
+        })
+        setPosts(copy);
         try{
             const res = await fetch(`/api/organizator/declinereq/${id}`);
             if(!res.ok){
