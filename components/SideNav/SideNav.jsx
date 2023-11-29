@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./Nav.module.css"
+import styles from "./SideNav.module.css"
 import { FaBars } from "react-icons/fa";
 import { usePathname} from 'next/navigation'
 import { useState, useEffect } from "react";
@@ -18,6 +18,27 @@ const Nav = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const SCROLL_TRIGGER_PX = 0;
+
+  function setWindowSize () {
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+    useEffect(() => {
+      function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      }
+      window.addEventListener("resize", handleResize);
+      handleResize();
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    return windowSize;
+  }
+
+  const windowSize = setWindowSize();
 
   useEffect(() => {
     function check() {
@@ -45,37 +66,34 @@ const Nav = () => {
 
   useEffect(() => {
     if(windowSize.width > 1024) setMenuVisible(false)
-}, [windowSize])
+}, [windowSize.width])
 
   return (
     <>
       {(windowSize.width > 1024) ? null : (
-                <div className={styles.sidebar_links}>
-                    <div className={`${styles.menu_icon_close} ${menuVisible ? styles.show_x : ""}`} onClick={() => setMenuVisible(false)}>
+              <div className={styles.sidebar}>
+                <div className={styles.sidebarLinks}>
+                    <div className={`${styles.menuIconClose} ${menuVisible ? styles.showX : ""}`} onClick={() => setMenuVisible(false)}>
                       <FaTimes />
                     </div>
-                    <div >
-                      <nav className={styles.sideNav}>
-                        <ul>
-                          <li>
-                              <Link className={styles.sideNavLink} href="/about">O Nama</Link>
-                          </li>
-                          <li>
-                              <Link className={styles.sideNavLink} href="/activities">Aktivnosti</Link>
-                          </li>
-                          <li>
-                              <Link className={styles.sideNavLink} href="">Raspored</Link>
-                          </li>
-                          <li>
-                          
-                          </li>
-                        </ul>
-                      </nav>
+                    <div className={styles.sideNav}>
+                      <ul>
+                        <li>
+                            <Link className={styles.sideNavLink} href="/about">O Nama</Link>
+                        </li>
+                        <li>
+                            <Link className={styles.sideNavLink} href="/activities">Aktivnosti</Link>
+                        </li>
+                        <li>
+                            <Link className={styles.sideNavLink} href="">Raspored</Link>
+                        </li>
+                      </ul>
                     </div>
-                    <div>
+                </div>
+                <div className={styles.sidebarUserLinks}>
                       {session?.user ? (
                         <div className={styles.sideNavProfile}>
-                          <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
+                          <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.primaryButton} primaryButton`}>
                             {" "}
                             Odjavi se</button>
                         </div>
@@ -91,68 +109,9 @@ const Nav = () => {
                           ))
                         )}
                     </div>
-                </div>
+              </div>
         )}
 
-
-
-
-
-
-
-
-    <div className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
-      <div className={styles.logo}>
-              <Link href="/">
-                <img src={scrolled ? "/images/logoNavGreen.png" : "/images/logoNavWhite.png"} alt="Logo" />
-              </Link>
-      </div>
-      <nav className={styles.nav}>
-        <ul>
-          <li>
-              <Link className={styles.navLink} href="/about">O Nama</Link>
-          </li>
-          <li>
-              <Link className={styles.navLink} href="/activities">Aktivnosti</Link>
-          </li>
-          <li>
-              <Link className={styles.navLink} href="">Raspored</Link>
-          </li>
-          <li>
-          {session?.user ? (
-            <div className={styles.navProfile}>
-              <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
-                {" "}
-                Odjavi se
-              </button>
-              <Link href="/profile">
-                <Image
-                  src={session?.user.image}
-                  width={37}
-                  height={37}
-                  className={styles.profilePic}
-                  alt="profile"
-                ></Image>
-              </Link>
-            </div>
-            ) : (
-              providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className={`${styles.primaryButton} primaryButton`}
-                >Prijavi se</button>
-              ))
-            )}
-          </li>
-        </ul>
-      </nav>
-      <div className={`${styles.menuBtn}`} onClick={(e) => {e.stopPropagation(); setMenuVisible(true); }}>
-        <FaBars />
-      </div>
-    </div>
     </>
     
   );
