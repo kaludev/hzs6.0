@@ -3,7 +3,7 @@ import styles from "./Contact.module.css"
 import Map from "@components/Map/Map"
 import { useState} from "react"
 
-export default function ContactSection() {
+export default function ContactSection({mode}) {
     const [buttonState, setButtonState] = useState({
         showClosest: false,
         showNext: true,
@@ -13,7 +13,7 @@ export default function ContactSection() {
     return (
         <section className={styles.contactSec}>
             <div className={styles.iframeMain}>
-                <Map buttonState={buttonState} mode="all"/>
+                <Map buttonState={buttonState} mode={mode} />
             </div>
             <div className={styles.iframeButtons}>
                 <button className={`${styles.primaryButton} primaryButton`} onClick={() => {
