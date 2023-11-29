@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer({dark}) {
 
     return (
-        <footer>
+        <footer className={styles.footer}>
             <hr className={styles.footerDevider} />
             <div className={styles.footerMain}>
                 <div className={styles.footerCol}>

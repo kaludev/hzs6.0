@@ -109,3 +109,20 @@
 .warningButton:hover{
     background-color: red;
 }
+
+/* Medium devices (landscape tablets, 600 and up) */
+@media only screen and (max-width: 600px) {
+    .descRow{
+        flex-direction: column;
+        background-color: pink;
+    }
+    .descRowMain{
+        width: 100%;
+    }
+    .userInfo{
+        margin: 0;
+    }
+    .primaryButton, .secondaryButton{
+        margin: 0 0 0 10px;
+    }
+}
