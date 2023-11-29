@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth"
-import Organizer from "@models/organizer";
 import User from "@models/user";
-import OrganizerRequest from "@models/OrganizerRequest";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { connectToDB } from "@utils/database";
 
 
@@ -9,7 +8,8 @@ export const POST= async (req) => {
     try{
         await connectToDB();
         const { name,username} = await req.json();
-        const data = await getServerSession();
+        const data = await getServerSession(authOptions);
+        console.log(data);
         const user = await User.findOneAndUpdate({
             email: data.user.email
         },{

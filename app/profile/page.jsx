@@ -6,11 +6,15 @@ import ProfileSection from "@components/Profile/Profile";
 import OrganizationForm from "@components/OrganizationForm/OrganizationForm";
 import SettingsForm from "@components/SettingsForm/SettingsForm";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Profile = () => {
     const {data: session} = useSession();
     const [settings, setSettings] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [providers, setProviders] = useState(null)
+    const [deactivating, setDeactivating] = useState(false);
+    const router = useRouter();
     const [request, setRequest] = useState({
         ime: {
             value: "",
@@ -71,9 +75,24 @@ const Profile = () => {
     })
     const [submitting, setSubmitting] = useState(false)
     const handleDeactivate = async () => {
-        
+        setDeactivating(true);
+        try{
+            const res = await fetch('/api/user/deactivate')
+            if(!res.ok){
+                setDeactivating(false);
+                throw new Error(await res.text());
+            }
+            setDeactivating(false);
+            toast.success("Uspesno poslan zahtev",{
+                position: toast.POSITION.TOP_RIGHT
+            });
+            await signOut();
+            await router.push("/")
+        }catch(e){
+            toast.error("Greska: " + e.message);
+        }
     }
-    const router = useRouter();
+    
     useEffect(() =>{
         setProfile({
             ime: {
@@ -102,13 +121,18 @@ const Profile = () => {
                 name={session?.user.name}
                 username={session?.user.username}
                 photo ={session?.user.image}
+                isSuperAdmin={session?.user.isSuperAdmin}
+                requestedOrganizer={session?.user.requestedOrganizer}
                 isOrganizer={session?.user.isOrganizer}
                 form = {showForm}
                 showForm={() => {setShowForm((prev) => !prev);setSettings(false)}}
                 settings={settings}
                 showSettings={() => {setSettings((prev) => !prev); setShowForm(false)}}
+                showEvents={() => {setEvents((prev) => !prev); setShowForm(false)}}
+                showRequests={() => {setRequests((prev) => !prev); setShowForm(false)}}
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
                 handleDeactivate={handleDeactivate}
+                deactivating={deactivating}
                 />
                 {showForm && 
                     <OrganizationForm
