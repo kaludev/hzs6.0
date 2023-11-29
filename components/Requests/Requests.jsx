@@ -1,4 +1,5 @@
 
+import { useSession } from 'next-auth/react';
 import { useState,useEffect } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,8 +17,9 @@ const RequestCardList = ({data,handleConfirm,handleDecline}) =>{
     </div>
   )
 }
-const Requests = (session) => {
+const Requests = () => {
     const [Posts, setPosts] = useState([]);
+    const {data: session} = useSession();
     const handleConfirm= async (id) => {
         try{
             const res = await fetch(`/api/organizator/confirmreq/${id}`);

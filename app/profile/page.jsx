@@ -154,8 +154,7 @@ const Profile = () => {
                     />
                     }
                 {requests && 
-                <Requests 
-                session = {session}/>
+                <Requests/>
                 }
                 {events && 
                 <Events/>
