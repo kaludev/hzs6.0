@@ -16,7 +16,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                     <div className={styles.username}>@{username}</div>
                 </div>
                 {form ? 
-                    <div onClick={showForm} className={styles.userSettings}>
+                    <div onClick={showForm && showForm || showRequests && showRequests || showEvents && showEvents} className={styles.userSettings}>
                         <FaTimes/>
                     </div>
                     :
