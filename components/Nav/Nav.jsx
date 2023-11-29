@@ -67,7 +67,7 @@ const Nav = ({setMenuVisible}) => {
             <div className={styles.navProfile}>
               {session?.user.isOrganizer && <Link href="/create-event" className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
-                Dodaj Događaj
+                Dodaj takmičenje
               </Link>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}

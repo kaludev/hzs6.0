@@ -22,21 +22,21 @@ export default function ContactSection({mode}) {
                         showNext: false,
                         showPast: false
                     })
-                }}>Prikaži najbliže dešavanje</button>
+                }}>Prikaži najbliža takmičenja</button>
                 <button className={`${styles.primaryButton} primaryButton`} onClick={() => {
                     setButtonState({
                         showClosest: false,
                         showNext: false,
                         showPast: true
                     })
-                }}>Prikaži prošla dešavanja</button>
+                }}>Prikaži prošla takmičenja</button>
                 <button className={`${styles.primaryButton} primaryButton`} onClick={() => {
                     setButtonState({
                         showClosest: false,
                         showNext: true,
                         showPast: false
                     })
-                }}>Prikaži predstojeća dešavanja</button>
+                }}>Prikaži predstojeća takmičenja</button>
             </div>
         </section>
     )
