@@ -74,13 +74,15 @@ const Nav = ({setMenuVisible}) => {
                 Odjavi se
               </button>
               <Link href="/profile">
-                <Image
-                  src={session?.user.image}
-                  width={37}
-                  height={37}
-                  className={styles.profilePic}
-                  alt="profile"
-                ></Image>
+                <div className={styles.navProfileImageBack}>
+                  <Image
+                    src={session?.user.image}
+                    width={37}
+                    height={37}
+                    className={styles.profilePic}
+                    alt="profile"
+                  ></Image>
+                </div>
               </Link>
             </div>
             ) : (
