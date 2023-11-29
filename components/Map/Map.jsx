@@ -153,7 +153,7 @@ const Map = ({buttonState, mode}) => {
                   new Date(e.starts_at) > Date.now() ? (
                     <Marker
                       key={e.id}
-                      icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                      icon={{url: `../../images/faviconRed.ico`}}
                       position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
                       title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                     />
@@ -178,7 +178,7 @@ const Map = ({buttonState, mode}) => {
                       new Date(e.ends_at) < Date.now() ? (
                         <Marker
                           key={e.id}
-                          icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                          icon={{url: `../../images/faviconRed.ico`}}
                           position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
                           title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                         />
@@ -201,7 +201,7 @@ const Map = ({buttonState, mode}) => {
                     new Date(e.starts_at) > Date.now() ? (
                       <Marker
                         key={e.id}
-                        icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                        icon={{url: `../../images/faviconRed.ico`}}
                         position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
                         title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                       />
@@ -226,7 +226,7 @@ const Map = ({buttonState, mode}) => {
                         new Date(e.ends_at) < Date.now() ? (
                           <Marker
                             key={e.id}
-                            icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                            icon={{url: `../../images/faviconRed.ico`}}
                             position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
                             title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                           />
