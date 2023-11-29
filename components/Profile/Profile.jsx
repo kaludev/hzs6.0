@@ -2,7 +2,8 @@ import Image from "next/image";
 import styles from "./Profile.module.css"
 import { FaCog,FaTimes } from "react-icons/fa";
 
-export default function ProfileSection({name, username, photo,isOrganizer,form,showForm,settings,showSettings,handleSignOut,handleDeactivate}){
+export default function ProfileSection({name, username, photo,isSuperAdmin,requestedOrganizer,
+    isOrganizer,form,showForm,settings,showSettings,showEvents,showRequests,handleSignOut,handleDeactivate,deactivating}){
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
@@ -37,15 +38,38 @@ export default function ProfileSection({name, username, photo,isOrganizer,form,s
                             Podešavanja
                         </div>
                     </div>
-                    {!isOrganizer && 
+                    { !isSuperAdmin && !isOrganizer && 
                         <div className={styles.descRow}>
                             <div className={styles.descRowMain}>
                                 <div className={styles.descTitle}>Podnesite zahtev za organizatora</div>
                                 <div className={styles.descP}>Ukoliko želite da održavate događaje i prijavljujete kandidate morate postati organizator</div>
                             </div>
-                            <div onClick = {showForm} className={`${styles.secondaryButton} secondaryButton`}>
-                                Započnite
+                            <button disabled={requestedOrganizer} onClick = {showForm} className={`${styles.secondaryButton} secondaryButton`}>
+                                {requestedOrganizer? "Poslali ste zahtev":"Započnite"}
+                            </button>
+                        </div>
+                    }
+                    {isOrganizer &&
+                        <div className={styles.descRow}>
+                            <div className={styles.descRowMain}>
+                                <div className={styles.descTitle}>Pogledajte vase dogadjaje</div>
+                                <div className={styles.descP}>Pogledajte dogadjaje koje ste vi organizovali i njihove statistike</div>
                             </div>
+                            <button onClick = {showEvents} className={`${styles.secondaryButton} secondaryButton`}>
+                                Dogadjaji
+                            </button>
+                        </div>
+                    }
+                    {
+                        isSuperAdmin && 
+                        <div className={styles.descRow}>
+                            <div className={styles.descRowMain}>
+                                <div className={styles.descTitle}>Pogledajte zahteve za organizatora</div>
+                                <div className={styles.descP}>Pogledajte zahteve ljudi koji zele da se kvalifikuju za organizatora</div>
+                            </div>
+                            <button onClick = {showRequests} className={`${styles.secondaryButton} secondaryButton`}>
+                                Zahtevi
+                            </button>
                         </div>
                     }
                     <div className={styles.descRow}>
@@ -63,7 +87,7 @@ export default function ProfileSection({name, username, photo,isOrganizer,form,s
                             <div className={styles.descP}>Ovde možete deaktivirati nalog i više ga nikada ne koristiti</div>
                         </div>
                         <div onClick={handleDeactivate} className={`${styles.secondaryButton} ${styles.warningButton} secondaryButton`}>
-                            Deaktiviraj
+                            {deactivating ? "Deaktiviranje" : "Deaktiviraj"}
                         </div>
                     </div>
                 </div>
