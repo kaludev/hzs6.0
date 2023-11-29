@@ -14,6 +14,7 @@ const Nav = () => {
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const SCROLL_TRIGGER_PX = 0;
 
@@ -95,7 +96,7 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
-      <div className={`${styles.menuBtn}`} onClick={(e) => {e.stopPropagation(); setMenuVisible(true)}}>
+      <div className={`${styles.menuBtn}`} onClick={(e) => {e.stopPropagation(); setMenuVisible(true); }}>
         <FaBars />
       </div>
     </div>
