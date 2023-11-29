@@ -13,7 +13,7 @@ export default function RequestCard({data,handleConfirm,handleDecline}){
                 <div className={styles.eventDesc}>{data.name}</div>
                 <div className={styles.eventData}>
                     <div className={styles.eventPlaceData}>
-                        <div className={styles.eventTime}><span className={styles.eventColored}><FaRegEnvelope />{data.email}</span></div>
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaRegEnvelope /></span>{data.email}</div>
                         <div className={styles.eventLocation}><span className={styles.eventColored}><FaRegEnvelope /></span>{data.club_email}</div>
                         <div className={styles.eventLocation}><span className={styles.eventColored}><FaPhoneAlt /></span>{data.phone}</div>
                     </div>

@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 import { usePathname} from 'next/navigation'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { FaTimes } from "react-icons/fa";
 
 const Nav = () => {
   
@@ -42,7 +43,64 @@ const Nav = () => {
     setUpProviders();
   }, []);
 
+  useEffect(() => {
+    if(windowSize.width > 1024) setMenuVisible(false)
+}, [windowSize])
+
   return (
+    <>
+      {(windowSize.width > 1024) ? null : (
+                <div className={styles.sidebar_links}>
+                    <div className={`${styles.menu_icon_close} ${menuVisible ? styles.show_x : ""}`} onClick={() => setMenuVisible(false)}>
+                      <FaTimes />
+                    </div>
+                    <div >
+                      <nav className={styles.sideNav}>
+                        <ul>
+                          <li>
+                              <Link className={styles.sideNavLink} href="/about">O Nama</Link>
+                          </li>
+                          <li>
+                              <Link className={styles.sideNavLink} href="/activities">Aktivnosti</Link>
+                          </li>
+                          <li>
+                              <Link className={styles.sideNavLink} href="">Raspored</Link>
+                          </li>
+                          <li>
+                          
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                    <div>
+                      {session?.user ? (
+                        <div className={styles.sideNavProfile}>
+                          <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
+                            {" "}
+                            Odjavi se</button>
+                        </div>
+                        ) : (
+                          providers &&
+                          Object.values(providers).map((provider) => (
+                            <button
+                              type="button"
+                              key={provider.name}
+                              onClick={() => signIn(provider.id)}
+                              className={`${styles.primaryButton} primaryButton`}
+                            >Prijavi se</button>
+                          ))
+                        )}
+                    </div>
+                </div>
+        )}
+
+
+
+
+
+
+
+
     <div className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>
               <Link href="/">
@@ -63,10 +121,6 @@ const Nav = () => {
           <li>
           {session?.user ? (
             <div className={styles.navProfile}>
-              {session?.user.isOrganizer && <Link href="/create-event" className={`${styles.secondaryButton} secondaryButton`}>
-                {" "}
-                Dodaj Događaj
-              </Link>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
@@ -99,6 +153,8 @@ const Nav = () => {
         <FaBars />
       </div>
     </div>
+    </>
+    
   );
 };
 
