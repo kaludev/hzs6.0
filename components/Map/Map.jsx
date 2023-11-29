@@ -2,27 +2,34 @@
 import {useState, useEffect} from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import { useSession } from 'next-auth/react';
+import styles from "../Contact/Contact.module.css"
+import { buttonContext } from '@components/Contact/Contact';
 
-const Map = () => {
+const Map = ({buttonState, mode}) => {
     const [yourLocation, setYourLocation] = useState({});
     const [closestMarker, setClosestMarker] = useState(null);
     const [directions, setDirections] = useState(null);
+    const [closestEvent, setClosestEvent] = useState();
+    const [ifNextEvents, setIfNextEvents] = useState();
     const {data: session} = useSession();
 
     useEffect(() => {
         if(navigator.geolocation){
           navigator.geolocation.getCurrentPosition((pos) => {
             console.log(pos);
+            console.log("buttonstate", buttonState);
             setYourLocation({lat: pos.coords.latitude, lng: pos.coords.longitude});          
           }, (err) => {
             console.log(err);
           });
         }
+        
     }, []);
 
     useEffect(() => {
       if(session?.user){
-        findClosestMarker(yourLocation);
+        console.log(session.events);
+        findClosestMarker(yourLocation, mode);
       }
     }, [session]);
 
@@ -31,23 +38,56 @@ const Map = () => {
       height: '100%',
     };
 
-    const findClosestMarker = (userLocation) => {
+    const findClosestMarker = (userLocation, mode) => {
         let closestDistance = Number.MAX_VALUE;
         let closestMarker = null;
-  
-        session?.user.events.forEach((e) => {
-          const eventLocation = {
-            lat: Number(e.address.split(',')[0]),
-            lng: Number(e.address.split(',')[1]),
-          };
-          const distance = calculateDistance(userLocation, eventLocation);
-  
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestMarker = eventLocation;
-          }
-        });
+        let closestEvent = null;
+        let bool;
+        if(mode == "user"){
+          session?.user.events.forEach((e) => {
+            if(new Date(e.starts_at) > Date.now()){
+              bool = true;
+              const eventLocation = {
+                lat: Number(e.address.split(',')[0]),
+                lng: Number(e.address.split(',')[1]),
+              };
+              const distance = calculateDistance(userLocation, eventLocation);
+      
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestMarker = eventLocation;
+                closestEvent = e;
+              }
+            }
+            else{
+              bool = false;
+            }
+          });
+        }
+        else if(mode == "all"){
+          session?.events.forEach((e) => {
+            if(new Date(e.starts_at) > Date.now()){
+              bool = true;
+              const eventLocation = {
+                lat: Number(e.address.split(',')[0]),
+                lng: Number(e.address.split(',')[1]),
+              };
+              const distance = calculateDistance(userLocation, eventLocation);
+      
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestMarker = eventLocation;
+                closestEvent = e;
+              }
+            }
+            else{
+              bool = false;
+            }
+          });
+        }
         setClosestMarker(closestMarker);
+        setClosestEvent(closestEvent);
+        setIfNextEvents(bool);
     };
   
     const calculateDistance = (pos1, pos2) => {
@@ -90,27 +130,122 @@ const Map = () => {
       }
     };
 
+    const returnClosest = () => {
+      handleDirections();
+      if(directions && closestMarker){
+        return true;
+      }
+    }
+
     return (
       
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={yourLocation} zoom={10}>
+        <GoogleMap mapContainerStyle={containerStyle} center={yourLocation} zoom={2}>
           
           {
-            session?.user && (
+
+            mode == "user" && (
               
-              session?.user.events.map((e) => (
-                  <Marker position={{lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1])}} title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()} />
-              ))
-            )  
+                session?.user && (
+              <>
+                {buttonState.showNext && (
+                session?.user.events.map((e) => (
+                  new Date(e.starts_at) > Date.now() ? (
+                    <Marker
+                      key={e.id}
+                      icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                      position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                      title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
+                    />
+                  ) : console.log("nema predstojecih")
+                ))
+                
+                )
+                }
+                {
+                  buttonState.showClosest && returnClosest() && (
+                    ifNextEvents ? (
+                      <>
+                        <Marker position={closestMarker} title={closestEvent.name + "\n" + closestEvent.description + "\n" + new Date(closestEvent.starts_at).toLocaleDateString() + " - " + new Date(closestEvent.ends_at).toLocaleDateString() + "\n" + new Date(closestEvent.starts_at).toLocaleTimeString() + " - " + new Date(closestEvent.ends_at).toLocaleTimeString()}  />
+                        <DirectionsRenderer directions={directions} />
+                      </>
+                    ) : console.log("nema predstojecih ruta")
+                  )
+                }
+                {
+                  buttonState.showPast && (
+                    session?.user.events.map((e) => (
+                      new Date(e.ends_at) < Date.now() ? (
+                        <Marker
+                          key={e.id}
+                          icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                          position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                          title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
+                        />
+                      ) : console.log("nema proslih")
+                    ))
+                    
+                  )
+                }
+              </>
+            )
               
-          }
-          {closestMarker && (
-          <Marker position={closestMarker} title="Closest marker to your location"  />
-          )}
+            )
+            }
+            {
+              mode == "all" && (
+              session?.events && (
+                <>
+                  {buttonState.showNext && (
+                  session?.events.map((e) => (
+                    new Date(e.starts_at) > Date.now() ? (
+                      <Marker
+                        key={e.id}
+                        icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                        position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                        title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
+                      />
+                    ) : console.log("nema predstojecih")
+                  ))
+                  
+                  )
+                  }
+                  {
+                    buttonState.showClosest && returnClosest() && (
+                      ifNextEvents ? (
+                        <>
+                          <Marker position={closestMarker} title={closestEvent.name + "\n" + closestEvent.description + "\n" + new Date(closestEvent.starts_at).toLocaleDateString() + " - " + new Date(closestEvent.ends_at).toLocaleDateString() + "\n" + new Date(closestEvent.starts_at).toLocaleTimeString() + " - " + new Date(closestEvent.ends_at).toLocaleTimeString()}  />
+                          <DirectionsRenderer directions={directions} />
+                        </>
+                      ) : console.log("nema predstojecih ruta")
+                    )
+                  }
+                  {
+                    buttonState.showPast && (
+                      session?.events.map((e) => (
+                        new Date(e.ends_at) < Date.now() ? (
+                          <Marker
+                            key={e.id}
+                            icon={{url: `../../images/logoBlack.png`, scaledSize: new window.google.maps.Size(50, 30)}}
+                            position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                            title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
+                          />
+                        ) : console.log("nema proslih")
+                      ))
+                      
+                    )
+                  }
+                </>
+              )
+              
+            )
+
+            }
+
+          
           {yourLocation && (
           <Marker position={yourLocation} title="Your location"  />
           )}
-          {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>
       </LoadScript>
       
