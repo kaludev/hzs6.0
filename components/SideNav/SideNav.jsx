@@ -106,18 +106,23 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
                     </button>
                   </div>
                 ) : (
-              providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className={`${styles.primaryButton} primaryButton`}
-                >Prijavi se</button>
-              ))
-            )}
-                    </div>
-              </div>
+                  
+                      providers &&
+                      Object.values(providers).map((provider) => (
+                        <div className={styles.sideNavProfile}>
+                          <button
+                            type="button"
+                            key={provider.name}
+                            onClick={() => signIn(provider.id)}
+                            className={`${styles.primaryButton} primaryButton`}
+                          >Prijavi se</button>
+                          </div>
+                      ))
+                    
+                    )}
+                  
+                </div>
+      </div>
 
     </>
     

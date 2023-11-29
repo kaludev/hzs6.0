@@ -21,80 +21,36 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
             setEvent(copy);
         }
 
-        if (event.email.value == ``) {
+        if (event.lokacija.value == ``) {
             const copy = { ...event };
-            copy['email'].error = true;
-            copy['email'].errorMsg = "Morate uneti email";
+            copy['lokacija'].error = true;
+            copy['lokacija'].errorMsg = "lokaciju";
             setEvent(copy);
             valid = false;
-        }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.email.value)) {
+        }else {
             const copy = { ...event };
-            copy['email'].error = true;
-            copy['email'].errorMsg = "Unesite ispravnu email adresu";
-            setEvent(copy);
-            valid = false;
-        }
-        else {
-            const copy = { ...event };
-            copy['email'].error = false;
-            copy['email'].errorMsg = "";
+            copy['lokacija'].error = false;
+            copy['lokacija'].errorMsg = "";
             setEvent(copy);
         }
 
-        if (event.nazivKluba.value == ``) {
+        if (event.max.value == ``) {
             const copy = { ...event };
-            copy['nazivKluba'].error = true;
-            copy['nazivKluba'].errorMsg = "Morate uneti naziv Kluba";
+            copy['max'].error = true;
+            copy['max'].errorMsg = "Morate uneti telefon";
+            setEvent(copy);
+            valid = false;
+        }else if(!isNaN(event.max.value) && !isNaN(parseFloat(event.max.value))){
+            const copy = { ...event };
+            copy['max'].error = true;
+            copy['max'].errorMsg = "Morate uneti telefon";
             setEvent(copy);
             valid = false;
         }
         else{
             const copy = { ...event };
-            copy['nazivKluba'].error = false;
-            copy['nazivKluba'].errorMsg = "";
-            setEvent(copy);
-        }
-
-        if (event.emailKluba.value == ``) {
-            const copy = { ...event };
-            copy['emailKluba'].error = true;
-            copy['emailKluba'].errorMsg = "Morate uneti email Kluba";
-            setEvent(copy);
-            valid = false;
-        }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.emailKluba.value)) {
-            const copy = { ...event };
-            copy['emailKluba'].error = true;
-            copy['emailKluba'].errorMsg = "Unesite ispravnu email adresu";
-            setEvent(copy);
-            valid = false;
-        }
-        else {
-            const copy = { ...event };
-            copy['emailKluba'].error = false;
-            copy['emailKluba'].errorMsg = "";
-            setEvent(copy);
-        }
-
-        if (event.telefon.value == ``) {
-            const copy = { ...event };
-            copy['telefon'].error = true;
-            copy['telefon'].errorMsg = "Morate uneti telefon";
-            setEvent(copy);
-            valid = false;
-        }
-        else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/.test(event.telefon.value)) {
-            const copy = { ...event };
-            copy['telefon'].error = true;
-            copy['telefon'].errorMsg = "Unesite ispravan broj telefona";
-            setEvent(copy);
-            valid = false;
-        }
-        else{
-            const copy = { ...event };
-            copy['telefon'].error = false;
-            copy['telefon'].errorMsg = "";
+            copy['max'].error = false;
+            copy['max'].errorMsg = "";
             setEvent(copy);
         }
 
@@ -120,10 +76,10 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
         } 
         const body = {
             ime: event.ime.value,
-            email: event.email.value,
-            nazivKluba: event.nazivKluba.value,
+            lokacija: event.lokacija.value,
+            vremeOd;
+            max: event.max.value,
             emailKluba: event.emailKluba.value,
-            telefon: event.telefon.value,
             poruka: event.poruka.value
         }
 

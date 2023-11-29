@@ -1,9 +1,12 @@
+import EventCard from "@components/EventCard/EventCard"
 
-const Events = () => {
+const Events = (data) => {
 
-    
+
   return (
-    <div>Events</div>
+    data.map(event => (
+        <EventCard/>
+    ))
   )
 }
 
