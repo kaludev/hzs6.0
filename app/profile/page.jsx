@@ -16,6 +16,8 @@ const Profile = () => {
     const [showForm, setShowForm] = useState(false);
     const [deactivating, setDeactivating] = useState(false);
     const router = useRouter();
+    const [events, setEvents] = useState(false)
+    const [requests, setRequests] = useState(false)
     const [request, setRequest] = useState({
         ime: {
             value: "",
@@ -129,8 +131,8 @@ const Profile = () => {
                 showForm={() => {setShowForm((prev) => !prev);setSettings(false)}}
                 settings={settings}
                 showSettings={() => {setSettings((prev) => !prev); setShowForm(false)}}
-                showEvents={() => {setEvents((prev) => !prev); setShowForm(false)}}
-                showRequests={() => {setRequests((prev) => !prev); setShowForm(false)}}
+                showEvents={() => {setEvents((prev) => !prev);}}
+                showRequests={() => {setRequests((prev) => !prev);}}
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
                 handleDeactivate={handleDeactivate}
                 deactivating={deactivating}
@@ -151,6 +153,12 @@ const Profile = () => {
                         backToProfile={() =>{ setSettings(false); setShowForm(false);window.location.reload();}}
                     />
                     }
+                {requests && 
+                <Requests/>
+                }
+                {events && 
+                <Events/>
+                }
             </div>
             
     )
