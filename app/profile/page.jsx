@@ -4,7 +4,6 @@ import { getProviders, signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 import ProfileSection from "@components/Profile/Profile";
 import OrganizationForm from "@components/OrganizationForm/OrganizationForm";
-import "@styles/margin.css"
 import SettingsForm from "@components/SettingsForm/SettingsForm";
 import { useRouter } from "next/navigation";
 const Profile = () => {

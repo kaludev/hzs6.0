@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin: 95px auto 0 auto;
 }
 .profileCardMain{
     width: 90%;
