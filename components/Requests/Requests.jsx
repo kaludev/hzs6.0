@@ -4,18 +4,21 @@ import { useState,useEffect } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestCard from "@components/RequestCard/RequestCard";
+import styles from '@components/RequestCard/RequestCard.module.css'
 
 const RequestCardList = ({data,handleConfirm,handleDecline}) =>{
   return (
-    <div className="mt-16 prompt_layout">
-      {data.map(request =>(
+    <section className={styles.cardsMainSection}>
+            <section className={styles.cardsSection}>
+            {data.map(request =>(
         <RequestCard key={request._id}
         data = {request}
         handleConfirm={() => handleConfirm(request._id)}
         handleDecline={() => handleDecline(request._id)}
          />
       ))}
-    </div>
+        </section>
+    </section>
   )
 }
 const Requests = () => {
