@@ -11,7 +11,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <SponsorsSection />
-      <ContactSection />
+      <ContactSection mode="all" />
     </>
   )
 }

@@ -43,7 +43,7 @@ const Map = ({buttonState, mode}) => {
         };
       }
       if(session?.user){
-        console.log(session.events);
+        console.log(session.user);
         findClosestMarker(yourLocation, mode);
       }else if (mode === 'all'){
         loadData(session);
@@ -65,10 +65,7 @@ const Map = ({buttonState, mode}) => {
           session?.user.events.forEach((e) => {
             if(new Date(e.starts_at) > Date.now()){
               bool = true;
-              const eventLocation = {
-                lat: Number(e.address.split(',')[0]),
-                lng: Number(e.address.split(',')[1]),
-              };
+              const eventLocation = e.location;
               const distance = calculateDistance(userLocation, eventLocation);
       
               if (distance < closestDistance) {
@@ -86,10 +83,7 @@ const Map = ({buttonState, mode}) => {
           events.forEach((e) => {
             if(new Date(e.starts_at) > Date.now()){
               bool = true;
-              const eventLocation = {
-                lat: Number(e.address.split(',')[0]),
-                lng: Number(e.address.split(',')[1]),
-              };
+              const eventLocation = e.location;
               const distance = calculateDistance(userLocation, eventLocation);
       
               if (distance < closestDistance) {
@@ -172,7 +166,7 @@ const Map = ({buttonState, mode}) => {
                     <Marker
                       key={e.id}
                       icon={{url: `../../images/faviconRed.ico`}}
-                      position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                      position={e.location}
                       title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                     />
                   ) : console.log("nema predstojecih")
@@ -197,7 +191,7 @@ const Map = ({buttonState, mode}) => {
                         <Marker
                           key={e.id}
                           icon={{url: `../../images/faviconRed.ico`}}
-                          position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                          position={e.location}
                           title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                         />
                       ) : console.log("nema proslih")
@@ -220,7 +214,7 @@ const Map = ({buttonState, mode}) => {
                       <Marker
                         key={e.id}
                         icon={{url: `../../images/faviconRed.ico`}}
-                        position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                        position={e.location}
                         title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                       />
                     ) : console.log("nema predstojecih")
@@ -245,7 +239,7 @@ const Map = ({buttonState, mode}) => {
                           <Marker
                             key={e.id}
                             icon={{url: `../../images/faviconRed.ico`}}
-                            position={{ lat: Number(e.address.split(',')[0]), lng: Number(e.address.split(',')[1]) }}
+                            position={e.location}
                             title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                           />
                         ) : console.log("nema proslih")
