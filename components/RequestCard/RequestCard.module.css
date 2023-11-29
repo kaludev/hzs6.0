@@ -1,0 +1,106 @@
+.cardsMainSection{
+    width: 100%;
+}
+.cardsSection{
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.cardEvent{
+    width: 100%;
+    max-width: 360px;
+    height: fit-content;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+}
+.eventMain{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.eventName{
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px 0;
+}
+.eventDesc{
+    width: 100%;
+    font-size: 16px;
+    color: #000000c4;
+    line-height: 19px;
+    word-wrap: break-word;
+}
+.eventData{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+}
+.eventPlaceData{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    color: #000000c4;
+    font-size: 14px;
+}
+.eventColored{
+    width: 30%;
+    padding-right: 5px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+.eventParticipants{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+.eventButtons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.primaryButton{
+    padding: 5px 15px;
+    margin: 10px 20px 10px 5px;
+}
+.primaryButton:hover{
+    color: var(--main-color);
+}
+.secondaryButton{
+    width: 80px;
+    height: 39px;
+    margin: 10px 0;
+}
+.eventLikes{
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    align-items: center;
+    margin: 0 20px;
+}
+.eventLikesNum{
+    font-size: 16px;
+}
+/* Medium devices (landscape tablets, 800 and down) */
+@media only screen and (max-width: 800px) {
+    .cardsSection{
+        justify-content: center;
+    }
+}

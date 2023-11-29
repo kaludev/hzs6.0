@@ -1,6 +1,4 @@
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import styles from './OrganizationForm.module.css'
+import styles from './EventForm.module.css'
 
 const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToProfile}) => {
 
@@ -180,32 +178,61 @@ const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToP
             <div className={styles.formContainer}>
                 <form className={`${styles.contactForm} `} name="contactForm" onSubmit={handleSubmit}>
                     <div className={`${styles.inputBox} ${request.ime.error ? styles.error : ""} ${request.ime.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Ime i prezime</label>
+                        <label className={styles.inputLabel}>Naziv</label>
                         <input value={request.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{request.ime.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.email.error ?  styles.error : ""} ${request.email.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Email</label>
-                        <input value={request.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.email.errorMsg}</p>
+                    <div className={`${styles.inputBox} ${request.lokacija.error ?  styles.error : ""} ${request.lokacija.focus ? styles.focus : ""}`}>
+                        <label className={styles.inputLabel}>Lokacija</label>
+                        <input value={request.lokacija.value} type="text" className={styles.input1} name="lokacija" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.lokacija.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Naziv Kluba</label>
-                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
+                    <div className={`${styles.inputBox} ${request.vremeOd.error ?  styles.error : ""} ${request.vremeOd.focus ? styles.focus : ""}`}>
+                        <label className={styles.inputLabel}>Vreme od</label>
+                        <input value={request.vremeOd.value} type="text" className={styles.input1} name="vremeOd" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.vremeOd.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.emailKluba.error ?  styles.error : ""} ${request.emailKluba.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Email Kluba</label>
-                        <input value={request.emailKluba.value} type="text" className={styles.input1} name="emailKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.emailKluba.errorMsg}</p>
+                    <div className={`${styles.inputBox} ${request.vremeDo.error ?  styles.error : ""} ${request.vremeDo.focus ? styles.focus : ""}`}>
+                        <label className={styles.inputLabel}>Vreme do</label>
+                        <input value={request.vremeDo.value} type="text" className={styles.input1} name="vremeDo" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.vremeDo.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${request.telefon.error ?  styles.error : ""} ${request.telefon.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Kontakt telefon</label>
-                        <input value={request.telefon.value} type="text" className={styles.input1} name="telefon" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{request.telefon.errorMsg}</p>
+                    <div className={`${styles.inputBox} ${request.max.error ?  styles.error : ""} ${request.max.focus ? styles.focus : ""}`}>
+                        <label className={styles.inputLabel}>Maksimalan broj učesnika</label>
+                        <input value={request.max.value} type="text" className={styles.input1} name="max" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.max.errorMsg}</p>
                     </div>
+                    <div className={styles.eventTypes}>
+                        <p className={styles.typeName}>Tip Događaja</p>
+
+                        <input type="radio" name="eventTypes" id="eventTypes" 
+                        value="Na otvorenom" checked ={request.eventTypes === "Na otvorenom"}
+                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        <span className={styles.eventType}>Na otvorenom</span><br />
+
+                        <input type="radio" name="eventTypes" id="eventTypes" 
+                        value="Na zatvorenom" checked ={request.eventTypes === "Na zatvorenom"} 
+                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        <span className={styles.eventType}>Na zatvorenom</span><br />
+
+                        <input type="radio" name="eventTypes" id="eventTypes" 
+                        value="Na otvorenom i zatvorenom" checked ={request.eventTypes === "Na otvorenom i zatvorenom"}
+                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
+                        <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
+                    </div>
+                    <div class="select">
+                        <select class="selectText" required>
+                            <option value="" disabled selected></option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <span class="select-highlight"></span>
+                        <span class="select-bar"></span>
+                        <label class="select-label">Select</label>
+				    </div>
                     <div className={`${styles.inputBox} ${request.poruka.error ?  styles.error : ""} ${request.poruka.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Zašto želite da postanete organizator</label>
+                        <label className={styles.inputLabel}>Opis</label>
                         <textarea value={request.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
                         <p className={styles.errorMessage}>{request.poruka.errorMsg}</p>
                     </div>

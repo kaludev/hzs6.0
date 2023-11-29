@@ -3,11 +3,11 @@ import mongoose, { Schema,model ,models } from "mongoose";
 const organizerSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
+        unique : [true, 'Korisnik je vec organizator'],
         ref: "User"
     },
     name: {
         type : String,
-        unique : [true, 'Name should be unique'],
         required : [true, 'Name is required']
     },
     upvotes: {

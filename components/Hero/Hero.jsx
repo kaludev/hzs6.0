@@ -8,8 +8,8 @@ export default function HeroSection() {
                 <h1 className={styles.h1}>Kreiraj svoju budućnost u novoj areni.</h1>
                 <p className={styles.navP}>Takmiči se, prondađi organizatore, osvoji nagrade i još mnogo toga . . .</p>
                 <div className={styles.heroBtns}>
-                    <Link href="/takmici-se"><button className={`${styles.primaryButton} primaryButton`}>Pronađite takmičenja</button></Link>
-                    <Link href="/saznaj-vise"><button className={`${styles.secondaryButton} secondaryButton`}>Saznaj više</button></Link>
+                    <Link href="/activities"><button className={`${styles.primaryButton} primaryButton`}>Pronađite takmičenja</button></Link>
+                    <Link href="/about"><button className={`${styles.secondaryButton} secondaryButton`}>Saznaj više</button></Link>
                 </div>
             </section>
         </header>

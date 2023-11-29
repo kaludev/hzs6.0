@@ -4,14 +4,21 @@ import { getProviders, signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 import ProfileSection from "@components/Profile/Profile";
 import OrganizationForm from "@components/OrganizationForm/OrganizationForm";
-import "@styles/margin.css"
 import SettingsForm from "@components/SettingsForm/SettingsForm";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Requests from "@components/Requests/Requests";
+import Events from "@components/Events/Events";
+
 const Profile = () => {
     const {data: session} = useSession();
     const [settings, setSettings] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [providers, setProviders] = useState(null)
+    const [deactivating, setDeactivating] = useState(false);
+    const router = useRouter();
+    const [events, setEvents] = useState(false)
+    const [requests, setRequests] = useState(false)
     const [request, setRequest] = useState({
         ime: {
             value: "",
@@ -72,9 +79,24 @@ const Profile = () => {
     })
     const [submitting, setSubmitting] = useState(false)
     const handleDeactivate = async () => {
-        
+        setDeactivating(true);
+        try{
+            const res = await fetch('/api/user/deactivate')
+            if(!res.ok){
+                setDeactivating(false);
+                throw new Error(await res.text());
+            }
+            setDeactivating(false);
+            toast.success("Uspesno poslan zahtev",{
+                position: toast.POSITION.TOP_RIGHT
+            });
+            await signOut();
+            await router.push("/")
+        }catch(e){
+            toast.error("Greska: " + e.message);
+        }
     }
-    const router = useRouter();
+    
     useEffect(() =>{
         setProfile({
             ime: {
@@ -103,13 +125,20 @@ const Profile = () => {
                 name={session?.user.name}
                 username={session?.user.username}
                 photo ={session?.user.image}
+                isSuperAdmin={session?.user.isSuperAdmin}
+                requestedOrganizer={session?.user.requestedOrganizer}
                 isOrganizer={session?.user.isOrganizer}
                 form = {showForm}
                 showForm={() => {setShowForm((prev) => !prev);setSettings(false)}}
                 settings={settings}
                 showSettings={() => {setSettings((prev) => !prev); setShowForm(false)}}
+                events={events}
+                showEvents={() => {setEvents((prev) => !prev);}}
+                requests={requests}
+                showRequests={() => {setRequests((prev) => !prev);}}
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
                 handleDeactivate={handleDeactivate}
+                deactivating={deactivating}
                 />
                 {showForm && 
                     <OrganizationForm
@@ -127,6 +156,12 @@ const Profile = () => {
                         backToProfile={() =>{ setSettings(false); setShowForm(false);window.location.reload();}}
                     />
                     }
+                {requests && 
+                <Requests/>
+                }
+                {events && 
+                <Events/>
+                }
             </div>
             
     )

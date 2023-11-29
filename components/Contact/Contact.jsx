@@ -1,7 +1,5 @@
 "use client"
 import styles from "./Contact.module.css"
-//import KontaktAPI from "../../../../services/api/Kontakt";
-//import { useStateContext } from "../../../../services/context/ContextProvider";
 import Map from "@components/Map/Map"
 import { useState} from "react"
 

@@ -4,7 +4,8 @@ import Link from "next/link"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 
-export default function AboutUsPage(){
+export default function EventCard(eventName, eventDesc, address, eventStartTime, eventEndTime, 
+    applied, maxCapacity, likes,handleSubmit, handleEdit, ){
 
     const[hover, setHover] = useState();
 
@@ -12,20 +13,23 @@ export default function AboutUsPage(){
         <div className={styles.cardEvent}>
             <img className={styles.eventPhoto} src="./images/hero.jpg" alt="Event Photo" />
             <div className={styles.eventMain}>
-                <div className={styles.eventName}>Stoni tenis u Novoj hali sportova</div>
-                <div className={styles.eventDesc}>Finale turnira u stonom tenisu ce se odrzati u  Novoj hali sportova da vidimo ko je najjaci</div>
+                <div className={styles.eventName}>{eventName}</div>
+                <div className={styles.eventDesc}>{eventDesc}</div>
                 <div className={styles.eventData}>
                     <div className={styles.eventPlaceData}>
-                        <div className={styles.eventLocation}><span className={styles.eventColored}><FaMapMarkerAlt /></span> Nova hala sportova 1, Kraljevo</div>
-                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> 09:30h - 11:00h</div>
+                        <div className={styles.eventLocation}><span className={styles.eventColored}><FaMapMarkerAlt /></span>{address}</div>
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {eventStartTime.getDate() + ". "+ (eventStartTime.getMonth()+1) +". " + eventStartTime.getFullYear() + "."} - {eventEndTime.getDate() + ". "+ (eventEndTime.getMonth()+1) +". " + eventEndTime.getFullYear() + "."}</div>                 
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {eventStartTime.getHours()+ ":" + eventStartTime.getMinutes()} -  {eventEndTime.getHours()+ ":" + eventEndTime.getMinutes()}</div>
                     </div>
-                    <div className={styles.eventParticipants}>22/46</div>
+                    <div className={styles.eventParticipants}>{applied}/{maxCapacity}</div>
                 </div>
                 <div className={styles.eventButtons}>
-                    <button className={`${styles.primaryButton} primaryButton`}>Prijavi se</button>
+                    {handleSubmit && <button onClick={handleSubmit()} className={`${styles.primaryButton} primaryButton`}>Prijavi se</button>}
+                    {handleEdit && <button onClick={handleEdit()} className={`${styles.primaryButton} primaryButton`}>Izmeni</button>}
+                    {handleDelete && <button onClick={handleDelete()} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
                     <div className={styles.eventLikes}>
                         <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
-                        <div className={styles.eventLikesNum}>44</div>
+                        <div className={styles.eventLikesNum}>{likes}</div>
                     </div>
                 </div>
                 
