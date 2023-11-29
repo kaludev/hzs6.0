@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import styles from './EventForm.module.css'
+import './calendar'
 
 const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile}) => {
 
+    const calendarRef = useRef(null);
+    const calendarElement = calendarRef.current;
+
+    useEffect(() => {
+        generateCalendar(); 
+      }, []);
+
+      
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true;
@@ -224,6 +233,35 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                         <span className={`${styles.selectHighlight}`}></span>
                         <span className={`${styles.selectBar} `}></span>
                         <label className={`${styles.selectLabel}`}>Tip takmičenja</label>
+				    </div>
+                    <div className={styles.selectDate}>
+                    <div ref={calendarRef} className={styles.calendar}>
+                        <div className={styles.calendarHeader}>
+                            <span className={styles.monthPicker} id="monthPicker"></span>
+                            <div className={styles.yearPicker}>
+                            <span className={styles.yearChange} id="prevYear">
+                                <pre>&#8592;</pre>
+                            </span>
+                            <span id="year"></span>
+                            <span className={styles.yearChange} id="nextYear">
+                                <pre>&#8594;</pre>
+                            </span>
+                            </div>
+                        </div>
+                        <div className={styles.calendarBody}>
+                            <div className={styles.calendarWeekDay}>
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                            </div>
+                            <div className={styles.calendarDays}></div>
+                        </div>
+                        <div className={styles.monthList}></div>
+                    </div>
 				    </div>
                     <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Opis</label>
