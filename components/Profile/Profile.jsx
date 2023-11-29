@@ -1,8 +1,8 @@
 import Image from "next/image";
 import styles from "./Profile.module.css"
-import { FaCog } from "react-icons/fa";
+import { FaCog,FaTimes } from "react-icons/fa";
 
-export default function ProfileSection({name, username, photo,isOrganizer,form,showForm,settings,showSettings,handleSignOut}){
+export default function ProfileSection({name, username, photo,isOrganizer,form,showForm,settings,showSettings,handleSignOut,handleDeactivate}){
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
@@ -14,9 +14,15 @@ export default function ProfileSection({name, username, photo,isOrganizer,form,s
                     <div className={styles.userFirstName}>{name}</div>
                     <div className={styles.username}>@{username}</div>
                 </div>
-                <div onClick={showSettings} className={styles.userSettings}>
-                    <FaCog />
-                </div>
+                {form ? 
+                    <div onClick={showForm} className={styles.userSettings}>
+                        <FaTimes/>
+                    </div>
+                    :
+                    <div onClick={showSettings} className={styles.userSettings}>
+                        {settings? <FaTimes/> : <FaCog />}
+                    </div>
+                }
             </div>
             <hr className={styles.divider} />
 
@@ -56,7 +62,7 @@ export default function ProfileSection({name, username, photo,isOrganizer,form,s
                             <div className={styles.descTitle}>Deaktivirajte vaš nalog</div>
                             <div className={styles.descP}>Ovde možete deaktivirati nalog i više ga nikada ne koristiti</div>
                         </div>
-                        <div className={`${styles.secondaryButton} ${styles.warningButton} secondaryButton`}>
+                        <div onClick={handleDeactivate} className={`${styles.secondaryButton} ${styles.warningButton} secondaryButton`}>
                             Deaktiviraj
                         </div>
                     </div>

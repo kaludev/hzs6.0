@@ -1,4 +1,3 @@
-"use client"
 
 import HeroSection from "@components/Hero/Hero"
 import AboutSection from "@components/About/About"
@@ -13,7 +12,6 @@ export default function Home() {
       <AboutSection />
       <SponsorsSection />
       <ContactSection />
-      <Map />
     </>
   )
 }

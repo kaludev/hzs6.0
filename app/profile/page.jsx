@@ -13,26 +13,90 @@ const Profile = () => {
     const [showForm, setShowForm] = useState(false);
     const [providers, setProviders] = useState(null)
     const [request, setRequest] = useState({
-        name: "",
-        eventTypes:"",
-        reason: ""
+        ime: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        email: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        nazivKluba: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        emailKluba: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        telefon: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        poruka: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        }
     })
     const [profile,setProfile] = useState({
-        name: "",
-        username: ""
+        ime: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        email: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        },
+        username: {
+            value: "",
+            focus: false,
+            error: false,
+            errorMsg: ""
+        }
     })
     const [submitting, setSubmitting] = useState(false)
-    const router = useRouter();
-
-    const handleSubmit = async () =>{
-        const res = await fetch('/api/users/requestOrganizer',{
-            method : "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(request)
-        })
+    const handleDeactivate = async () => {
+        
     }
+    const router = useRouter();
+    useEffect(() =>{
+        setProfile({
+            ime: {
+                value: session?.user.name,
+                focus: true,
+                error: false,
+                errorMsg: ""
+            },
+            email: {
+                value: session?.user.email,
+                focus: true,
+                error: false,
+                errorMsg: ""
+            },
+            username: {
+                value: session?.user.username,
+                focus: true,
+                error: false,
+                errorMsg: ""
+            }
+        })
+    }, [session] )
     return (
             <div>
                 <ProfileSection 
@@ -45,18 +109,22 @@ const Profile = () => {
                 settings={settings}
                 showSettings={() => {setSettings((prev) => !prev); setShowForm(false)}}
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
+                handleDeactivate={handleDeactivate}
                 />
                 {showForm && 
                     <OrganizationForm
                     request={request}
                     setRequest={setRequest}
                     submitting={submitting}
+                    setSubmitting={setSubmitting}
+                    backToProfile={() =>{ setSettings(false); setShowForm(false)}}
                     />
                 }
                 {settings && 
                     <SettingsForm
                         profile={profile}
                         setProfile={setProfile}
+                        backToProfile={() =>{ setSettings(false); setShowForm(false);window.location.reload();}}
                     />
                     }
             </div>
