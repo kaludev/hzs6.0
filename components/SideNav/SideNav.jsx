@@ -62,6 +62,7 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
     };
     setUpProviders();
   }, []);
+  useEffect(() =>{console.log(menuVisible)} , [menuVisible])
 
   useEffect(() => {
     if(windowSize.width > 1024) setMenuVisible(false)
