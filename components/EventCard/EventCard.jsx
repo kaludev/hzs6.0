@@ -4,7 +4,7 @@ import Link from "next/link"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 
-export default function AboutUsPage(eventName, eventDesc, address, eventStartTime, eventEndTime, 
+export default function EventCard(eventName, eventDesc, address, eventStartTime, eventEndTime, 
     applied, maxCapacity, likes,handleSubmit, handleEdit, ){
 
     const[hover, setHover] = useState();

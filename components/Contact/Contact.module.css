@@ -3,9 +3,12 @@
     margin: 20px auto;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .iframeMain{
-    width: 1000px;
+  width: 100%;
+    min-width: 1000px;
     height: 700px;
 }
 .iframe{
@@ -24,6 +27,7 @@
   padding: 10px 15px;
   cursor: pointer;
   font-weight: 500;
+  margin-top: 25px;
   background-color: var(--main-color);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -31,13 +35,22 @@
   color: var(--main-color);
   box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
 }
-.primaryButton:not(:first-child){
-  margin-top: 25px;
-}
-/* Extra large devices (large laptops and desktops, 1200px) */
+
 @media only screen and (max-width: 1200px) {
   .contactSec{
     width: 90%;
+    flex-direction: column;
+  }
+  .iframeButtons{
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .primaryButton{
+    margin: 25px 10px;
+    width: 30%;
+    min-height: 74px;
   }
 }
 
@@ -46,20 +59,23 @@
   .formContainer{
     flex-direction: column;
   }
-  .iframeCont{
-    width: 100%;
-  }
-  .contactForm{
-    width: 100%;
-  }
-  .primaryButton{
-    margin: auto;
-    width: 100%;
-  }
 }
 
-/* Medium devices (landscape tablets, 768pxp) */
-@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 700px) {
+  .iframeButtons{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .primaryButton{
+    margin: 10px 0;
+    width: 90%;
+  }
+  .primaryButton:first-child{
+    margin-top: 30px;
+  }
+}
 
 /* Small devices (portrait tablets and large phones, 600px) */
 @media only screen and (max-width: 600px) {}
