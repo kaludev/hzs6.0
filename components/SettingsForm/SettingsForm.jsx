@@ -1,154 +1,125 @@
-import React from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react'
 import styles from './SettingsForm.module.css'
 
-const SettingsForm = ({profile, setProfile})  => {
-    const [formData, setFormData] = useState({
-        ime: {
-            value: profile.name,
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        email: {
-            value: profile.email,
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        username: {
-            value: profile.username,
-            focus: false,
-            error: false,
-            errorMsg: ""
-        }
-    })
-
-
+const SettingsForm = ({profile, setProfile,backToProfile})  => {
+    const [submitting, setSubmitting] = useState(false);
     async function handleSubmit(e) {
         e.preventDefault();
+        setSubmitting(true);
         let valid = true;
 
-        if (formData.ime.value == ``) {
-            const copy = { ...formData };
+        if (profile.ime.value == ``) {
+            const copy = { ...profile };
             copy['ime'].error = true;
             copy['ime'].errorMsg = "Morate uneti ime";
-            setFormData(copy);
+            setProfile(copy);
             valid = false;
         }
         else{
-            const copy = { ...formData };
+            const copy = { ...profile };
             copy['ime'].error = false;
             copy['ime'].errorMsg = "";
-            setFormData(copy);
+            setProfile(copy);
         }
 
-        if (formData.email.value == ``) {
-            const copy = { ...formData };
-            copy['email'].error = true;
-            copy['email'].errorMsg = "Morate uneti email";
-            setFormData(copy);
-            valid = false;
-        }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email.value)) {
-            const copy = { ...formData };
-            copy['email'].error = true;
-            copy['email'].errorMsg = "Unesite ispravnu email adresu";
-            setFormData(copy);
-            valid = false;
-        }
-        else {
-            const copy = { ...formData };
-            copy['email'].error = false;
-            copy['email'].errorMsg = "";
-            setFormData(copy);
-        }
-
-        if (formData.username.value == ``) {
-            const copy = { ...formData };
+        if (profile.username.value == ``) {
+            const copy = { ...profile };
             copy['username'].error = true;
-            copy['usename'].errorMsg = "Morate uneti username";
-            setFormData(copy);
+            copy['username'].errorMsg = "Morate uneti username";
+            setProfile(copy);
             valid = false;
         }
         else{
-            const copy = { ...formData };
+            const copy = { ...profile };
             copy['username'].error = false;
             copy['username'].errorMsg = "";
-            setFormData(copy);
+            setProfile(copy);
         }
 
-        if(!valid) return;
+        if(!valid){
+            setSubmitting(false);
+            toast.error("Greska u validaciji");
+            return;
+        } 
+        const body = {
+            name:profile.ime.value,
+            username:profile.username.value
+        }
         
-        let copy = JSON.parse(JSON.stringify(formData)) // deep copy
+        let copy = JSON.parse(JSON.stringify(profile)) // deep copy
         copy.ime.value = "";
         copy.email.value = "";
-        copy.poruka.value = "";
-        setFormData(copy)
+        copy.username.value = "";
+        setProfile(copy)
+
+        try{
+            const res = await fetch('/api/user/edit',{
+                    method : "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(body)
+                })
+            if(!res.ok){
+                setSubmitting(false);
+                throw new Error(await res.text());
+            }
+            setSubmitting(false);
+            toast.success("Uspesno pozlan zahtev",{
+                position: toast.POSITION.TOP_RIGHT
+            });
+            backToProfile();
+        }catch(e){
+            toast.error("Greska: " + e.message);
+        }
     }
 
     function handleChange(e) {
-        const copy = { ...formData };
+        const copy = { ...profile };
         copy[e.target.name].value = e.target.value;
-        setFormData(copy);
+        setProfile(copy);
     }
 
     function handleFocus(e) {
-        const copy = { ...formData };
+        const copy = { ...profile };
         copy[e.target.name].focus = true;
-        setFormData(copy);
+        setProfile(copy);
     }
 
     function handleBlur(e) {
-        const copy = { ...formData };
+        const copy = { ...profile };
         copy[e.target.name].focus = !!copy[e.target.name].value;
-        setFormData(copy);
+        setProfile(copy);
     }
   return (
     <>
     <section className={styles.contactSec}>
             <div className={styles.formContainer}>
                 <form className={`${styles.contactForm} `} name="contactForm" onSubmit={handleSubmit}>
-                    <div className={`${styles.inputBox} ${formData.ime.error ? styles.error : ""} ${formData.ime.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${profile.ime.error ? styles.error : ""} ${profile.ime.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Ime i prezime</label>
-                        <input value={formData.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.ime.errorMsg}</p>
+                        <input value={profile.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{profile.ime.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.email.error ?  styles.error : ""} ${formData.email.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${profile.email.error ?  styles.error : ""} ${profile.email.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Email</label>
-                        <input value={formData.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} disabled/>
-                        <p className={styles.errorMessage}>{formData.email.errorMsg}</p>
+                        <input value={profile.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} disabled/>
+                        <p className={styles.errorMessage}>{profile.email.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.username.error ?  styles.error : ""} ${formData.username.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${profile.username.error ?  styles.error : ""} ${profile.username.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Username</label>
-                        <input value={formData.username.value} type="text" className={styles.input1} name="username" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.username.errorMsg}</p>
+                        <input value={profile.username.value} type="text" className={styles.input1} name="username" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{profile.username.errorMsg}</p>
                     </div>
-                    {/* <div className={styles.eventTypes}>
-                        <p className={styles.typeName}>Tip Događaja</p>
-
-                        <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na otvorenom" checked ={request.eventTypes === "Na otvorenom"}
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
-                        <span className={styles.eventType}>Na otvorenom</span><br />
-
-                        <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na zatvorenom" checked ={request.eventTypes === "Na zatvorenom"} 
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
-                        <span className={styles.eventType}>Na zatvorenom</span><br />
-
-                        <input type="radio" name="eventTypes" id="eventTypes" 
-                        value="Na otvorenom i zatvorenom" checked ={request.eventTypes === "Na otvorenom i zatvorenom"}
-                        onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
-                        <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
-                    </div> */}
                     <div className={styles.submitButtonBox}>
                         <button type="submit"
                         className={`${styles.primaryButton} primaryButton`}
                         onClick={handleSubmit}>{"Sačuvaj izmene"}</button>
 
                         <button
-                        className={`${styles.secondaryButton} secondaryButton`}
+                        onClick={backToProfile} className={`${styles.secondaryButton} secondaryButton`}
                         >{"Otkaži"}</button>
                     </div>
                 </form>

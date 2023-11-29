@@ -1,183 +1,177 @@
-import React from 'react'
-import { useState } from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from './OrganizationForm.module.css'
 
-const OrganizationForm = ({request, setRequest, submitting}) => {
-    const [formData, setFormData] = useState({
-        ime: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        email: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        nazivKluba: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        emailKluba: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        telefon: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        },
-        poruka: {
-            value: "",
-            focus: false,
-            error: false,
-            errorMsg: ""
-        }
-    })
+const OrganizationForm = ({request, setRequest, submitting,setSubmitting,backToProfile}) => {
 
 
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true;
-
-        if (formData.ime.value == ``) {
-            const copy = { ...formData };
+        setSubmitting(true);
+        if (request.ime.value == ``) {
+            const copy = { ...request };
             copy['ime'].error = true;
             copy['ime'].errorMsg = "Morate uneti ime";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
         else{
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['ime'].error = false;
             copy['ime'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
 
-        if (formData.email.value == ``) {
-            const copy = { ...formData };
+        if (request.email.value == ``) {
+            const copy = { ...request };
             copy['email'].error = true;
             copy['email'].errorMsg = "Morate uneti email";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email.value)) {
-            const copy = { ...formData };
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(request.email.value)) {
+            const copy = { ...request };
             copy['email'].error = true;
             copy['email'].errorMsg = "Unesite ispravnu email adresu";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
         else {
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['email'].error = false;
             copy['email'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
 
-        if (formData.nazivKluba.value == ``) {
-            const copy = { ...formData };
+        if (request.nazivKluba.value == ``) {
+            const copy = { ...request };
             copy['nazivKluba'].error = true;
             copy['nazivKluba'].errorMsg = "Morate uneti naziv Kluba";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
         else{
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['nazivKluba'].error = false;
             copy['nazivKluba'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
 
-        if (formData.emailKluba.value == ``) {
-            const copy = { ...formData };
+        if (request.emailKluba.value == ``) {
+            const copy = { ...request };
             copy['emailKluba'].error = true;
             copy['emailKluba'].errorMsg = "Morate uneti email Kluba";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.emailKluba.value)) {
-            const copy = { ...formData };
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(request.emailKluba.value)) {
+            const copy = { ...request };
             copy['emailKluba'].error = true;
             copy['emailKluba'].errorMsg = "Unesite ispravnu email adresu";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
         else {
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['emailKluba'].error = false;
             copy['emailKluba'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
 
-        if (formData.telefon.value == ``) {
-            const copy = { ...formData };
+        if (request.telefon.value == ``) {
+            const copy = { ...request };
             copy['telefon'].error = true;
             copy['telefon'].errorMsg = "Morate uneti telefon";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
-        else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/.test(formData.telefon.value)) {
-            const copy = { ...formData };
+        else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/.test(request.telefon.value)) {
+            const copy = { ...request };
             copy['telefon'].error = true;
             copy['telefon'].errorMsg = "Unesite ispravan broj telefona";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
         else{
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['telefon'].error = false;
             copy['telefon'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
 
-        if (formData.poruka.value == "") {
-            const copy = { ...formData };
+        if (request.poruka.value == "") {
+            const copy = { ...request };
             copy['poruka'].error = true;
             copy['poruka'].errorMsg = "Morate uneti poruku";
-            setFormData(copy);
+            setRequest(copy);
             valid = false;
         }
 
         else{
-            const copy = { ...formData };
+            const copy = { ...request };
             copy['poruka'].error = false;
             copy['poruka'].errorMsg = "";
-            setFormData(copy);
+            setRequest(copy);
         }
         
-        if(!valid) return;
-        
-        let copy = JSON.parse(JSON.stringify(formData)) // deep copy
+        if(!valid){
+            setSubmitting(false);
+            toast.error("Greska u validaciji");
+            return;
+        } 
+        const body = {
+            ime: request.ime.value,
+            email: request.email.value,
+            nazivKluba: request.nazivKluba.value,
+            emailKluba: request.emailKluba.value,
+            telefon: request.telefon.value,
+            poruka: request.poruka.value
+        }
+
+        let copy = JSON.parse(JSON.stringify(request)) // deep copy
         copy.ime.value = "";
         copy.email.value = "";
         copy.poruka.value = "";
-        setFormData(copy)
+        setRequest(copy)
+        try{
+            const res = await fetch('/api/organizator/request',{
+                    method : "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(body)
+                })
+            if(!res.ok){
+                setSubmitting(false);
+                throw new Error(await res.text());
+            }
+            setSubmitting(false);
+            toast.success("Uspesno pozlan zahtev",{
+                position: toast.POSITION.TOP_RIGHT
+            });
+            backToProfile();
+        }catch(e){
+            toast.error("Greska: " + e.message);
+        }
     }
 
     function handleChange(e) {
-        const copy = { ...formData };
+        const copy = { ...request };
         copy[e.target.name].value = e.target.value;
-        setFormData(copy);
+        setRequest(copy);
     }
 
     function handleFocus(e) {
-        const copy = { ...formData };
+        const copy = { ...request };
         copy[e.target.name].focus = true;
-        setFormData(copy);
+        setRequest(copy);
     }
 
     function handleBlur(e) {
-        const copy = { ...formData };
+        const copy = { ...request };
         copy[e.target.name].focus = !!copy[e.target.name].value;
-        setFormData(copy);
+        setRequest(copy);
     }
   return (
     <>
@@ -185,30 +179,30 @@ const OrganizationForm = ({request, setRequest, submitting}) => {
             <h2>Prijavite se i postanite organizator</h2>
             <div className={styles.formContainer}>
                 <form className={`${styles.contactForm} `} name="contactForm" onSubmit={handleSubmit}>
-                    <div className={`${styles.inputBox} ${formData.ime.error ? styles.error : ""} ${formData.ime.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.ime.error ? styles.error : ""} ${request.ime.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Ime i prezime</label>
-                        <input value={formData.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.ime.errorMsg}</p>
+                        <input value={request.ime.value} type="text" className={styles.input1} name="ime" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.ime.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.email.error ?  styles.error : ""} ${formData.email.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.email.error ?  styles.error : ""} ${request.email.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Email</label>
-                        <input value={formData.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.email.errorMsg}</p>
+                        <input value={request.email.value} type="text" className={styles.input1} name="email" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.email.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.nazivKluba.error ?  styles.error : ""} ${formData.nazivKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.nazivKluba.error ?  styles.error : ""} ${request.nazivKluba.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Naziv Kluba</label>
-                        <input value={formData.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.nazivKluba.errorMsg}</p>
+                        <input value={request.nazivKluba.value} type="text" className={styles.input1} name="nazivKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.nazivKluba.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.emailKluba.error ?  styles.error : ""} ${formData.emailKluba.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.emailKluba.error ?  styles.error : ""} ${request.emailKluba.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Email Kluba</label>
-                        <input value={formData.emailKluba.value} type="text" className={styles.input1} name="emailKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.emailKluba.errorMsg}</p>
+                        <input value={request.emailKluba.value} type="text" className={styles.input1} name="emailKluba" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.emailKluba.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${formData.telefon.error ?  styles.error : ""} ${formData.telefon.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.telefon.error ?  styles.error : ""} ${request.telefon.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Kontakt telefon</label>
-                        <input value={formData.telefon.value} type="text" className={styles.input1} name="telefon" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{formData.telefon.errorMsg}</p>
+                        <input value={request.telefon.value} type="text" className={styles.input1} name="telefon" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+                        <p className={styles.errorMessage}>{request.telefon.errorMsg}</p>
                     </div>
                     {/* <div className={styles.eventTypes}>
                         <p className={styles.typeName}>Tip Događaja</p>
@@ -228,10 +222,10 @@ const OrganizationForm = ({request, setRequest, submitting}) => {
                         onChange={(e) =>{setRequest({...request,eventTypes: e.target.value})}}/>
                         <span className={styles.eventType}>Na otvorenom i zatvorenom</span><br />
                     </div> */}
-                    <div className={`${styles.inputBox} ${formData.poruka.error ?  styles.error : ""} ${formData.poruka.focus ? styles.focus : ""}`}>
+                    <div className={`${styles.inputBox} ${request.poruka.error ?  styles.error : ""} ${request.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Zašto želite da postanete organizator</label>
-                        <textarea value={formData.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
-                        <p className={styles.errorMessage}>{formData.poruka.errorMsg}</p>
+                        <textarea value={request.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
+                        <p className={styles.errorMessage}>{request.poruka.errorMsg}</p>
                     </div>
                     <div className="submitButtonBox">
                         <button type="submit"

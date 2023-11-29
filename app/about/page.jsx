@@ -1,5 +1,3 @@
-"use client"
-
 import AboutUsPage from "@components/AboutUs/AboutUs"
 
 const About = () => {

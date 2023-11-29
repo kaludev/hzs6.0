@@ -1,5 +1,5 @@
 "use client";
-import React, { Component } from "react";
+import { Component } from "react";
 import Slider from "react-slick";
 import styles from "./Sponsors.module.css"
 
@@ -30,7 +30,7 @@ export default function SponsorsSection() {
         <Slider {...settings}>
           {images.map((image, index) => (
             <div key={index} className={styles.wrapper}>
-              <img src={image} className={styles.image} />
+              <img src={image} className={styles.image} alt="HakatonArenaLogo"/>
             </div>
           ))}
         </Slider>

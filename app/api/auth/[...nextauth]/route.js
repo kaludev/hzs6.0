@@ -5,6 +5,7 @@ import Event from "@models/event";
 
 import { connectToDB } from "@utils/database";
 import Organizer from "@models/organizer";
+import OrganizerRequest from "@models/OrganizerRequest";
 
 const handler = NextAuth({
   providers: [
@@ -40,7 +41,6 @@ const handler = NextAuth({
       let isOrganizer = await Organizer.findOne({
         user_id: sessionUser._id
       });
-      console.log(isOrganizer)
       if (isOrganizer != undefined) {
         isOrganizer = true;
       }else{
@@ -49,9 +49,18 @@ const handler = NextAuth({
       const events = await Event.find({users_signed: sessionUser._id});
       session.user.image = sessionUser.image.toString();
       session.user.username = sessionUser.username;
+      session.user.name = sessionUser.name;
       session.user.isOrganizer = isOrganizer;
+      session.user.isSuperAdmin = sessionUser.isSuperAdmin;
+      const existingReq = await OrganizerRequest.findOne({
+        user_id: sessionUser._id
+      })
+      if(existingReq){
+        session.user.requestedOrganizer = true;
+      }else{
+        session.user.requestedOrganizer = false;
+      }
       session.user.events = events;
-      console.log(session.user);
       return session;
     },
     async signIn({ profile }) {

@@ -4,12 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css"
 import { FaBars } from "react-icons/fa";
-import { useRouter } from 'next/navigation'
+import { usePathname} from 'next/navigation'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  const router = useRouter();
+  
+  const pathname = usePathname()
   const {data: session} = useSession();
   const [ providers, setProviders ] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -20,17 +21,18 @@ const Nav = () => {
     function check() {
         setScrolled(window.scrollY > SCROLL_TRIGGER_PX);
     }
+    
     console.log(window.location.pathname)
     if(window.location.pathname != "/"){
       setScrolled(true);
     }else{
       setScrolled(false);
       window.addEventListener("scroll", check)
-    }
-    return () => {
+      return () => {
         window.removeEventListener("scroll", check);
+      }
     }
-},[])
+},[pathname])
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -50,26 +52,26 @@ const Nav = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-              <a className={styles.navLink} href="/about">O Nama</a>
+              <Link className={styles.navLink} href="/about">O Nama</Link>
           </li>
           <li>
-              <a className={styles.navLink} href="">Aktivnosti</a>
+              <Link className={styles.navLink} href="">Aktivnosti</Link>
           </li>
           <li>
-              <a className={styles.navLink} href="">Raspored</a>
+              <Link className={styles.navLink} href="">Raspored</Link>
           </li>
           <li>
           {session?.user ? (
             <div className={styles.navProfile}>
-              {session?.user.isOrganizer && <a href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
+              {session?.user.isOrganizer && <Link href="/create-prompt" className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Dodaj Događaj
-              </a>}
+              </Link>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
               </button>
-              <a href="/profile">
+              <Link href="/profile">
                 <Image
                   src={session?.user.image}
                   width={37}
@@ -77,7 +79,7 @@ const Nav = () => {
                   className={styles.profilePic}
                   alt="profile"
                 ></Image>
-              </a>
+              </Link>
             </div>
             ) : (
               providers &&

@@ -7,12 +7,26 @@ const organizerRequestSchema = new Schema({
     },
     name: {
         type : String,
-        unique : [true, 'Name should be unique'],
-        required : [true, 'Name is required']
+        required : [true, 'Ime je obavezno']
     },
-    EventTypes: {
+    email:{
+        type : String,
+        required : [true, 'Email je obavezan'],
+        match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email mora biti validan"]
+    },
+    club_name: {
+        type : String,
+        required : [true, 'Ime je obavezno'],
+    },
+    club_email: {
+        type : String,
+        required : [true, 'Email je obavezan'],
+        match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email mora biti validan"]
+    },
+    phone: {
         type: String,
-        required : [true, 'Event types is required']
+        required : [true, 'Telefon je obavezan'],
+        match : [/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/,"Telefon mora biti validan"]
     },
     reason:{
         type: String

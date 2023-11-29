@@ -1,5 +1,5 @@
 "use client"
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useSession } from 'next-auth/react';
 
