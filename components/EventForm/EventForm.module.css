@@ -11,6 +11,16 @@
     text-align: center;
 }
 
+.input1.sati{
+    width: 70px !important;
+}
+.input1.minuti{
+    width: 70px !important;
+}
+.hourMinute{
+    flex-direction: row !important;
+    align-items: center;
+}
 .formContainer {
     width: 100%;
     display: flex;
