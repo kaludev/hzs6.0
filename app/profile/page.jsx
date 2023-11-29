@@ -132,6 +132,7 @@ const Profile = () => {
                 settings={settings}
                 showSettings={() => {setSettings((prev) => !prev); setShowForm(false)}}
                 showEvents={() => {setEvents((prev) => !prev);}}
+                requests={requests}
                 showRequests={() => {setRequests((prev) => !prev);}}
                 handleSignOut={async () =>{await signOut(); window.location.href ='/'}}
                 handleDeactivate={handleDeactivate}

@@ -3,7 +3,7 @@ import styles from "./Profile.module.css"
 import { FaCog,FaTimes } from "react-icons/fa";
 
 export default function ProfileSection({name, username, photo,isSuperAdmin,requestedOrganizer,
-    isOrganizer,form,showForm,settings,showSettings,showEvents,showRequests,handleSignOut,handleDeactivate,deactivating}){
+    isOrganizer,form,showForm,settings,showSettings,events,showEvents,requests,showRequests,handleSignOut,handleDeactivate,deactivating}){
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
@@ -27,7 +27,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
             </div>
             <hr className={styles.divider} />
 
-            {!form && !settings && 
+            {!form && !settings && !requests && !events && 
                 <div className={styles.profileDesc}>
                     <div className={styles.descRow}>
                         <div className={styles.descRowMain}>

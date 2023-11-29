@@ -8,7 +8,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 export const GET = async (req,{params}) => {
     const data = await getServerSession(authOptions);
     console.log(data);
-    if(data.isSuperAdmin) {
+    if(data.user.isSuperAdmin) {
         try{
             await connectToDB();
             const request = await OrganizerRequest.findById(params.id);
@@ -20,5 +20,7 @@ export const GET = async (req,{params}) => {
         }catch(err){
             return new Response("Greska pri odbijanju zahteva",{status: 500})
         }
+    }else{
+        return new Response("Nemate permisiju",{ok:false,status:500});
     }
 }
