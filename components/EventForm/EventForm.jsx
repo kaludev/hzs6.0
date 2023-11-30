@@ -241,19 +241,21 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                         <input value={event.address.value} type="text" className={styles.input1} name="address" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
                         <p className={styles.errorMessage}>{event.address.errorMsg}</p>
                     </div>
-                    <div className={`${styles.inputBox} ${styles.hourMinute} ${event.vremeOd.error ?  styles.error : ""} ${event.vremeOd.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Početak</label>
-                        <input value={event.vremeOd.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeOd" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <span>: </span>
-                        <input value={event.vremeOd.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeOd" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{event.vremeOd.errorMsg}</p>
-                    </div>
-                    <div className={`${styles.inputBox} ${styles.hourMinute} ${event.vremeDo.error ?  styles.error : ""} ${event.vremeDo.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Kraj</label>
-                        <input value={event.vremeDo.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeDo" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <span>: </span>
-                        <input value={event.vremeDo.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeDo" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
-                        <p className={styles.errorMessage}>{event.vremeDo.errorMsg}</p>
+                    <div className={`${styles.inputTimeCont}`}>
+                        <div className={`${styles.inputBox} ${styles.inputTime} ${styles.hourMinute} ${event.vremeOd.error ?  styles.error : ""} ${event.vremeOd.focus ? styles.focus : ""}`}>
+                            <label className={styles.inputLabel}>Početak</label>
+                            <input value={event.vremeOd.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeOd" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
+                            <span>: </span>
+                            <input value={event.vremeOd.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeOd" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
+                            <p className={styles.errorMessage}>{event.vremeOd.errorMsg}</p>
+                        </div>
+                        <div className={`${styles.inputBox} ${styles.inputTime} ${styles.hourMinute} ${event.vremeDo.error ?  styles.error : ""} ${event.vremeDo.focus ? styles.focus : ""}`}>
+                            <label className={styles.inputLabel}>Kraj</label>
+                            <input value={event.vremeDo.value.getHours()} type="text" className={styles.input1 +" "+ styles.sati} name="vremeDo" onChange={handleHourChange} onFocus={handleFocus} onBlur={handleBlur} />
+                            <span>: </span>
+                            <input value={event.vremeDo.value.getMinutes()} type="text" className={styles.input1 +" "+ styles.minuti} name="vremeDo" onChange={handleMinuteChange} onFocus={handleFocus} onBlur={handleBlur} />
+                            <p className={styles.errorMessage}>{event.vremeDo.errorMsg}</p>
+                        </div>
                     </div>
                     <div className={`${styles.inputBox} ${event.max.error ?  styles.error : ""} ${event.max.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Maksimalan broj takmičara</label>
@@ -292,36 +294,41 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                         <span className={`${styles.selectBar} `}></span>
                         <label className={`${styles.selectLabel}`}>Nivo Takmičenja</label>
 				    </div>
-                    <div className={styles.selectDate}>
-                    <div className={styles.calendar}>
-                        <div className={styles.calendarHeader}>
-                            <span onClick={() => {setMonthPicker((prev) => !prev)}} className={styles.monthPicker} id="monthPicker">{monthNames[event.vremeOd.value.getMonth()]}</span>
-                            <div className={styles.yearPicker}>
-                            <span onClick={decrementOdYear} className={styles.yearChange} id="prevYear">
-                                <pre><FaAngleLeft /></pre>
-                            </span>
-                            <span id="year">{event.vremeOd.value.getFullYear()}</span>
-                            <span onClick={incrementOdYear} className={styles.yearChange} id="nextYear">
-                                <pre><FaAngleRight /></pre>
-                            </span>
-                            </div>
-                        </div>
-                        <div className={styles.calendarBody}>
-                            <div className={styles.calendarWeekDay}>
-                            <div>Ned</div>
-                            <div>Pon</div>
-                            <div>Uto</div>
-                            <div>Sre</div>
-                            <div>Čet</div>
-                            <div>Pet</div>
-                            <div>Sub</div>
-                            </div>
-                            <div className={styles.calendarDays}>
-                                {calendarDays.map(value => (<div onClick={setOdDay} className={event.vremeOd.value.getDate() === value ? styles.active : ""}>{value}</div>))}
-                            </div>
-                        </div>
-                        {monthPicker && <div className={styles.monthList}>{monthNames.map( name =>(<div onClick={changeOdMonth}>{name}</div>))}</div>}
+                    <div className={`${styles.fileInput} ${styles.primaryButtonFile} primaryButton`}>
+                        <input type="file" id="file" className={`${styles.file}`}/>
+                        <label for="file">Izaberite sliku</label>
                     </div>
+                    <p className={styles.errorMessage}>Morate uneti sliku</p>
+                    <div className={styles.selectDate}>
+                        <div className={styles.calendar}>
+                            <div className={styles.calendarHeader}>
+                                <span onClick={() => {setMonthPicker((prev) => !prev)}} className={styles.monthPicker} id="monthPicker">{monthNames[event.vremeOd.value.getMonth()]}</span>
+                                <div className={styles.yearPicker}>
+                                <span onClick={decrementOdYear} className={styles.yearChange} id="prevYear">
+                                    <pre><FaAngleLeft /></pre>
+                                </span>
+                                <span id="year">{event.vremeOd.value.getFullYear()}</span>
+                                <span onClick={incrementOdYear} className={styles.yearChange} id="nextYear">
+                                    <pre><FaAngleRight /></pre>
+                                </span>
+                                </div>
+                            </div>
+                            <div className={styles.calendarBody}>
+                                <div className={styles.calendarWeekDay}>
+                                <div>Ned</div>
+                                <div>Pon</div>
+                                <div>Uto</div>
+                                <div>Sre</div>
+                                <div>Čet</div>
+                                <div>Pet</div>
+                                <div>Sub</div>
+                                </div>
+                                <div className={styles.calendarDays}>
+                                    {calendarDays.map(value => (<div onClick={setOdDay} className={event.vremeOd.value.getDate() === value ? styles.active : ""}>{value}</div>))}
+                                </div>
+                            </div>
+                            {monthPicker && <div className={styles.monthList}>{monthNames.map( name =>(<div onClick={changeOdMonth}>{name}</div>))}</div>}
+                        </div>
 				    </div>
                     <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
                         <label className={styles.inputLabel}>Opis</label>
