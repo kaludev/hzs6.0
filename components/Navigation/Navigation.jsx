@@ -2,10 +2,13 @@
 
 import Nav from "@components/Nav/Nav";
 import SideNav from "@components/SideNav/SideNav";
-import { useState } from "react"
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react"
 
 const Navigation = () => {
     const [menuVisible, setMenuVisible] = useState(false);
+    const params = useParams();
+    useEffect(() => {setMenuVisible(false)},[params]);
   return (
     <div>
         <Nav setMenuVisible={setMenuVisible} />

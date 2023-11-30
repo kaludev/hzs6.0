@@ -100,6 +100,11 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
                       {" "}
                       Dodaj Događaj
                     </Link>}
+                    <Link href="/profile" className={`${styles.primaryButton} primaryButton`}>
+                      <div className={styles.navProfileImageBack}>
+                          Moj Nalog
+                      </div>
+                    </Link>
                     <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.primaryButton} primaryButton`}>
                       {" "}
                       Odjavi se
