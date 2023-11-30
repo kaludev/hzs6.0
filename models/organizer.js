@@ -10,10 +10,6 @@ const organizerSchema = new Schema({
         type : String,
         required : [true, 'Name is required']
     },
-    upvotes: {
-        type: Number,
-        default: 0,
-    },
     events: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Event",

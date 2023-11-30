@@ -51,10 +51,9 @@ const eventSchema = new Schema({
             message: "Event is full!",
         }
     },
-    likes:{
-        type: Number,
-        required: true,
-        default:0
+    users_liked: {
+        type: [mongoose.Schema.Types.ObjectId],
+        default: []
     },
     eventType:{
         type: Number,
