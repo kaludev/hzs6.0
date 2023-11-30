@@ -59,13 +59,10 @@ const handleUnlike = async (id) => {
             eventEndTime={new Date(event.ends_at)} applied={event.users_signed.length} 
             maxCapacity = {event.capacity}
             likes={event.users_liked}
-            maxCapacity = {event.capacity} likes={event.users_liked}
             handleSubmit={() => handleSubmit(event._id)} providers={providers}
             handleLeave={() => handleLeave(event._id)}
             signIn={signIn} users_signed={event.users_signed}
             handleEdit={handleEdit} handleDelete={handleDelete}
-            handleLike={() => handleLike(event._id)}
-            handleDislike={() => handleDislike(event._id)}
             image={event?.image[0]}
             handleLike={handleLike}
             handleUnlike={handleUnlike}
