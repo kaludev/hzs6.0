@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./EventCard.module.css"
-import Link from "next/link"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 
-export default function EventCard(eventName, eventDesc, address, eventStartTime, eventEndTime, 
-    applied, maxCapacity, likes,handleSubmit, handleEdit, ){
-
+export default function EventCard({eventName, eventDesc, address, eventStartTime, eventEndTime, 
+    applied, maxCapacity, likes,handleSubmit, handleEdit, handleDelete}){
+    
     const[hover, setHover] = useState();
-
     return(
         <div className={styles.cardEvent}>
             <img className={styles.eventPhoto} src="./images/hero.jpg" alt="Event Photo" />
@@ -18,8 +16,8 @@ export default function EventCard(eventName, eventDesc, address, eventStartTime,
                 <div className={styles.eventData}>
                     <div className={styles.eventPlaceData}>
                         <div className={styles.eventLocation}><span className={styles.eventColored}><FaMapMarkerAlt /></span>{address}</div>
-                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {eventStartTime.getDate() + ". "+ (eventStartTime.getMonth()+1) +". " + eventStartTime.getFullYear() + "."} - {eventEndTime.getDate() + ". "+ (eventEndTime.getMonth()+1) +". " + eventEndTime.getFullYear() + "."}</div>                 
-                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {eventStartTime.getHours()+ ":" + eventStartTime.getMinutes()} -  {eventEndTime.getHours()+ ":" + eventEndTime.getMinutes()}</div>
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {new Date(eventStartTime).getDate() + ". "+ (new Date(eventStartTime).getMonth()+1) +". " + new Date(eventStartTime).getFullYear() + "."} - {new Date(eventEndTime).getDate() + ". "+ (new Date(eventEndTime).getMonth()+1) +". " + new Date(eventEndTime).getFullYear() + "."}</div>                 
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {new Date(eventStartTime).getHours()+ ":" + new Date(eventStartTime).getMinutes()} -  {new Date(eventEndTime).getHours()+ ":" + new Date(eventEndTime).getMinutes()}</div>
                     </div>
                     <div className={styles.eventParticipants}>{applied}/{maxCapacity}</div>
                 </div>
