@@ -1,16 +1,21 @@
 "use client"
 import {useState, useEffect} from 'react';
-import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer, useJsApiLoader } from '@react-google-maps/api';
 import { useSession } from 'next-auth/react';
-import styles from "../Contact/Contact.module.css"
-import { buttonContext } from '@components/Contact/Contact';
 
 const Map = ({buttonState, mode}) => {
     const [yourLocation, setYourLocation] = useState({});
     const [closestMarker, setClosestMarker] = useState(null);
     const [directions, setDirections] = useState(null);
-    const [closestEvent, setClosestEvent] = useState();
-    const [ifNextEvents, setIfNextEvents] = useState();
+    const [closestEvent, setClosestEvent] = useState(null);
+    const [ifNextEvent, setIfNextEvent] = useState();
+    const [events, setEvents] = useState([]);
+    const { isLoaded } = useJsApiLoader({
+      googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+    })
+    useEffect(() => {
+      console.log(isLoaded);
+    }, [isLoaded])
     const {data: session} = useSession();
 
     useEffect(() => {
@@ -26,12 +31,31 @@ const Map = ({buttonState, mode}) => {
         
     }, []);
 
-    useEffect(() => {
-      if(session?.user){
-        console.log(session.events);
-        findClosestMarker(yourLocation, mode);
-      }
-    }, [session]);
+    if(mode == "user"){
+      useEffect(() => {
+        console.log(session);
+          if(session?.user){
+            console.log(session.user);
+            findClosestMarker(yourLocation, mode);
+          }
+                 
+      }, [session, isLoaded]);
+    }
+    else if(mode == "all"){
+      useEffect(() => {
+        async function getEvents(){
+          const res = await fetch("/api/event/getEvents");
+          const json = await res.json();
+          return json;
+        }
+        getEvents().then((data) => {
+          console.log(data);
+          setEvents(data);
+          findClosestMarker(yourLocation, mode);
+        });
+      }, [events]);
+    }
+    
 
     const containerStyle = {
       width: '100%',
@@ -48,46 +72,47 @@ const Map = ({buttonState, mode}) => {
             if(new Date(e.starts_at) > Date.now()){
               bool = true;
               const eventLocation = {
-                lat: Number(e.address.split(',')[0]),
-                lng: Number(e.address.split(',')[1]),
-              };
-              const distance = calculateDistance(userLocation, eventLocation);
-      
-              if (distance < closestDistance) {
-                closestDistance = distance;
-                closestMarker = eventLocation;
-                closestEvent = e;
-              }
+              lat: Number(e.address.split(',')[0]),
+              lng: Number(e.address.split(',')[1]),
+            };
+            const distance = calculateDistance(userLocation, eventLocation);
+    
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestMarker = eventLocation;
+              closestEvent = e;
             }
-            else{
-              bool = false;
-            }
+          }
+          else{
+            bool = false;
+          }
           });
         }
         else if(mode == "all"){
-          session?.events.forEach((e) => {
-            if(new Date(e.starts_at) > Date.now()){
-              bool = true;
-              const eventLocation = {
-                lat: Number(e.address.split(',')[0]),
-                lng: Number(e.address.split(',')[1]),
-              };
-              const distance = calculateDistance(userLocation, eventLocation);
-      
-              if (distance < closestDistance) {
-                closestDistance = distance;
-                closestMarker = eventLocation;
-                closestEvent = e;
+          console.log(events);
+          events.forEach((e) => {
+              if(new Date(e.starts_at) > Date.now()){
+                  bool = true;
+                  const eventLocation = {
+                  lat: Number(e.address.split(',')[0]),
+                  lng: Number(e.address.split(',')[1]),
+                };
+                const distance = calculateDistance(userLocation, eventLocation);
+        
+                if (distance < closestDistance) {
+                  closestDistance = distance;
+                  closestMarker = eventLocation;
+                  closestEvent = e;
+                }
               }
-            }
-            else{
-              bool = false;
-            }
+              else{
+                bool = false;
+              }
           });
         }
+        setIfNextEvent(bool);
         setClosestMarker(closestMarker);
         setClosestEvent(closestEvent);
-        setIfNextEvents(bool);
     };
   
     const calculateDistance = (pos1, pos2) => {
@@ -101,7 +126,7 @@ const Map = ({buttonState, mode}) => {
           Math.sin(dLng / 2) *
           Math.sin(dLng / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      const distance = R * c; // Distance in kilometers
+      const distance = R * c;
       return distance;
     };
   
@@ -109,8 +134,12 @@ const Map = ({buttonState, mode}) => {
       return deg * (Math.PI / 180);
     };
 
+    useEffect(() => {
+      console.log("Updated directions:", directions);
+    }, [directions]);
+
     const handleDirections = () => {
-      if (yourLocation && closestMarker) {
+      if (yourLocation && closestMarker && !directions) {
         const directionsService = new window.google.maps.DirectionsService();
   
         directionsService.route(
@@ -121,6 +150,7 @@ const Map = ({buttonState, mode}) => {
           },
           (result, status) => {
             if (status === 'OK') {
+              console.log("result", result);
               setDirections(result);
             } else {
               console.error(`Directions request failed due to ${status}`);
@@ -131,20 +161,24 @@ const Map = ({buttonState, mode}) => {
     };
 
     const returnClosest = () => {
-      handleDirections();
-      if(directions && closestMarker){
+      console.log("directions", directions);
+      console.log("closestMarker", closestMarker);
+      console.log("closestEvent", closestEvent);
+      if(yourLocation && closestMarker){
+        handleDirections();
         return true;
       }
     }
 
     return (
-      
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap onl mapContainerStyle={containerStyle} center={yourLocation} zoom={2}>
+      <>
+      {
+        isLoaded && (
+          <GoogleMap mapContainerStyle={containerStyle} center={yourLocation} zoom={2}>
           
           {
 
-            mode == "user" && (
+            mode === "user" && (
               
                 session?.user && (
               <>
@@ -164,12 +198,12 @@ const Map = ({buttonState, mode}) => {
                 }
                 {
                   buttonState.showClosest && returnClosest() && (
-                    ifNextEvents ? (
+                    
                       <>
                         <Marker position={closestMarker} title={closestEvent.name + "\n" + closestEvent.description + "\n" + new Date(closestEvent.starts_at).toLocaleDateString() + " - " + new Date(closestEvent.ends_at).toLocaleDateString() + "\n" + new Date(closestEvent.starts_at).toLocaleTimeString() + " - " + new Date(closestEvent.ends_at).toLocaleTimeString()}  />
                         <DirectionsRenderer directions={directions} />
                       </>
-                    ) : console.log("nema predstojecih ruta")
+
                   )
                 }
                 {
@@ -193,11 +227,11 @@ const Map = ({buttonState, mode}) => {
             )
             }
             {
-              mode == "all" && (
-              session?.events && (
+              mode === "all" && (
+              events && (
                 <>
                   {buttonState.showNext && (
-                  session?.events.map((e) => (
+                  events.map((e) => (
                     new Date(e.starts_at) > Date.now() ? (
                       <Marker
                         key={e.id}
@@ -212,17 +246,17 @@ const Map = ({buttonState, mode}) => {
                   }
                   {
                     buttonState.showClosest && returnClosest() && (
-                      ifNextEvents ? (
+                      
                         <>
                           <Marker position={closestMarker} title={closestEvent.name + "\n" + closestEvent.description + "\n" + new Date(closestEvent.starts_at).toLocaleDateString() + " - " + new Date(closestEvent.ends_at).toLocaleDateString() + "\n" + new Date(closestEvent.starts_at).toLocaleTimeString() + " - " + new Date(closestEvent.ends_at).toLocaleTimeString()}  />
                           <DirectionsRenderer directions={directions} />
                         </>
-                      ) : console.log("nema predstojecih ruta")
+                      
                     )
                   }
                   {
                     buttonState.showPast && (
-                      session?.events.map((e) => (
+                      events.map((e) => (
                         new Date(e.ends_at) < Date.now() ? (
                           <Marker
                             key={e.id}
@@ -247,8 +281,9 @@ const Map = ({buttonState, mode}) => {
           <Marker position={yourLocation} title="Your location"  />
           )}
         </GoogleMap>
-      </LoadScript>
-      
+        )
+      }
+      </>
     );
 }
 
