@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import emptyStyles from './Events.module.css'
 import Link from "next/link"
 
-const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers,signIn,handleLike,handleDislike}) => {
+const Events = ({data,user,handleSubmit,handleLeave,handleEdit,handleDelete,providers,signIn}) => {
  
   const handleLike = async (id) => {
     if(user){
