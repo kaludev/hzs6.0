@@ -7,11 +7,14 @@ import { NextResponse } from 'next/server';
 
 export const POST = async (req) => {
         const user = await getServerSession(authOptions);
+        console.log("user iz like");
         console.log(user);
         try{
                 await connectToDB();
                 const data = await req.json();
                 const event = await Event.findOne({_id: data.id});
+                console.log("event iz like ispod");
+                console.log(event);
                 const updated_array = [...event.users_liked, user._id];
                 console.log(updated_array);
                 const updated_event = await Event.findOneAndUpdate({id: data._id}, {users_liked: updated_array}, {new: true});
