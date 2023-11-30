@@ -18,7 +18,7 @@ const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers
           handleEdit={handleEdit && (() => handleEdit(event._id))} handleDelete={handleDelete && (() => handleDelete(event._id))}
         />
     ))) : (
-      <div className={emptyStyles.emptyArr}><span className={emptyStyles.colored}>Još uvek nemate svoja takmičenja.</span><br />Kako biste videli svoja takmičenja, prvo ih morate organizovati</div>
+      <div className={emptyStyles.emptyArr}><span className={emptyStyles.colored}>Još uvek se niste prijavili za takmičenja.</span><br />Kako biste videli svoja takmičenja, pogledajte arenu i prijavite se</div>
     )
   )
 }
