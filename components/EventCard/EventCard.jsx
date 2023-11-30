@@ -3,6 +3,7 @@ import styles from "./EventCard.module.css"
 import { FaRegHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
+import Link from "next/link";
 
 export default function EventCard({eventId, eventName, eventDesc, address,
      eventStartTime, eventEndTime, applied, maxCapacity, likes,handleSubmit,
