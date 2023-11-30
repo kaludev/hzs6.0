@@ -14,15 +14,13 @@ const Map = ({buttonState, mode}) => {
       googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
     })
     useEffect(() => {
-      console.log(isLoaded);
+
     }, [isLoaded])
     const {data: session} = useSession();
 
     useEffect(() => {
         if(navigator.geolocation){
           navigator.geolocation.getCurrentPosition((pos) => {
-            console.log(pos);
-            console.log("buttonstate", buttonState);
             setYourLocation({lat: pos.coords.latitude, lng: pos.coords.longitude});          
           }, (err) => {
             console.log(err);
@@ -33,9 +31,7 @@ const Map = ({buttonState, mode}) => {
 
     if(mode == "user"){
       useEffect(() => {
-        console.log(session);
           if(session?.user){
-            console.log(session.user);
             findClosestMarker(yourLocation, mode);
           }
                  
@@ -52,7 +48,6 @@ const Map = ({buttonState, mode}) => {
           return json;
         }
         getEvents().then((data) => {
-          console.log(data);
           setEvents(data);
           findClosestMarker(yourLocation, mode);
         });
@@ -60,7 +55,7 @@ const Map = ({buttonState, mode}) => {
     }
     
     useEffect(() => {
-      console.log("eventi updatovani");
+
     },[events]);
     
 
@@ -93,7 +88,6 @@ const Map = ({buttonState, mode}) => {
           });
         }
         else if(mode == "all"){
-          console.log(events);
           events.forEach((e) => {
               if(new Date(e.starts_at) > Date.now()){
                 bool = true;
@@ -136,7 +130,7 @@ const Map = ({buttonState, mode}) => {
     };
 
     useEffect(() => {
-      console.log("Updated directions:", directions);
+
     }, [directions]);
 
     const handleDirections = () => {
@@ -151,7 +145,6 @@ const Map = ({buttonState, mode}) => {
           },
           (result, status) => {
             if (status === 'OK') {
-              console.log("result", result);
               setDirections(result);
             } else {
               console.error(`Directions request failed due to ${status}`);
@@ -162,9 +155,6 @@ const Map = ({buttonState, mode}) => {
     };
 
     const returnClosest = () => {
-      console.log("directions", directions);
-      console.log("closestMarker", closestMarker);
-      console.log("closestEvent", closestEvent);
       if(yourLocation && closestMarker){
         handleDirections();
         return true;
@@ -217,7 +207,7 @@ const Map = ({buttonState, mode}) => {
                           position={e.location}
                           title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                         />
-                      ) : console.log("nema proslih")
+                      ) : ""
                     ))
                     
                   )
@@ -240,7 +230,7 @@ const Map = ({buttonState, mode}) => {
                         position={e.location}
                         title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                       />
-                    ) : console.log("nema predstojecih")
+                    ) : ""
                   ))
                   
                   )
@@ -265,7 +255,7 @@ const Map = ({buttonState, mode}) => {
                             position={e.location}
                             title={e.name + "\n" + e.description + "\n" + new Date(e.starts_at).toLocaleDateString() + " - " + new Date(e.ends_at).toLocaleDateString() + "\n" + new Date(e.starts_at).toLocaleTimeString() + " - " + new Date(e.ends_at).toLocaleTimeString()}
                           />
-                        ) : console.log("nema proslih")
+                        ) : ""
                       ))
                       
                     )

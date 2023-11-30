@@ -18,7 +18,6 @@ const EventCardList = ({mode}) => {
                     const posts = await res.json()
                     if(!res.ok) return new Error(res.text);
                     setData(posts);
-                    console.log(posts);
                 }catch(e){
                     toast.error(e.message);
                 }
@@ -31,7 +30,6 @@ const EventCardList = ({mode}) => {
                     const posts = await res.json()
                     if(!res.ok) return new Error(res.text);
                     setData(posts);
-                    console.log(posts);
                 }catch(e){
                     toast.error(e.message);
                 }
@@ -50,7 +48,6 @@ const EventCardList = ({mode}) => {
         return false;
     }
     const handleSubmit= async (id) => {
-        console.log(id);
         try{
             const res = await fetch(`/api/event/join/${id}`);
             if(!res.ok){
@@ -58,12 +55,9 @@ const EventCardList = ({mode}) => {
             }
             toast.success("Uspesno prihvacen zahtev");
             const copy = [... data];
-            console.log(copy);
             copy.forEach(event =>{
-                console.log(event);
                 if(event._id == id){
                     event.users_signed.push(session?.user.id);
-                    console.log(event);
                 }
             })
             setData(copy)
@@ -74,7 +68,6 @@ const EventCardList = ({mode}) => {
         }
     };
     const handleLeave= async (id) => {
-        console.log(id);
         try{
             const res = await fetch(`/api/event/leave/${id}`);
             if(!res.ok){
@@ -82,12 +75,10 @@ const EventCardList = ({mode}) => {
             }
             toast.success("Uspesno prihvacen zahtev");
             const copy = [... data];
-            console.log(copy);
             copy.forEach(event =>{
                 
                 if(event._id == id){
                     event.users_signed.filter(removeValue);
-                    console.log(event);
                 }
             })
             setData(copy)

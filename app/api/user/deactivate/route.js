@@ -13,7 +13,9 @@ export const GET = async (req) => {
         const organizer = await Organizer.findOne({
             user_id: data.user._id
         })
-        console.log(organizer);
+        for(let event of organizer.events) {
+            Event.findByIdAndDelete(event);
+        }
         await Event.updateMany({users_signed: data.user._id},{
             $pull: {
                 users_signed : data.user._id
@@ -22,10 +24,11 @@ export const GET = async (req) => {
 
         await OrganizerRequest.deleteOne({
             user_id: data.user._id
-        })/*
+        })
         await User.deleteOne({
             id: data.user._id
-        });*/
+        });
+        return new Response(JSON.stringify({ ok: true, message: 'Uspesno obrisan nalog'}))
     }catch(e){
         console.log(e);
         return new Response("Greska pri editovanju korisnika", {status: 500});

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Requests from "@components/Requests/Requests";
-import Events from "@components/Events/Events";
+import EventsAdmin from "@components/EventsAdmin/EventsAdmin";
 
 const Profile = () => {
     const {data: session} = useSession();
@@ -18,7 +18,8 @@ const Profile = () => {
     const [deactivating, setDeactivating] = useState(false);
     const router = useRouter();
     const [events, setEvents] = useState(false)
-    const [requests, setRequests] = useState(false)
+    const [requests, setRequests] = useState(false);
+    const [data, setData] = useState([])
     const [request, setRequest] = useState({
         ime: {
             value: "",
@@ -119,6 +120,42 @@ const Profile = () => {
             }
         })
     }, [session] )
+    useEffect(() =>{
+        const fetchPosts = async () => {
+            try{
+                const res = await fetch('/api/event/getmyevents');
+                console.log(res);
+                const posts = await res.json()
+                if(!res.ok) return new Error(res.text);
+                setData(posts);
+                console.log(posts);
+            }catch(e){
+                toast.error(e.message);
+                console.log(e);
+            }
+          };
+          fetchPosts();
+    },[session])
+    const handleEdit = async (id) =>{
+        await router.push('/edit-event?id=' + id);
+    }
+    const handleDelete = async (id) =>{
+        try{
+            const res = await fetch('/api/event/delete/'+id);
+            if(!res.ok) return new Error(res.text);
+            toast.success("Uspesno obrisano");
+            const copy = [];
+            data.forEach(event => {
+                if(event._id != id){
+                    copy.push(event);
+                }
+            })
+            setData(copy);
+        }catch(e){
+            toast.error(e.message);
+            console.log(e);
+        }
+    }
     return (
             <div>
                 <ProfileSection 
@@ -160,7 +197,11 @@ const Profile = () => {
                 <Requests/>
                 }
                 {events && 
-                <Events/>
+                <EventsAdmin
+                data={data}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                />
                 }
             </div>
             

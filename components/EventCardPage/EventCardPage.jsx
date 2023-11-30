@@ -27,7 +27,7 @@ export default function EventCard({eventId, eventName, eventPhoto, eventDesc, ad
                             {handleSubmit && <button onClick={() => {handleSubmit(eventId)}} className={`${styles.primaryButton} primaryButton`}>Prijavi se</button>}
                             <div className={styles.eventLikes}>
                                 <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
-                                <div className={styles.eventLikesNum}>{likes}</div>
+                                <div className={styles.eventLikesNum}> {likes}</div>
                             </div>
                         </div>
                         
