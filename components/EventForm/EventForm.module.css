@@ -265,7 +265,13 @@
     background: var(--main-color);
     transition: 0.2s ease all;
 }
-
+.active{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px) ;
+    -webkit-backdrop-filter: blur(10px) ;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) ;
+}
 .selectBar:before {
     left: 50%;
 }
@@ -310,6 +316,9 @@
 
 .monthPicker{
     padding: 0 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
 }
 .yearPicker{
     display: flex;
@@ -318,15 +327,48 @@
 .yearChange{
     display: grid;
     padding-top: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.yearChange:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px) ;
+    -webkit-backdrop-filter: blur(10px) ;
+    border-radius: 50%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) ;
 }
 .calendarBody{
     padding: 5px;
 }
 .calendarWeekDay{
     display: grid;
+    height: 50px;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
 }
 .calendarDays{
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.calendarDays div{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    animation: to-top 1s forwards;
+    border-radius: 50%;
+}
+
+.calendar-day-hover{
+    transition: all 0.2s ease-in-out;
 }
 .monthList{
     display: grid;
@@ -334,7 +376,32 @@
     width: 100%;
     height: 100%;
     top: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+    -webkit-backdrop-filter: blur(50px) ;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) ;
+    padding: 20px;
+    grid-template-columns: repeat(3, auto);
+    z-index: 1000;
+    left: 0;
+    border-radius: 30px;
+    visibility: visible;
+    pointer-events: visible;
+    background-color: #002069;
+    transition: all 0.2s ease-in-out;
 }
+.monthList > div{
+    display: grid;
+    z-index: 1000;
+    place-items: center;
+}
+.monthList > div > div {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
 /* Extra large devices (large laptops and desktops, 1200px) */
 @media only screen and (max-width: 1200px) {
     .contactSec {

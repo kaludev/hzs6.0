@@ -1,17 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './EventForm.module.css'
-import './calendar'
 
 const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile}) => {
-
-    const calendarRef = useRef(null);
-    const calendarElement = calendarRef.current;
-
+    
+    let daysOfMonth = [];
+    const [calendarDays, setCalendarDays] = useState([]);
+    const [monthPicker, setMonthPicker] = useState(false);
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let first_day;
     useEffect(() => {
-        generateCalendar(); 
-      }, []);
-
-      
+        first_day = new Date(event.vremeOd.value.getFullYear(), event.vremeOd.value.getMonth(), 1)
+        daysOfMonth= [31, (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        setTimeout(() =>{
+            console.log(daysOfMonth)
+            const divs = [];
+            for(let i=0; i<daysOfMonth[event.vremeOd.value.getMonth()] + first_day.getDay() ; i++){
+                if (i >= first_day.getDay()) {
+                    divs.push(i- first_day.getDay()+1);
+                }else{
+                    divs.push("");
+                }
+            }
+            console.log(divs);
+            setCalendarDays(divs);
+        },200)
+        console.log(event.vremeOd.value);
+        console.log(event.vremeDo.value);
+    },[event])
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true;
@@ -136,7 +151,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
             if(copy.vremeDo.value.getTime() > copy.vremeOd.value.getTime()){
                 setEvent(copy);
             }else{
-                copy.vremeOd.value.setTime(event.vremeDo.value.getTime()-60000);
+                copy.vremeOd.value.setHours(event.vremeDo.value.getHours()-1);
                 console.log(copy.vremeOd.value)
                 setEvent(copy);
             }
@@ -150,8 +165,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
             if(copy.vremeDo.value.getTime() > copy.vremeOd.value.getTime()){
                 setEvent(copy);
             }else{
-                copy.vremeOd.value.setTime(event.vremeDo.value.getTime()-60000);
-                console.log(copy.vremeOd.value)
+                copy.vremeOd.value.setMinutes(event.vremeDo.value.getMinutes()-1);
                 setEvent(copy);
             }
         }
@@ -167,6 +181,55 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
         const copy = { ...event };
         copy[e.target.name].focus = !!copy[e.target.name].value;
         setEvent(copy);
+    }
+    function incrementOdYear() {
+        const copy = { ...event };
+        
+        copy.vremeOd.value.setFullYear(event.vremeOd.value.getFullYear() +1 );
+        copy.vremeDo.value.setFullYear(event.vremeDo.value.getFullYear() +1 );
+        setEvent(copy);
+    }
+    function decrementOdYear() {
+        const copy = { ...event };
+        let year = copy.vremeOd.value.getFullYear();
+        copy.vremeOd.value.setFullYear(event.vremeOd.value.getFullYear() -1 );
+        copy.vremeDo.value.setFullYear(event.vremeDo.value.getFullYear() -1 );
+        if(copy.vremeOd.value.getTime() > new Date().getTime()){
+            setEvent(copy);
+        }else{
+            copy.vremeOd.value.setFullYear(year);
+            copy.vremeDo.value.setFullYear(year);
+            setEvent(copy);
+        }
+        setEvent(copy);
+    }
+    function changeOdMonth(e) {
+        const copy = { ...event };
+        copy.vremeOd.value.setMonth(monthNames.indexOf(e.target.textContent));
+        copy.vremeDo.value.setMonth(monthNames.indexOf(e.target.textContent));
+        setMonthPicker(false);
+        if(copy.vremeOd.value.getTime() > new Date().getTime()){
+            setEvent(copy);
+        }else{
+            copy.vremeOd.value.setMonth(new Date().getMonth());
+            copy.vremeOd.value.setDate(new Date().getDate()+1);
+            copy.vremeDo.value.setMonth(new Date().getMonth());
+            copy.vremeDo.value.setDate(new Date().getDate()+1);
+            setEvent(copy);
+        }
+    }
+    function setOdDay(e){
+        const copy = { ...event };
+        if(e.target.textContent){
+            copy.vremeOd.value.setDate(parseInt(e.target.textContent));
+            copy.vremeDo.value.setDate(parseInt(e.target.textContent));
+            if(copy.vremeOd.value.getTime() > new Date().getTime()){
+                setEvent(copy);
+            }else{
+                copy.vremeOd.value.setDate(new Date().getDate() + 1);
+                copy.vremeDo.value.setDate(new Date().getDate() + 1);
+            }
+        }
     }
   return (
     <>
@@ -223,27 +286,27 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                     </div>
                     <div className={styles.select}>
                         <select className={styles.selectText} required>
-                            <option value="" disabled selected></option>
-                            <option value="1">Međunarodno</option>
+                            <option value="" disabled></option>
+                            <option value="1" >Međunarodno</option>
                             <option value="2">Državno</option>
                             <option value="3">Opštinsko</option>
                             <option value="4">Školsko</option>
-                            <option value="5">Drugo</option>
+                            <option value="5" selected>Drugo</option>
                         </select>
                         <span className={`${styles.selectHighlight}`}></span>
                         <span className={`${styles.selectBar} `}></span>
                         <label className={`${styles.selectLabel}`}>Tip takmičenja</label>
 				    </div>
                     <div className={styles.selectDate}>
-                    <div ref={calendarRef} className={styles.calendar}>
+                    <div className={styles.calendar}>
                         <div className={styles.calendarHeader}>
-                            <span className={styles.monthPicker} id="monthPicker"></span>
+                            <span onClick={() => {setMonthPicker((prev) => !prev)}} className={styles.monthPicker} id="monthPicker">{monthNames[event.vremeOd.value.getMonth()]}</span>
                             <div className={styles.yearPicker}>
-                            <span className={styles.yearChange} id="prevYear">
+                            <span onClick={decrementOdYear} className={styles.yearChange} id="prevYear">
                                 <pre>&#8592;</pre>
                             </span>
-                            <span id="year"></span>
-                            <span className={styles.yearChange} id="nextYear">
+                            <span id="year">{event.vremeOd.value.getFullYear()}</span>
+                            <span onClick={incrementOdYear} className={styles.yearChange} id="nextYear">
                                 <pre>&#8594;</pre>
                             </span>
                             </div>
@@ -258,9 +321,11 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,backToProfile
                             <div>Fri</div>
                             <div>Sat</div>
                             </div>
-                            <div className={styles.calendarDays}></div>
+                            <div className={styles.calendarDays}>
+                                {calendarDays.map(value => (<div onClick={setOdDay} className={event.vremeOd.value.getDate() === value ? styles.active : ""}>{value}</div>))}
+                            </div>
                         </div>
-                        <div className={styles.monthList}></div>
+                        {monthPicker && <div className={styles.monthList}>{monthNames.map( name =>(<div onClick={changeOdMonth}>{name}</div>))}</div>}
                     </div>
 				    </div>
                     <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
