@@ -356,7 +356,8 @@
     grid-template-columns: repeat(7, 1fr);
 }
 .calendarDays div{
-    width: 50px;
+    width: 100%;
+    max-width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
