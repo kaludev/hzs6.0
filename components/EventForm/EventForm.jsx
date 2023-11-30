@@ -213,6 +213,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             }else{
                 copy.vremeOd.value.setDate(new Date().getDate() + 1);
                 copy.vremeDo.value.setDate(new Date().getDate() + 1);
+                setEvent(copy);
             }
         }
     }
