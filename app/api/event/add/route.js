@@ -5,6 +5,9 @@ import { NextResponse } from 'next/server';
 export const POST = async (req) => {
         try{
                 await connectToDB();
+                /*const formData = await req.formData();
+
+                const file = formData.get("file");*/
                 const data = await req.json();
                 const resg = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
                         data.address

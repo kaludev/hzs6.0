@@ -11,16 +11,19 @@
     text-align: center;
 }
 
-.input1.sati{
+.input1.sati {
     width: 70px !important;
 }
-.input1.minuti{
+
+.input1.minuti {
     width: 70px !important;
 }
-.hourMinute{
+
+.hourMinute {
     flex-direction: row !important;
     align-items: center;
 }
+
 .formContainer {
     width: 100%;
     display: flex;
@@ -41,10 +44,6 @@
     display: flex;
     flex-direction: column;
     margin: 10px 0;
-}
-
-.inputBox:first-of-type {
-    margin-top: 20px;
 }
 
 .inputBox.active-grey .input1 {
@@ -159,6 +158,38 @@
     clear: both;
 }
 
+.inputTimeCont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.inputTime {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+.fileInput label {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .primaryButton {
     width: 160px;
     padding: 10px 15px;
@@ -166,6 +197,19 @@
     font-weight: 500;
     background-color: var(--main-color);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.primaryButtonFile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.primaryButtonFile:hover{
+    color: var(--main-color);
+    box-shadow: none;
 }
 
 .primaryButton:hover {
@@ -190,7 +234,7 @@
 .select {
     position: relative;
     width: 100%;
-    margin: 20px 0;
+    margin: 40px 0;
 }
 
 .selectText {
@@ -289,52 +333,130 @@
     opacity: 0.5;
 }
 
-.selectDate{
+.active {
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    color: #fff;
+}
+
+.selectDate {
     width: 100%;
     margin: 20px 0;
 }
 
-.calendar{
+.calendar {
     position: relative;
     width: 100%;
     padding: 5px;
     margin: 0 auto;
 }
 
-.calendarHeader{
+.calendarHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px;
 }
 
-.monthPicker{
+.monthPicker {
     padding: 0 5px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.1s;
 }
-.yearPicker{
+
+.monthPicker:hover {
+    color: var(--main-color);
+}
+
+.yearPicker {
     display: flex;
     align-items: center;
 }
-.yearChange{
+
+.yearChange {
     display: grid;
-    padding-top: 10px;
+    height: 40px;
+    width: 40px;
+    padding-top: 6px;
+    border-radius: 50%;
+    place-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
 }
-.calendarBody{
+
+.yearChange:hover {
+    color: var(--main-color);
+}
+
+.calendarBody {
     padding: 5px;
 }
-.calendarWeekDay{
+
+.calendarWeekDay {
     display: grid;
+    height: 50px;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
 }
-.calendarDays{
+
+.calendarDays {
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
 }
-.monthList{
+
+.calendarDays div {
+    width: 100%;
+    max-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.monthList {
     display: grid;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
+    grid-template-columns: repeat(3, auto);
+    padding: 20px;
+    z-index: 9;
+    left: 0;
+    border-radius: 30px;
+    visibility: visible;
+    pointer-events: visible;
+    transition: all 0.2s ease-in-out;
 }
+
+.monthList>div {
+    display: grid;
+    z-index: 1000;
+    place-items: center;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.monthList>div:hover {
+    color: var(--main-color);
+}
+
+.monthList>div>div {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
 /* Extra large devices (large laptops and desktops, 1200px) */
 @media only screen and (max-width: 1200px) {
     .contactSec {
@@ -366,4 +488,9 @@
 @media only screen and (max-width: 768px) {}
 
 /* Small devices (portrait tablets and large phones, 600px) */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+    .inputTimeCont {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

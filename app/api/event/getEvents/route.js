@@ -6,6 +6,7 @@ export const GET = async (req) => {
     try{
         await connectToDB();
         const events = await Event.find({});
+        console.log(events);
         return new Response(JSON.stringify(events),{
             status: 200
         })

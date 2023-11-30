@@ -4,7 +4,8 @@ import { useState} from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import EventForm from '@components/EventForm/EventForm'
-
+import "react-toastify/dist/ReactToastify.css";
+import {toast} from 'react-toastify';
 
 
 const createEvent = () => {
@@ -16,7 +17,7 @@ const createEvent = () => {
             error: false,
             errorMsg: ""
         },
-    lokacija: {
+    address: {
         value: "",
         focus: false,
         error: false,
@@ -41,13 +42,13 @@ const createEvent = () => {
         errorMsg: ""
     },
     eventType: {
-        value: "",
+        value: 0, 
         focus: false,
         error: false,
         errorMsg: ""
     },
     level: {
-        value: "",
+        value: 0,
         focus: false,
         error: false,
         errorMsg: ""
@@ -62,25 +63,27 @@ const createEvent = () => {
   })
   const router = useRouter();
   const {data:session} = useSession();
-  const createPrompt = async (e) => {
-    e.preventDefault();
-    
+  const submitBody = async (body) => {
     setSubmitting(true);
-    try {
-      const res = await fetch('/api/prompt/new', {
-        method: 'POST',
-        body: JSON.stringify({
-          prompt: post.prompt,
-          userId: session?.user.id,
-          tag: post.tag,
-        })
+    console.log(body);
+    try{
+      const res = await fetch('/api/event/add',{
+          method : "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body)
       })
-      if(res.ok){
-        router.push('/')
+
+      if(!res.ok){
+        throw new Error(await res.json());
       }
-    }catch (e) {
-      console.log(e);
-    }finally {
+      toast.success("Uspesno dodat dogadjaj",{
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }catch(e){
+      toast.error("Greska: " + e.message);
+    }finally{
       setSubmitting(false);
     }
   }
@@ -91,6 +94,7 @@ const createEvent = () => {
     setEvent={setEvent}
     submitting={submitting}
     setSubmitting={setSubmitting}
+    submitBody={submitBody}
     />
   )
 }
