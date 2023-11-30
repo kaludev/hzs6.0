@@ -114,10 +114,9 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
                   
                       providers &&
                       Object.values(providers).map((provider) => (
-                        <div className={styles.sideNavProfile}>
+                        <div key={provider.id} className={styles.sideNavProfile}>
                           <button
                             type="button"
-                            key={provider.name}
                             onClick={() => signIn(provider.id)}
                             className={`${styles.primaryButton} primaryButton`}
                           >Prijavi se</button>

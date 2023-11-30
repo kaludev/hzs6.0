@@ -5,14 +5,13 @@ import { FaCog,FaTimes } from "react-icons/fa";
 
 export default function ProfileSection({name, username, photo,isSuperAdmin,requestedOrganizer,
     isOrganizer,form,showForm,settings,showSettings,events,showEvents,requests,showRequests,handleSignOut,handleDeactivate,deactivating}){
-        console.log(form || requests || events);
     return(
         <section className={styles.profileCard}>
         <div className={styles.profileCardMain}>
             <h2>O nalogu</h2>
             <hr className={styles.divider} />
             <div className={styles.profileHeader}>
-                <Image className={styles.userPhoto} src={photo} alt="Profile" width={80} height={80}/>
+                {photo && <Image className={styles.userPhoto} src={photo} alt="Profile" width={80} height={80}/>}
                 <div className={styles.userInfo}>
                     <div className={styles.userFirstName}>{name}</div>
                     <div className={styles.username}>@{username}</div>
