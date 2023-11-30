@@ -87,7 +87,7 @@ export default function EventCard({eventId, eventName, eventDesc, address,
                                     }
                                 }
                                 }  onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
-                        <div className={styles.eventLikesNum}>{likes.length}</div>
+                        <div className={styles.eventLikesNum}>{likes?.length}</div>
                     </div>
                 </div>
                 
