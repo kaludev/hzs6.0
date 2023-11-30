@@ -19,7 +19,7 @@ export default function EventCard({eventId, eventName, eventDesc, address,
     },[session]);
     useEffect(() => {
         if(session?.user)
-            if(likes?.filter(user_id => user_id == user._id).length > 0)
+            if(likes?.filter(user_id => user_id == session?.user._id).length > 0)
             setClicked(true);
             else
             setClicked(false);
