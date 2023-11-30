@@ -16,6 +16,7 @@ const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers
           handleLeave={() => handleLeave(event._id)}
           signIn={signIn} users_signed={event.users_signed}
           handleEdit={handleEdit && (() => handleEdit(event._id))} handleDelete={handleDelete && (() => handleDelete(event._id))}
+          image={event?.image[0]}
         />
     ))) : (
       <div className={emptyStyles.emptyArr}><span className={emptyStyles.colored}>Još uvek se niste prijavili za takmičenja.</span><br />Kako biste videli svoja takmičenja, pogledajte arenu i prijavite se</div>

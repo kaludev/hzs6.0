@@ -1,4 +1,5 @@
 import Event from "@models/event";
+import { put } from '@vercel/blob';
 import Organizer from "@models/organizer";
 import { connectToDB } from "@utils/database";
 import { getServerSession } from "next-auth";
@@ -10,10 +11,28 @@ export const POST = async (req) => {
         console.log(user);
         try{
                 await connectToDB();
-                /*const formData = await req.formData();
+                const formData = await req.formData();
+                console.log(formData.get('name'));
+                const file = await formData.get("file");
+                await console.log( file);
 
-                const file = formData.get("file");*/
-                const data = await req.json();
+                const bytes = await file.arrayBuffer();
+                const buffer = Buffer.from(bytes);
+                const blob = await put(formData.get('name')+'.jpg', buffer, {
+                        access: 'public',
+                      });
+                console.log(blob);
+                const data = {
+                        name: formData.get('name'),
+                        address: formData.get('address'), 
+                        starts_at: formData.get('starts_at'),
+                        ends_at: formData.get('ends_at'),
+                        eventType: formData.get('eventType'),
+                        level: formData.get('level'),
+                        capacity: formData.get('capacity'),
+                        description: formData.get('description'),
+                        image: [blob.url]
+                }
                 const resg = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
                         data.address
                       )}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);

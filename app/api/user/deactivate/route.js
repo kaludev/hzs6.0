@@ -10,25 +10,32 @@ export const GET = async (req) => {
     try {
     await connectToDB();
         const data = await getServerSession(authOptions);
-        const organizer = await Organizer.findOne({
-            user_id: data.user._id
-        })
-        for(let event of organizer.events) {
-            Event.findByIdAndDelete(event);
+        if(data.user.isOrganizer){
+            const organizer = await Organizer.findOne({
+                user_id: data.user._id
+            })
+            if(organizer?.events){
+                for(let event of organizer?.events) {
+                    Event.findByIdAndDelete(event.id);
+                }
+                Organizer.deleteOne({user_id: data.user._id})
+            }
         }
+        if(data.user.requestedOrganizer){
+            await OrganizerRequest.deleteOne({
+                user_id: data.user._id
+            })  
+        }
+        
         await Event.updateMany({users_signed: data.user._id},{
             $pull: {
                 users_signed : data.user._id
             }
         })
-
-        await OrganizerRequest.deleteOne({
-            user_id: data.user._id
-        })
         await User.deleteOne({
             id: data.user._id
         });
-        return new Response(JSON.stringify({ ok: true, message: 'Uspesno obrisan nalog'}))
+        return new Response(JSON.stringify({ ok: true, message: 'Uspesno obrisan nalog'}),{status:200})
     }catch(e){
         console.log(e);
         return new Response("Greska pri editovanju korisnika", {status: 500});
