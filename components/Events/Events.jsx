@@ -9,6 +9,8 @@ const Events = ({data,handleSubmit,handleEdit,handleDelete}) => {
         address={event.address} eventStartTime={new Date(event.starts_at)}
          eventEndTime={new Date(event.ends_at)} applied={event.users_signed.length} 
           maxCapacity = {event.capacity} likes={event.likes}
+          handleSubmit={handleSubmit}
+          handleEdit={handleEdit} handleDelete={handleDelete}
          />
     ))
   )

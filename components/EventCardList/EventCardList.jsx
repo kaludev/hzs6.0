@@ -20,10 +20,13 @@ const EventCardList = () => {
           };
           fetchPosts();
     },[]);
+    const handleSubmit= (id) => {
+        
+    };
   return (
     data ? <Events 
     data={data}
-
+    handleSubmit={handleSubmit}
     /> : <div>loading....</div>
   )
 }
