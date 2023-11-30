@@ -343,7 +343,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                     <div className="submitButtonBox">
                         <button type="submit"
                         className={`${styles.primaryButton} primaryButton`}
-                        onClick={handleSubmit}>{submitting ? "Slanje zahteva..." : "Pošalji zahtev"}</button>
+                        onClick={handleSubmit}>{submitting ? "Slanje zahteva..." : "Rezerviši"}</button>
                     </div>
                 </form>
             </div>
