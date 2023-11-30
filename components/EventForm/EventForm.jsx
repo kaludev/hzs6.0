@@ -284,7 +284,6 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                     </div>
                     <div className={styles.select}>
                         <select name="level" value = {event.level.value} className={styles.selectText} required onChange={handleChange}>
-                            <option value="" disabled></option>
                             <option value={4}>Međunarodno</option>
                             <option value={3}>Državno</option>
                             <option value={2}>Opštinsko</option>
@@ -332,7 +331,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                         </div>
 				    </div>
                     <div className={`${styles.inputBox} ${event.poruka.error ?  styles.error : ""} ${event.poruka.focus ? styles.focus : ""}`}>
-                        <label className={styles.inputLabel}>Opis</label>
+                        <label className={styles.inputLabel}>Opis takmičenja</label>
                         <textarea value={event.poruka.value} type="text" className={styles.input1} rows="10" name="poruka" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}></textarea>
                         <p className={styles.errorMessage}>{event.poruka.errorMsg}</p>
                     </div>
