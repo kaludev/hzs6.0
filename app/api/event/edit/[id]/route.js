@@ -4,6 +4,7 @@ import { connectToDB } from "@utils/database";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
 import { NextResponse } from 'next/server';
+import { put } from "@vercel/blob";
 
 export const POST = async (req,{params}) => {
         const user = await getServerSession(authOptions);
