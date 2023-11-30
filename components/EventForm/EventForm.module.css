@@ -190,7 +190,7 @@
 .select {
     position: relative;
     width: 100%;
-    margin: 20px 0;
+    margin: 40px 0;
 }
 
 .selectText {
@@ -265,13 +265,6 @@
     background: var(--main-color);
     transition: 0.2s ease all;
 }
-.active{
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px) ;
-    -webkit-backdrop-filter: blur(10px) ;
-    border-radius: 10px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) ;
-}
 .selectBar:before {
     left: 50%;
 }
@@ -293,6 +286,12 @@
     left: 0;
     pointer-events: none;
     opacity: 0.5;
+}
+
+.active{
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    color: #fff;
 }
 
 .selectDate{
@@ -317,8 +316,12 @@
 .monthPicker{
     padding: 0 5px;
     border-radius: 10px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease-in;
+    transition: all 0.1s;
+}
+.monthPicker:hover{
+    color: var(--main-color);
 }
 .yearPicker{
     display: flex;
@@ -326,21 +329,18 @@
 }
 .yearChange{
     display: grid;
-    padding-top: 10px;
     height: 40px;
     width: 40px;
+    padding-top: 6px;
     border-radius: 50%;
     place-items: center;
+    text-align: center;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .yearChange:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px) ;
-    -webkit-backdrop-filter: blur(10px) ;
-    border-radius: 50%;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) ;
+    color: var(--main-color);
 }
 .calendarBody{
     padding: 5px;
@@ -363,12 +363,7 @@
     justify-content: center;
     position: relative;
     cursor: pointer;
-    animation: to-top 1s forwards;
     border-radius: 50%;
-}
-
-.calendar-day-hover{
-    transition: all 0.2s ease-in-out;
 }
 .monthList{
     display: grid;
@@ -376,23 +371,26 @@
     width: 100%;
     height: 100%;
     top: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
-    -webkit-backdrop-filter: blur(50px) ;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) ;
-    padding: 20px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
     grid-template-columns: repeat(3, auto);
-    z-index: 1000;
+    padding: 20px;
+    z-index: 9;
     left: 0;
     border-radius: 30px;
     visibility: visible;
     pointer-events: visible;
-    background-color: #002069;
     transition: all 0.2s ease-in-out;
 }
 .monthList > div{
     display: grid;
     z-index: 1000;
     place-items: center;
+    font-weight: 500;
+    cursor: pointer;
+}
+.monthList > div:hover{
+    color: var(--main-color);
 }
 .monthList > div > div {
     padding: 15px;
