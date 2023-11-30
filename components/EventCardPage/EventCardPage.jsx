@@ -42,14 +42,20 @@ export default function EventCard({user, eventId, eventName, eventPhoto, eventDe
                             <div className={styles.eventLikes}>
                                 <button className={`${styles.secondaryButton} secondaryButton`} onClick={() => {
                                     if(clicked){
-                                        handleUnlike(eventId);
-                                        if(user)
-                                        setClicked(!clicked);
+                                        
+                                        if(user){
+                                            handleUnlike();
+                                            setClicked(!clicked);
+                                        }
+                                        
                                     }
                                     else{
-                                        handleLike(eventId);
-                                        if(user)
-                                        setClicked(!clicked);
+                                        
+                                        if(user){
+                                            handleLike();
+                                            setClicked(!clicked);
+                                        }
+                                        
                                     }
                                 }
                                 } onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ clicked ? <FaHeart /> : <FaRegHeart />}</button>
