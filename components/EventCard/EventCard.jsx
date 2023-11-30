@@ -7,15 +7,27 @@ import Link from "next/link";
 
 export default function EventCard({eventId, eventName, eventDesc, address,
      eventStartTime, eventEndTime, applied, maxCapacity, likes,handleSubmit,
-     handleEdit,handleLeave, handleDelete,providers, signIn,users_signed,image}){
+     handleEdit,handleLeave, handleDelete,providers, signIn,users_signed,image,handleLike,handleUnlike}){
     const {data:session} = useSession()
     const [prijavljen, setPrijavljen] = useState();
     const [applieds, setApplieds] = useState();
     const[hover, setHover] = useState();
+    const [clicked, setClicked] = useState();
     useEffect(() => {
         setApplieds(users_signed.length)
         setPrijavljen(users_signed?.includes(session?.user._id))
     },[session]);
+    useEffect(() => {
+        if(session?.user)
+            if(likes?.filter(user_id => user_id == user._id).length > 0)
+            setClicked(true);
+            else
+            setClicked(false);
+        else{
+            setClicked(false);
+        }
+        
+    }, []);
     return(
         <div className={styles.cardEvent}>
             <Link href={`/event/${eventId}`}><img className={styles.eventPhoto} src={image ? image :"./images/hero.jpg"} alt="Event Photo" /></Link>
@@ -56,8 +68,26 @@ export default function EventCard({eventId, eventName, eventDesc, address,
                     {handleEdit && <button onClick={handleEdit} className={`${styles.primaryButton} primaryButton`}>Izmeni</button>}
                     {handleDelete && <button onClick={handleDelete} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
                     <div className={styles.eventLikes}>
-                        <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
-                        <div className={styles.eventLikesNum}>{likes}</div>
+                        <button className={`${styles.secondaryButton} secondaryButton`} onClick={() => {
+                                    if(clicked){
+                                        
+                                        if(session?.user){
+                                            handleUnlike();
+                                            setClicked(!clicked);
+                                        }
+                                        
+                                    }
+                                    else{
+                                        
+                                        if(session?.user){
+                                            handleLike();
+                                            setClicked(!clicked);
+                                        }
+                                        
+                                    }
+                                }
+                                }  onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
+                        <div className={styles.eventLikesNum}>{likes.length}</div>
                     </div>
                 </div>
                 
