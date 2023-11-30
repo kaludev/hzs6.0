@@ -13,8 +13,8 @@ export default function EventCard({eventName, eventDesc, address, eventStartTime
                 <div className={styles.cardEvent}>
                     <img className={styles.eventPhoto} src="./images/hero.jpg" alt="Event Photo" />
                     <div className={styles.eventMain}>
-                        <div className={styles.eventName}>{eventName} IME TAKMICENJA OBRISATI POSLE</div>
-                        <div className={styles.eventDesc}>{eventDesc} OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE OPIS TAKMICENJA OBRISATI POSLE</div>
+                        <div className={styles.eventName}>{eventName}</div>
+                        <div className={styles.eventDesc}>{eventDesc}</div>
                         <div className={styles.eventData}>
                             <div className={styles.eventPlaceData}>
                                 <div className={styles.eventTime}><span className={styles.eventColored}><FaMapMarkerAlt /></span>{address}</div>
