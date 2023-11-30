@@ -92,9 +92,11 @@ const Profile = () => {
                 position: toast.POSITION.TOP_RIGHT
             });
             await signOut();
-            await router.push("/")
+            
         }catch(e){
             toast.error("Greska: " + e.message);
+        }finally{
+            window.location.href = '/';
         }
     }
     
@@ -121,20 +123,22 @@ const Profile = () => {
         })
     }, [session] )
     useEffect(() =>{
-        const fetchPosts = async () => {
-            try{
-                const res = await fetch('/api/event/getmyevents');
-                console.log(res);
-                const posts = await res.json()
-                if(!res.ok) return new Error(res.text);
-                setData(posts);
-                console.log(posts);
-            }catch(e){
-                toast.error(e.message);
-                console.log(e);
-            }
-          };
-          fetchPosts();
+        if(session?.user.isOrganizer){
+            const fetchPosts = async () => {
+                try{
+                    const res = await fetch('/api/event/getmyevents');
+                    console.log(res);
+                    const posts = await res.json()
+                    if(!res.ok) return new Error(res.text);
+                    setData(posts);
+                    console.log(posts);
+                }catch(e){
+                    toast.error(e.message);
+                    console.log(e);
+                }
+              };
+              fetchPosts();
+        }
     },[session])
     const handleEdit = async (id) =>{
         await router.push('/edit-event?id=' + id);

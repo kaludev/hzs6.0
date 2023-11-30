@@ -26,7 +26,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                 }
             }
             setCalendarDays(divs);
-        },200)
+        },200)  
     },[event])
     async function handleSubmit(e) {
         e.preventDefault();
@@ -94,7 +94,19 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             copy['max'].errorMsg = "";
             setEvent(copy);
         }
-
+        if(!event.file.value){
+            const copy = { ...event };
+            copy['file'].error = true;
+            copy['file'].errorMsg = "Slika mora biti uneta";
+            console.log(event);
+            setEvent(copy);
+            valid = false;
+        }else{
+            const copy = { ...event };
+            copy['file'].error = false;
+            copy['file'].errorMsg = "";
+            setEvent(copy);
+        }
         if (event.poruka.value == "") {
             const copy = { ...event };
             copy['poruka'].error = true;
@@ -231,6 +243,13 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             }
         }
     }
+    const handleFileChange = (e) => {
+        const copy = { ...event };
+        console.log(copy);
+        copy.file.value = e.target.files[0];
+        console.log(copy);
+        setEvent(copy);
+    };
   return (
     <>
     <section className={styles.contactSec}>
@@ -300,10 +319,10 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                         <label className={`${styles.selectLabel}`}>Nivo Takmičenja</label>
 				    </div>
                     <div className={`${styles.fileInput} ${styles.primaryButtonFile} primaryButton`}>
-                        <input type="file" id="file" className={`${styles.file}`}/>
+                        <input type="file" id="file" onChange={handleFileChange} className={`${styles.file}`}/>
                         <label htmlFor="file">Izaberite sliku</label>
                     </div>
-                    <p className={styles.errorMessage}>Morate uneti sliku</p>
+                    <p className={styles.errorMessage}>{event.file.errorMsg}</p>
                     <div className={styles.selectDate}>
                         <div className={styles.calendar}>
                             <div className={styles.calendarHeader}>
@@ -343,7 +362,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                     <div className="submitButtonBox">
                         <button type="submit"
                         className={`${styles.primaryButton} primaryButton`}
-                        onClick={handleSubmit}>{submitting ? "Slanje zahteva..." : "Pošalji zahtev"}</button>
+                        onClick={handleSubmit}>{submitting ? "Slanje zahteva..." : "Rezerviši"}</button>
                     </div>
                 </form>
             </div>

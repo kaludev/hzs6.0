@@ -6,7 +6,7 @@ import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa"
 
 export default function EventCard({eventName, eventDesc, address,
      eventStartTime, eventEndTime, applied, maxCapacity, likes,handleSubmit,
-     handleEdit,handleLeave, handleDelete,providers, signIn,users_signed}){
+     handleEdit,handleLeave, handleDelete,providers, signIn,users_signed,image}){
     const {data:session} = useSession()
     const [prijavljen, setPrijavljen] = useState();
     const [applieds, setApplieds] = useState();
@@ -17,7 +17,7 @@ export default function EventCard({eventName, eventDesc, address,
     },[session]);
     return(
         <div className={styles.cardEvent}>
-            <img className={styles.eventPhoto} src="./images/hero.jpg" alt="Event Photo" />
+            <img className={styles.eventPhoto} src={image ? image :"./images/hero.jpg"} alt="Event Photo" />
             <div className={styles.eventMain}>
                 <div className={styles.eventName}>{eventName}</div>
                 <div className={styles.eventDesc}>{eventDesc}</div>

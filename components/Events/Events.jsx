@@ -18,6 +18,7 @@ const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers
             handleLeave={() => handleLeave(event._id)}
             signIn={signIn} users_signed={event.users_signed}
             handleEdit={handleEdit} handleDelete={handleDelete}
+            image={event?.image[0]}
           />
         </Link>
     ))) : (
