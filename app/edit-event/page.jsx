@@ -25,6 +25,11 @@ const editEvent = () => {
         error: false,
         errorMsg: ""
     },
+    file: {
+      value: null,
+      error: false,
+      errorMsg: ""
+  },
     vremeOd: {
         value: new Date(new Date().getTime()-(60000)),
         focus: true,
