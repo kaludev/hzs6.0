@@ -6,7 +6,7 @@ import styles from "./RangListCard.module.css"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
 
-export default function RangListCard(){
+export default function RangListCard({data}){
     
     const tel = '67567'
 
@@ -16,16 +16,14 @@ export default function RangListCard(){
                     <div className={styles.eventMain}>
                         <div className={styles.eventHeader}>
                             <div className={styles.eventHeaderLeft}>
-                                <div className={styles.eventName}>IME KLUBA</div>
-                                <div className={styles.eventDesc}>EMAIL KLUBA</div>
+                                <div className={styles.eventName}>{data.name}</div>
                             </div>
                             <div className={styles.eventHeaderRight}><Link href={`tel:${tel}`}>064567675</Link></div>
                         </div>
-                        <div className={styles.eventOrgName}>IME ORGANIZATORA</div>
-                        <div className={styles.eventDesc}>EMAIL KLUBA</div>
+                        <div className={styles.eventOrgName}>{data.name}</div>
                         <div className={styles.eventHeaderSec}>
                             <div className={styles.eventHeaderLeft}>
-                                <div className={styles.eventData}>Broj održanih takmičenja: {}</div>
+                                <div className={styles.eventData}>{data.events.length}</div>
                             </div>
                                 <div className={styles.eventLikes}>
                                     <button className={`${styles.secondaryButton} secondaryButton`}><FaHeart /></button>

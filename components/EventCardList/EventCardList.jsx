@@ -96,6 +96,7 @@ const EventCardList = ({mode}) => {
   return (
     data? <Events 
     user_id={session?.user._id}
+    user={session?.user}
     data={data}
     handleSubmit={session?.user && handleSubmit}
     handleLeave={session?.user && handleLeave}
