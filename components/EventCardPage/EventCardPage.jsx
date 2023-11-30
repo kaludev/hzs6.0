@@ -29,7 +29,7 @@ export default function EventCard({eventName, eventDesc, address, eventStartTime
                             {handleDelete && <button onClick={handleDelete()} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
                             <div className={styles.eventLikes}>
                                 <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
-                                <div className={styles.eventLikesNum}>{likes}</div>
+                                <div className={styles.eventLikesNum}> {likes}</div>
                             </div>
                         </div>
                         
