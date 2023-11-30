@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Requests from "@components/Requests/Requests";
-import Events from "@components/Events/Events";
+import EventsAdmin from "@components/EventsAdmin/EventsAdmin";
 
 const Profile = () => {
     const {data: session} = useSession();
@@ -201,7 +201,7 @@ const Profile = () => {
                 <Requests/>
                 }
                 {events && 
-                <Events
+                <EventsAdmin
                 data={data}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}

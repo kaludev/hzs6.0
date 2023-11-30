@@ -98,7 +98,7 @@ const SideNav = ({menuVisible,setMenuVisible}) => {
                     {session?.user.isOrganizer && 
                     <Link href="/create-event" className={`${styles.primaryButton} primaryButton`}>
                       {" "}
-                      Dodaj Događaj
+                      Dodaj Takmičenje
                     </Link>}
                     <Link href="/profile" className={`${styles.primaryButton} primaryButton`}>
                       <div className={styles.navProfileImageBack}>
