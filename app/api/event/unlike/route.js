@@ -6,15 +6,13 @@ import { authOptions } from "@app/api/auth/[...nextauth]/route";
 import { NextResponse } from 'next/server';
 
 export const POST = async (req) => {
-        const user = await getServerSession(authOptions);
-        console.log(user);
         try{
+                const user = await getServerSession(authOptions);
                 await connectToDB();
                 const data = await req.json();
-                const event = await Event.findOne({_id: data.id});
-                const updated_arr = event.users_liked.filter(x => x != user._id);
-                event.users_liked = updated_arr;
-                const updated_event = await event.save();
+                const updated_event = await Event.findByIdAndUpdate(data.id,{
+                        $pull: {users_liked : user.user._id}
+                    }, {new: true});
                 return NextResponse.json({ ok: true, data: updated_event }, { status: 200 })
         }
         catch(err){
