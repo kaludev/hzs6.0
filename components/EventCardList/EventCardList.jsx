@@ -93,6 +93,48 @@ const EventCardList = ({mode}) => {
         };
         setUpProviders();
       }, []);
+
+    const handleLike = async (id) => {
+        if(session?.user){
+            const res = await fetch("/api/event/like", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id})
+            });
+            const json = await res.json();
+            if(json.ok){
+                console.log(json.data);
+            }
+        }
+        else{
+            Object.values(providers).map((provider) => {
+                signIn(provider.id);
+         })
+        }
+    }
+
+    const handleDislike = async (id) => {
+        if(session?.user){
+            const res = await fetch("/api/event/unlike", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id})
+            });
+            const json = await res.json();
+            if(json.ok){
+                console.log(json.data);
+            }
+        }
+        else{
+            Object.values(providers).map((provider) => {
+                signIn(provider.id);
+         })
+        }
+    }
   return (
     data? <Events 
     user_id={session?.user._id}
@@ -101,6 +143,8 @@ const EventCardList = ({mode}) => {
     handleLeave={session?.user && handleLeave}
     providers={providers}
     signIn={signIn}
+    handleLike={handleLike}
+    handleDislike={handleDislike}
     /> : <div>loading....</div>
   )
 }

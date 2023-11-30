@@ -6,9 +6,8 @@ import styles from "./RangListCard.module.css"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
 
-export default function RangListCard(){
-    
-    const tel = '67567'
+export default function RangListCard({user,email,tel,events,likes}){
+
 
     return(
 
@@ -16,20 +15,18 @@ export default function RangListCard(){
                     <div className={styles.eventMain}>
                         <div className={styles.eventHeader}>
                             <div className={styles.eventHeaderLeft}>
-                                <div className={styles.eventName}>IME KLUBA</div>
-                                <div className={styles.eventDesc}>EMAIL KLUBA</div>
+                                <div className={styles.eventName}>{user}</div>
+                                <div className={styles.eventDesc}>{email}</div>
                             </div>
-                            <div className={styles.eventHeaderRight}><Link href={`tel:${tel}`}>064567675</Link></div>
+                            <div className={styles.eventHeaderRight}><Link href={`tel:${tel}`}>{tel}</Link></div>
                         </div>
-                        <div className={styles.eventOrgName}>IME ORGANIZATORA</div>
-                        <div className={styles.eventDesc}>EMAIL KLUBA</div>
                         <div className={styles.eventHeaderSec}>
                             <div className={styles.eventHeaderLeft}>
-                                <div className={styles.eventData}>Broj održanih takmičenja: {}</div>
+                                <div className={styles.eventData}>Broj održanih takmičenja: {events}</div>
                             </div>
                                 <div className={styles.eventLikes}>
                                     <button className={`${styles.secondaryButton} secondaryButton`}><FaHeart /></button>
-                                    <div className={styles.eventLikesNum}>{}</div>
+                                    <div className={styles.eventLikesNum}>{likes}</div>
                                 </div>
                         </div>
                     </div>

@@ -1,17 +1,14 @@
 
 import styles from '@components/RangListCard/RangListCard.module.css'
 import RangListCard from '@components/RangListCard/RangListCard'
+import RangListCards from '@components/RangListCards/RangListCards'
 
 
 const RangList = () => {
-
     return (
         <section className={styles.cardsMainSection}>
             <section className={styles.cardsSection}>
-                <RangListCard mode = "all"/>
-                <RangListCard mode = "all"/>
-                <RangListCard mode = "all"/>
-                <RangListCard mode = "all"/>
+                <RangListCards />
             </section>
         </section>
     )

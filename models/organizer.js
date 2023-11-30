@@ -10,6 +10,9 @@ const organizerSchema = new Schema({
         type : String,
         required : [true, 'Name is required']
     },
+    tel:{
+        type: String
+    },
     events: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Event",

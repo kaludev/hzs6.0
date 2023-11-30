@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import emptyStyles from './Events.module.css'
 import Link from "next/link"
 
-const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers,signIn}) => {
+const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers,signIn,handleLike,handleDislike}) => {
   return (
     data && data.length > 0 ? (
        data.map(event => (
