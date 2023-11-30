@@ -1,11 +1,6 @@
 import mongoose, { Schema,model ,models } from "mongoose";
 
 const eventSchema = new Schema({
-    id:{
-        type: Number,
-        unique: [true, 'ID already in use!'],
-        required: [true,'ID is required!']
-    },
     name: {
         type : String,
         required : [true, 'Name is required'],
@@ -60,6 +55,14 @@ const eventSchema = new Schema({
         type: Number,
         required: true,
         default:0
+    },
+    eventType:{
+        type: Number,
+        required: true
+    },
+    level:{
+        type: Number,
+        required: true
     },
     image: {
         type: [String]
