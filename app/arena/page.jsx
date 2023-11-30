@@ -8,7 +8,7 @@ const EventsPage = () => {
     return (
         <section className={styles.cardsMainSection}>
             <section className={styles.cardsSection}>
-                <EventCardList />
+                <EventCardList mode = "all"/>
             </section>
         </section>
     )

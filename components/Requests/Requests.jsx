@@ -5,18 +5,24 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestCard from "@components/RequestCard/RequestCard";
 import styles from '@components/RequestCard/RequestCard.module.css'
+import emptyStyles from './Requests.module.css'
 
 const RequestCardList = ({data,handleConfirm,handleDecline}) =>{
   return (
     <section className={styles.cardsMainSection}>
             <section className={styles.cardsSection}>
-            {data.map(request =>(
-        <RequestCard key={request._id}
-        data = {request}
-        handleConfirm={() => handleConfirm(request._id)}
-        handleDecline={() => handleDecline(request._id)}
-         />
-      ))}
+            {
+                data && data.length > 0 ? (
+                    data.map(request =>(
+                    <RequestCard key={request._id}
+                    data = {request}
+                    handleConfirm={() => handleConfirm(request._id)}
+                    handleDecline={() => handleDecline(request._id)}
+                    />
+                ))) : (
+                    <div className={emptyStyles.emptyArr}><span className={emptyStyles.colored}>Čestitamo!</span><br /> Odgovorili ste na sve zahteve. Trenutno nema novih zahteva.</div>
+                )
+            }
         </section>
     </section>
   )
@@ -82,10 +88,10 @@ const Requests = () => {
     },[session])
     return (
         <section className='Requests' >
-        <RequestCardList
-            data = {Posts}
-            handleConfirm={handleConfirm}
-            handleDecline = {handleDelete}
+            <RequestCardList
+                data = {Posts}
+                handleConfirm={handleConfirm}
+                handleDecline = {handleDelete}
             />
         </section>
     )

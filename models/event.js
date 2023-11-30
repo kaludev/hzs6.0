@@ -4,7 +4,7 @@ const eventSchema = new Schema({
     name: {
         type : String,
         required : [true, 'Name is required'],
-        match: [/^[a-zA-Z0-9]{1,30}$/, "Name can contain up to 30 alphanumeric letters!"]
+        match: [/^[a-z A-Z0-9]{1,100}$/, "Name can contain up to 100 alphanumeric letters!"]
     },
     description: {
         type: String,

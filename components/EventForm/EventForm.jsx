@@ -41,6 +41,13 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             setEvent(copy);
             valid = false;
         }
+        else if ([/^[a-z A-Z0-9]{1,100}$/.test(event.ime.value)]) {
+            const copy = { ...event };
+            copy['ime'].error = true;
+            copy['ime'].errorMsg = "Ime sme sadržati samo slova i brojeve";
+            setEvent(copy);
+            valid = false;
+        }
         else{
             const copy = { ...event };
             copy['ime'].error = false;
@@ -56,10 +63,10 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             SetEventTypesErr('');
         }
 
-        if (event.lokacija.value == ``) {
+        if (event.address.value == ``) {
             const copy = { ...event };
-            copy['lokacija'].error = true;
-            copy['lokacija'].errorMsg = "Morate uneti lokaciju";
+            copy['address'].error = true;
+            copy['address'].errorMsg = "Morate uneti lokaciju";
             setEvent(copy);
             valid = false;
         }else {

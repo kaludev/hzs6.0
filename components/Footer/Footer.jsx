@@ -1,5 +1,6 @@
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import { FaInstagram, FaFacebookSquare, FaTwitter } from "react-icons/fa";
 
 export default function Footer({dark}) {
 
@@ -13,20 +14,19 @@ export default function Footer({dark}) {
                 <div className={styles.footerCol}>
                     <h3>Stranice</h3>
                     <div className={styles.footerLink}><Link href="/">Početna</Link></div>
-                    <div className={styles.footerLink}><Link href="/o-nama">O nama</Link></div>
-                    <div className={styles.footerLink}><Link href="/zaigraj-se">Zaigraj se</Link></div>
-                    <div className={styles.footerLink}><Link href="/saznaj-vise">Saznaj više</Link></div>
-                    <div className={styles.footerLink}><Link href="/dokumentacija">Dokumentacija</Link></div>
-                    <div className={styles.footerLink}><Link href="/test-funkcionalnosti">Test funkcionalnosti</Link></div>
+                    <div className={styles.footerLink}><Link href="/about">O nama</Link></div>
+                    <div className={styles.footerLink}><Link href="/arena">Arena</Link></div>
+                    <div className={styles.footerLink}><Link href="/ranglist">Rang Lista</Link></div>
+                    <div className={styles.footerLink}><Link href="/activities">Moje aktivnosti</Link></div>
                 </div>
                 <div className={styles.footerCol}>
-                    <h3>Resursi</h3>
-                    <div className={styles.footerLink}><Link href="/smerovi">Lista svih API-ja</Link></div>
-                    <div className={styles.footerLink}><a href="https://www.google.com" target="_blank" rel="noreferrer">Izvori podataka</a></div>
-                    <h3>Nalog</h3>
-                    <div className={styles.footerLink}><Link href="/profile">Upravljajte nalogom</Link></div>
-                    <div className={styles.footerLink}><Link href="/uloguj-se">Kreiraj nalog</Link></div>
-                    <div className={styles.footerLink}><Link href="/odjavi-se">Odjavi se</Link></div>
+                    <h3>Vaši podaci</h3>
+                    <div className={styles.footerLink}><Link href="/termsofuse">Uslovi korišćenja</Link></div>
+                    <div className={styles.footerLink}><a href="/privacypolicy"rel="noreferrer">Politika privatnosti</a></div>
+                    <h3>Naši partneri</h3>
+                    <div className={styles.footerLink}><Link href="https://vercel.com/" target="_blank">Vercel</Link></div>
+                    <div className={styles.footerLink}><Link href="https://nextjs.org/" target="_blank">Next.js</Link></div>
+                    <div className={styles.footerLink}><Link href="https://fkhadra.github.io/react-toastify/introduction" target="_blank">React Tostify</Link></div>
                 </div>
                 <div className={styles.footerCol}>
                     <h3>Kontakt</h3>
@@ -34,6 +34,11 @@ export default function Footer({dark}) {
                     <div className={styles.footerLink}><Link href="mailto:nikolamilanovic2305@gmail.com">nikolamilanovic2305@gmail.com</Link></div>
                     <div className={styles.footerLink}><Link href="mailto:dimitrijeradojkovic8@gmail.com">dimitrijeradojkovic8@gmail.com</Link></div>
                     <div className={styles.footerLink}><Link href="mailto:tvasiljevic785@gmail.com">tvasiljevic785@gmail.com</Link></div>
+                    <div className={styles.footerSocial}>
+                        <div className={styles.footerSocialLink}><Link href="https://www.instagram.com/" target="_blank"><FaInstagram /></Link></div>
+                        <div className={styles.footerSocialLink}><Link href="https://www.facebook.com/" target="_blank"><FaFacebookSquare /></Link></div>
+                        <div className={styles.footerSocialLink}><Link href="https://twitter.com/" target="_blank"><FaTwitter /></Link></div>
+                    </div>
                 </div>
             </div>
             <hr className={styles.footerDevider} />
@@ -41,7 +46,7 @@ export default function Footer({dark}) {
             <div className={styles.footerCopyright}>
                 <p className={styles.footerCopyrightP}>© {new Date().getFullYear()}. Sva prava zadržana Tim "Class" Kraljevo.</p>
                 <div className={styles.footerPowered}>
-                    <p>Veb aplikaciju izradili učenici ESTŠ "Nikola Tesla" </p>
+                    <p>Veb aplikacija izrađena za potrebe HZS 6.0 </p>
                 </div>
             </div>
         </footer>
