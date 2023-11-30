@@ -25,6 +25,11 @@ const editEvent = () => {
         error: false,
         errorMsg: ""
     },
+    file: {
+      value: null,
+      error: false,
+      errorMsg: ""
+  },
     vremeOd: {
         value: new Date(new Date().getTime()-(60000)),
         focus: true,
@@ -90,13 +95,23 @@ const editEvent = () => {
   const submitBody = async (body) => {
     setSubmitting(true);
     console.log(body);
+    const formData = new FormData();
+
+  
+    formData.append('file', event.file.value);
+    formData.append('name', body.name);
+    formData.append('address', body.address);
+    formData.append('starts_at', body.starts_at);
+    formData.append('ends_at', body.ends_at);
+    formData.append('eventType', body.eventType);
+    formData.append('level', body.level);
+    formData.append('capacity', body.capacity);
+    formData.append('description', body.description);
+
     try{
       const res = await fetch(`/api/event/edit/${eventId}`,{
           method : "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body)
+          body: formData
       })
 
       if(!res.ok){

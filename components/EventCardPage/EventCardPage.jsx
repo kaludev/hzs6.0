@@ -11,7 +11,7 @@ export default function EventCard({user, eventId, eventName, eventPhoto, eventDe
 
     useEffect(() => {
         if(user)
-            if(likes.filter(user_id => user_id == user._id).length > 0)
+            if(likes?.filter(user_id => user_id == user._id).length > 0)
             setClicked(true);
             else
             setClicked(false);
@@ -53,7 +53,7 @@ export default function EventCard({user, eventId, eventName, eventPhoto, eventDe
                                     }
                                 }
                                 } onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ clicked ? <FaHeart /> : <FaRegHeart />}</button>
-                                <div className={styles.eventLikesNum}> {likes.length}</div>
+                                <div className={styles.eventLikesNum}> {likes?.length}</div>
                             </div>
                         </div>
                         
