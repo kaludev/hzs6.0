@@ -30,7 +30,7 @@ export default function EventCard({eventName, eventDesc, address,
                     <div className={styles.eventParticipants}>{applieds}/{maxCapacity}</div>
                 </div>
                 <div className={styles.eventButtons}>
-                    {session?.user ? (prijavljen ? 
+                    {handleSubmit && (session?.user ? (prijavljen ? 
                         <button onClick={() => {handleLeave().then(() => {setPrijavljen(false);setApplieds((prev) => prev-1)})}} 
                         className={`${styles.primaryButton} primaryButton`}>
                         Odjavi se</button>
@@ -50,9 +50,10 @@ export default function EventCard({eventName, eventDesc, address,
                           >Prijavi se</button>
                         ))
                       )
+                    )
                     }
-                    {handleEdit && <button onClick={handleEdit()} className={`${styles.primaryButton} primaryButton`}>Izmeni</button>}
-                    {handleDelete && <button onClick={handleDelete()} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
+                    {handleEdit && <button onClick={handleEdit} className={`${styles.primaryButton} primaryButton`}>Izmeni</button>}
+                    {handleDelete && <button onClick={handleDelete} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
                     <div className={styles.eventLikes}>
                         <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
                         <div className={styles.eventLikesNum}>{likes}</div>

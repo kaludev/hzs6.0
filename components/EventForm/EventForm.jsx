@@ -17,7 +17,6 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
         first_day = new Date(event.vremeOd.value.getFullYear(), event.vremeOd.value.getMonth(), 1)
         daysOfMonth= [31, (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         setTimeout(() =>{
-            console.log(daysOfMonth)
             const divs = [];
             for(let i=0; i<daysOfMonth[event.vremeOd.value.getMonth()] + first_day.getDay() ; i++){
                 if (i >= first_day.getDay()) {
@@ -26,7 +25,6 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                     divs.push("");
                 }
             }
-            console.log(divs);
             setCalendarDays(divs);
         },200)
     },[event])
@@ -41,7 +39,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
             setEvent(copy);
             valid = false;
         }
-        else if ([/^[a-z A-Z0-9]{1,100}$/.test(event.ime.value)]) {
+        else if (!/^[a-z A-Z0-9]{1,100}$/.test(event.ime.value)) {
             const copy = { ...event };
             copy['ime'].error = true;
             copy['ime'].errorMsg = "Ime sme sadržati samo slova i brojeve";
@@ -303,7 +301,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
 				    </div>
                     <div className={`${styles.fileInput} ${styles.primaryButtonFile} primaryButton`}>
                         <input type="file" id="file" className={`${styles.file}`}/>
-                        <label for="file">Izaberite sliku</label>
+                        <label htmlFor="file">Izaberite sliku</label>
                     </div>
                     <p className={styles.errorMessage}>Morate uneti sliku</p>
                     <div className={styles.selectDate}>
@@ -331,7 +329,7 @@ const EventForm = ({type,event, setEvent, submitting,setSubmitting,submitBody}) 
                                 <div>Sub</div>
                                 </div>
                                 <div className={styles.calendarDays}>
-                                    {calendarDays.map(value => (<div onClick={setOdDay} className={event.vremeOd.value.getDate() === value ? styles.active : ""}>{value}</div>))}
+                                    {calendarDays.map((value,index) => (<div key={index} onClick={setOdDay} className={event.vremeOd.value.getDate() === value ? styles.active : ""}>{value}</div>))}
                                 </div>
                             </div>
                             {monthPicker && <div className={styles.monthList}>{monthNames.map( name =>(<div onClick={changeOdMonth}>{name}</div>))}</div>}

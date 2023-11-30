@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
 import { NextResponse } from 'next/server';
 
-export const POST = async (req) => {
+export const POST = async (req,{params}) => {
         const user = await getServerSession(authOptions);
         console.log(user);
         try{
@@ -22,17 +22,9 @@ export const POST = async (req) => {
                         const location = jsong.results[0].geometry.location;
                         data.location = location;
                         console.log(data);
-
-                        const event = new Event(data);
-                        await event.save();
+                        const event = await Event.findByIdAndUpdate(params.id, data);
                         console.log(event._id);
-                        
-                        const organizer = await Organizer.findOneAndUpdate({ user_id: user.user._id},{
-                                $addToSet:{ events : event._id}
-                        })
-                        console.log(organizer);
-                        console.log(await Organizer.findOne({ user_id: user.user._id}));
-                        return NextResponse.json({ ok: true, data: data }, { status: 200 })
+                        return NextResponse.json({ ok: true, data: event }, { status: 200 })
                 } else {
                         console.log('Geocoding failed');
                         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
