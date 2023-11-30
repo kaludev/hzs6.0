@@ -53,7 +53,8 @@ const eventSchema = new Schema({
     },
     users_liked: {
         type: [mongoose.Schema.Types.ObjectId],
-        default: []
+        default: [],
+        ref: "User"
     },
     eventType:{
         type: Number,
