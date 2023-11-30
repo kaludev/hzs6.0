@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
 
-export default function EventCard({eventName, eventDesc, address,
+export default function EventCard({eventId, eventName, eventDesc, address,
      eventStartTime, eventEndTime, applied, maxCapacity, likes,handleSubmit,
      handleEdit,handleLeave, handleDelete,providers, signIn,users_signed,image}){
     const {data:session} = useSession()
@@ -17,7 +17,7 @@ export default function EventCard({eventName, eventDesc, address,
     },[session]);
     return(
         <div className={styles.cardEvent}>
-            <img className={styles.eventPhoto} src={image ? image :"./images/hero.jpg"} alt="Event Photo" />
+            <Link href={`/event/${eventId}`}><img className={styles.eventPhoto} src={image ? image :"./images/hero.jpg"} alt="Event Photo" /></Link>
             <div className={styles.eventMain}>
                 <div className={styles.eventName}>{eventName}</div>
                 <div className={styles.eventDesc}>{eventDesc}</div>

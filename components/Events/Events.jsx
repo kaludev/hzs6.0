@@ -7,9 +7,10 @@ const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers
   return (
     data && data.length > 0 ? (
        data.map(event => (
-        <Link href={`/event/${event._id}`}>
+        
           <EventCard
             key={event._id}
+            eventId={event._id}
             eventName ={event.name} eventDesc={event.description} 
             address={event.address} eventStartTime={new Date(event.starts_at)}
             eventEndTime={new Date(event.ends_at)} applied={event.users_signed.length} 
@@ -20,7 +21,6 @@ const Events = ({data,handleSubmit,handleLeave,handleEdit,handleDelete,providers
             handleEdit={handleEdit} handleDelete={handleDelete}
             image={event?.image[0]}
           />
-        </Link>
     ))) : (
       <div className={emptyStyles.emptyArr}><span className={emptyStyles.colored}>Još uvek se niste prijavili za takmičenja.</span><br />Kako biste videli svoja takmičenja, pogledajte arenu i prijavite se</div>
     )
