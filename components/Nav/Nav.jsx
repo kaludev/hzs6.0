@@ -67,20 +67,22 @@ const Nav = ({setMenuVisible}) => {
             <div className={styles.navProfile}>
               {session?.user.isOrganizer && <Link href="/create-event" className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
-                Dodaj Događaj
+                Dodaj takmičenje
               </Link>}
               <button type="button" onClick={async () =>{await signOut(); window.location.href ='/'}} className={`${styles.secondaryButton} secondaryButton`}>
                 {" "}
                 Odjavi se
               </button>
               <Link href="/profile">
-                <Image
-                  src={session?.user.image}
-                  width={37}
-                  height={37}
-                  className={styles.profilePic}
-                  alt="profile"
-                ></Image>
+                <div className={styles.navProfileImageBack}>
+                  <Image
+                    src={session?.user.image}
+                    width={37}
+                    height={37}
+                    className={styles.profilePic}
+                    alt="profile"
+                  ></Image>
+                </div>
               </Link>
             </div>
             ) : (

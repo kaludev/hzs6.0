@@ -44,7 +44,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                         <div className={styles.descRow}>
                             <div className={styles.descRowMain}>
                                 <div className={styles.descTitle}>Podnesite zahtev za organizatora</div>
-                                <div className={styles.descP}>Ukoliko želite da održavate događaje i prijavljujete kandidate morate postati organizator</div>
+                                <div className={styles.descP}>Ukoliko želite da održavate takmičenja i prijavljujete kandidate morate postati organizator</div>
                             </div>
                             <button disabled={requestedOrganizer} onClick = {showForm} className={`${styles.secondaryButton} secondaryButton`}>
                                 {requestedOrganizer? "Poslali ste zahtev":"Započnite"}
@@ -54,19 +54,19 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                     {isOrganizer &&
                         <div className={styles.descRow}>
                             <div className={styles.descRowMain}>
-                                <div className={styles.descTitle}>Pogledajte vase dogadjaje</div>
-                                <div className={styles.descP}>Pogledajte dogadjaje koje ste vi organizovali i njihove statistike</div>
+                                <div className={styles.descTitle}>Pogledajte vaša takmičenja</div>
+                                <div className={styles.descP}>Pregledajte turnire koje ste vi organizovali i njihove statistike</div>
                             </div>
                             <button onClick = {showEvents} className={`${styles.secondaryButton} secondaryButton`}>
-                                Dogadjaji
+                                Pregledaj
                             </button>
                         </div>
                     }
                     {isOrganizer &&
                         <div className={styles.descRow}>
                             <div className={styles.descRowMain}>
-                                <div className={styles.descTitle}>Kreirajte novi dogadjaj</div>
-                                <div className={styles.descP}>Kreirajte novi sportski dogadjaj i pozovite ljude da ucestvuju</div>
+                                <div className={styles.descTitle}>Kreirajte novo takmičenje</div>
+                                <div className={styles.descP}>Kreirajte novi sportski turnir i pozovite ljude da učestvuju</div>
                             </div>
                             <Link href="/create-event" className={`${styles.secondaryButton} secondaryButton`}>
                                 Kreiraj
@@ -78,7 +78,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                         <div className={styles.descRow}>
                             <div className={styles.descRowMain}>
                                 <div className={styles.descTitle}>Pogledajte zahteve za organizatora</div>
-                                <div className={styles.descP}>Pogledajte zahteve ljudi koji zele da se kvalifikuju za organizatora</div>
+                                <div className={styles.descP}>Pogledajte zahteve korisnika koji žele da se kvalifikuju za organizatora</div>
                             </div>
                             <button onClick = {showRequests} className={`${styles.secondaryButton} secondaryButton`}>
                                 Zahtevi
@@ -88,7 +88,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                     <div className={styles.descRow}>
                         <div className={styles.descRowMain}>
                             <div className={styles.descTitle}>Odjavite se</div>
-                            <div className={styles.descP}>Odjavite se kako bi ste se prijavili preko drugog naloga</div>
+                            <div className={styles.descP}>Odjavite se kako bi ste se prijavili pomoću drugog naloga</div>
                         </div>
                         <div onClick={handleSignOut} className={`${styles.secondaryButton} secondaryButton`}>
                             Odjavi se
@@ -97,7 +97,7 @@ export default function ProfileSection({name, username, photo,isSuperAdmin,reque
                     <div className={styles.descRow}>
                         <div className={styles.descRowMain}>
                             <div className={styles.descTitle}>Deaktivirajte vaš nalog</div>
-                            <div className={styles.descP}>Ovde možete deaktivirati nalog i više ga nikada ne koristiti</div>
+                            <div className={styles.descP}>Ovde možete deaktivirati nalog i trajno ga obrisati iz svih naših baza, kao i sve podatke povezane sa njim</div>
                         </div>
                         <div onClick={handleDeactivate} className={`${styles.secondaryButton} ${styles.warningButton} secondaryButton`}>
                             {deactivating ? "Deaktiviranje" : "Deaktiviraj"}

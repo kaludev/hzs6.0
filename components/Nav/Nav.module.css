@@ -76,21 +76,30 @@
     margin-left: 10px;
 }
 
-.primaryButton, .secondaryButton {
+.navProfileImageBack {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primaryButton,
+.secondaryButton {
     padding: 7px 20px;
     margin: 5px;
     font-size: 14px;
     cursor: pointer;
 }
 
-.primaryButton{
+.primaryButton {
     background-color: var(--main-color);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 7px 25px;
     color: #fff;
 }
 
-.primaryButton:hover{
+.primaryButton:hover {
     color: var(--main-color);
     box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
 }

@@ -114,7 +114,6 @@
 @media only screen and (max-width: 600px) {
     .descRow{
         flex-direction: column;
-        background-color: pink;
     }
     .descRowMain{
         width: 100%;
