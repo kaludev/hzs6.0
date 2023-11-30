@@ -8,7 +8,7 @@ const RangListCards = () => {
     useEffect(() =>{
         const fetchPosts = async () => {
             try{
-                const res = await fetch('/api/organizator/getLikes');
+                const res = await fetch('/api/organizator/getlikes');
                 if(!res.ok){
                     new Error(res.text);
                 }
