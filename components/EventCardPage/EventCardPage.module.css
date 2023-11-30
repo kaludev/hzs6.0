@@ -1,6 +1,6 @@
 .cardsMainSection{
     width: 100%;
-    background-color: var(--main-background);
+    height: fit-content;
 }
 .cardsSection{
     width: 100%;
@@ -12,7 +12,6 @@
 }
 .cardEvent{
     width: 100%;
-    max-width: 360px;
     height: fit-content;
     min-height: 450px;
     display: flex;
@@ -24,27 +23,29 @@
 }
 .eventPhoto{
     width: 100%;
-    height: 150px;
+    height: 400px;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
 }
 .eventMain{
     width: 90%;
+    height: fit-content;
+    margin: 10px auto 40px auto;
     display: flex;
     flex-direction: column;
-    margin: auto;
 }
 .eventName{
     width: 100%;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 700;
-    padding: 5px 0;
+    padding: 20px 0 10px 0;
 }
 .eventDesc{
     width: 100%;
     font-size: 16px;
     color: #000000c4;
     line-height: 19px;
+    padding-bottom: 5px;
 }
 .eventData{
     width: 100%;
@@ -57,12 +58,15 @@
     display: flex;
     flex-direction: column;
     color: #000000c4;
-    font-size: 14px;
+    font-size: 16px;
 }
 .eventColored{
     width: 30%;
     color: var(--main-color);
     font-weight: bold;
+}
+.eventTime{
+    padding: 5px 0;
 }
 .eventParticipants{
     display: flex;

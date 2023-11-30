@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./EventCard.module.css"
 import { FaRegHeart } from "react-icons/fa";
-import { FaClock, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
 
 export default function EventCard({eventName, eventDesc, address,
      eventStartTime, eventEndTime, applied, maxCapacity, likes,handleSubmit,
@@ -24,7 +24,7 @@ export default function EventCard({eventName, eventDesc, address,
                 <div className={styles.eventData}>
                     <div className={styles.eventPlaceData}>
                         <div className={styles.eventLocation}><span className={styles.eventColored}><FaMapMarkerAlt /></span>{address}</div>
-                        <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {new Date(eventStartTime).getDate() + ". "+ (new Date(eventStartTime).getMonth()+1) +". " + new Date(eventStartTime).getFullYear() + "."} - {new Date(eventEndTime).getDate() + ". "+ (new Date(eventEndTime).getMonth()+1) +". " + new Date(eventEndTime).getFullYear() + "."}</div>                 
+                        <div className={styles.eventTime}><span className={styles.eventColored}><FaCalendarAlt /></span> {new Date(eventStartTime).getDate() + "."+ (new Date(eventStartTime).getMonth()+1) +"." + new Date(eventStartTime).getFullYear() + "."} - {new Date(eventEndTime).getDate() + "."+ (new Date(eventEndTime).getMonth()+1) +"." + new Date(eventEndTime).getFullYear() + "."}</div>                 
                         <div className={styles.eventTime}><span className={styles.eventColored}><FaClock /></span> {new Date(eventStartTime).getHours()+ ":" + new Date(eventStartTime).getMinutes()} -  {new Date(eventEndTime).getHours()+ ":" + new Date(eventEndTime).getMinutes()}</div>
                     </div>
                     <div className={styles.eventParticipants}>{applieds}/{maxCapacity}</div>

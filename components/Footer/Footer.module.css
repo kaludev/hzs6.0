@@ -46,6 +46,21 @@
     font-weight: 500;
 }
 
+.footerSocial{
+    display: flex;
+    flex-direction: row;
+}
+
+.footerSocialLink{
+    font-size: 30px;
+    padding: 10px 10px 0 5px;
+    color: var(--main-color);
+}
+
+.footerSocialLink:hover{
+    color: #000;
+}
+
 .footerLink a:hover {
     opacity: 1;
 }
