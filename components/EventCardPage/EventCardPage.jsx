@@ -3,15 +3,15 @@ import styles from "./EventCardPage.module.css"
 import { FaRegHeart } from "react-icons/fa";
 import { FaClock, FaMapMarkerAlt, FaHeart, FaCalendarAlt } from "react-icons/fa";
 
-export default function EventCard({eventName, eventDesc, address, eventStartTime, eventEndTime, 
-    applied, maxCapacity, likes,handleSubmit, handleEdit, handleDelete}){
+export default function EventCard({eventId, eventName, eventPhoto, eventDesc, address, eventStartTime, eventEndTime, 
+    applied, maxCapacity, likes,handleSubmit}){
     
     const[hover, setHover] = useState();
     return(
         <section className={styles.cardsMainSection}>
             <section className={styles.cardsSection}>
                 <div className={styles.cardEvent}>
-                    <img className={styles.eventPhoto} src="./images/hero.jpg" alt="Event Photo" />
+                    <img className={styles.eventPhoto} src={eventPhoto} alt="Event Photo" />
                     <div className={styles.eventMain}>
                         <div className={styles.eventName}>{eventName}</div>
                         <div className={styles.eventDesc}>{eventDesc}</div>
@@ -24,9 +24,7 @@ export default function EventCard({eventName, eventDesc, address, eventStartTime
                             <div className={styles.eventParticipants}>{applied}/{maxCapacity}</div>
                         </div>
                         <div className={styles.eventButtons}>
-                            {handleSubmit && <button onClick={handleSubmit()} className={`${styles.primaryButton} primaryButton`}>Prijavi se</button>}
-                            {handleEdit && <button onClick={handleEdit()} className={`${styles.primaryButton} primaryButton`}>Izmeni</button>}
-                            {handleDelete && <button onClick={handleDelete()} className={`${styles.primaryButton} primaryButton`}>Obrisi</button>}
+                            {handleSubmit && <button onClick={() => {handleSubmit(eventId)}} className={`${styles.primaryButton} primaryButton`}>Prijavi se</button>}
                             <div className={styles.eventLikes}>
                                 <button className={`${styles.secondaryButton} secondaryButton`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>{ hover ? <FaHeart /> : <FaRegHeart />}</button>
                                 <div className={styles.eventLikesNum}>{likes}</div>
