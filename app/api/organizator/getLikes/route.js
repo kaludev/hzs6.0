@@ -3,7 +3,7 @@ import { connectToDB } from "@utils/database";
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import Organizer from "@models/organizer";
-//GET post by id
+//GET post by id 
 export const GET = async (req) => {
     try{
         await connectToDB();
