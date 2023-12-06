@@ -27,7 +27,7 @@ export default function AboutUsPage(){
                     <div className={styles.aboutDescMain}>
                         <h3>Naša Misija</h3>
                         <div><p>Ne samo da okupljamo stručnjake iz različitih oblasti, već i pružamo platformu za rast i razvoj. Naša misija je podstaći kreativnost, podržati inovacije i stvoriti zajednicu u kojoj se svako lice razvija i ostvaruje svoje potencijale.</p></div>
-                        <Link href="/prijavi-se"><div className={`${styles.primaryButton} primaryButton`}>Prijavi se</div></Link>
+                        <Link href="/arena"><div className={`${styles.primaryButton} primaryButton`}>Prijavi se</div></Link>
                     </div>
                 </div>
                 <img className={styles.aboutImg} src="./images/hero5.jpg" alt="" />
@@ -47,7 +47,7 @@ export default function AboutUsPage(){
                     <div className={styles.aboutDescMain}>
                         <h3>Naš Tim</h3>
                         <div><p>Hakaton Arenu čini stručan tim entuzijasta sa različitim pozadinama, ali sa zajedničkom strašću za stvaranjem pozitivnog uticaja. Svaki takmičar doprinosi jedinstvenom skupu veština i perspektiva, čineći našu Arenu raznovrsnim mestom za saradnju.</p></div>
-                        <Link href="/prijavi-se"><div className={`${styles.primaryButton} primaryButton`}>Postani deo tima</div></Link>
+                        <Link href="/arena"><div className={`${styles.primaryButton} primaryButton`}>Postani deo tima</div></Link>
                     </div>
                 </div>
                 <img className={styles.aboutImg} src="./images/hero8.jpg" alt="" />

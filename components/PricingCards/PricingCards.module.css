@@ -1,0 +1,89 @@
+.pricingCont{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px auto;
+}
+.pricingCardSide, .pricingCardMid{
+    width: 30%;
+    height: fit-content;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.pricingCardSide{
+    background-color: var(--main-background);
+}
+.pricingCardMid{
+    min-height: 550px;
+    background-color: var(--main-color);
+}
+.pricingCardMain{
+    width: 100%;
+    padding: 25px 20px;
+}
+.priceDesc{
+    width: 100%;
+    font-size: 26px;
+    font-weight: 600;
+}
+.priceMain{
+    width: 100%;
+    padding: 5px 0;
+}
+.price{
+    width: 100%;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--main-color);
+}
+.pricingCardMid .price{
+    color: var(--main-background);
+}
+.pricePeriod{
+    font-size: 18px;
+    font-weight: 600;
+}
+.priceCardDesc{
+    padding: 15px 0;
+    width: 100%;
+}
+.priceInclude{
+    width: 100%;
+    padding: 3px 0;
+}
+.priceIncludeIcon{
+    padding-right: 8px;
+}
+.pricingCardSide .priceIncludeIcon{
+    color: var(--main-color);
+}
+.pricingCardMid .priceIncludeIcon{
+    color: var(--main-background);
+}
+.primaryButton{
+    margin: 15px 5px;
+    padding: 5px 35px;
+}
+.pricingCardSide .primaryButton:hover{
+    color: var(--main-color);
+}
+@media only screen and (max-width: 992px) {
+    .pricingCont{
+        flex-direction: column;
+    }
+    .pricingCardSide, .pricingCardMid{
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .pricingCont{
+        width: 90%;
+    }
+}
